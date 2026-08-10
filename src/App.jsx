@@ -1,7 +1,12 @@
-import CountryOverviewPage from './Country/pages/CountryOverviewPage'
+import Preloader from './components/Preloader.jsx'
+import AppRoutes from './router.jsx'
 
-function App() {
-  return <CountryOverviewPage />
+// App บางมาก: แสดง preloader ครั้งเดียว แล้วเรียก router
+export default function App() {
+  return (
+    <>
+      <Preloader />
+      <AppRoutes />
+    </>
+  )
 }
-
-export default App
