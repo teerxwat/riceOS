@@ -27,3 +27,6 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Personal notes (not shared with team)
+git-guide-personal.md

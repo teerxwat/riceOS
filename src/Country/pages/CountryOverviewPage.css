@@ -1,0 +1,7 @@
+.placeholder-note {
+  padding: 16px;
+  border: 1px dashed var(--db-border);
+  border-radius: var(--db-radius);
+  color: var(--db-text-muted);
+  font-size: 13px;
+}

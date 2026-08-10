@@ -1,0 +1,121 @@
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--db-border);
+  flex-wrap: wrap;
+}
+
+.dashboard-header-title h1 {
+  font-size: 22px;
+  letter-spacing: normal;
+  margin: 0;
+  color: var(--db-text);
+}
+
+.dashboard-header-title p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--db-text-muted);
+}
+
+.dashboard-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dashboard-header-chip {
+  font-size: 12.5px;
+  color: var(--db-text-muted);
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: var(--db-surface);
+  border: 1px solid var(--db-border);
+}
+
+.dashboard-header-icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--db-border);
+  background: var(--db-surface);
+  color: var(--db-text-muted);
+  cursor: pointer;
+}
+
+.dashboard-header-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--db-red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-header-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 6px 6px;
+  border-radius: 8px;
+  border: 1px solid var(--db-border);
+  background: var(--db-surface);
+  color: var(--db-text);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.dashboard-header-profile img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dashboard-header-profile-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.dashboard-header-profile-name {
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.dashboard-header-profile-role {
+  font-size: 11px;
+  color: var(--db-text-muted);
+}
+
+.dashboard-header-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: none;
+  background: var(--db-green);
+  color: #06240f;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
