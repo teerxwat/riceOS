@@ -1,0 +1,15 @@
+# กัน push ตรงเข้า main/master — ให้แตก branch แล้วเปิด PR แทน
+protected="main master"
+while read local_ref local_sha remote_ref remote_sha; do
+  branch=$(echo "$remote_ref" | sed 's#refs/heads/##')
+  for p in $protected; do
+    if [ "$branch" = "$p" ]; then
+      echo ""
+      echo "⛔  ห้าม push ตรงเข้า '$p'"
+      echo "    กรุณาแตก branch (git checkout -b feature/xxx) แล้วเปิด Pull Request"
+      echo ""
+      exit 1
+    fi
+  done
+done
+exit 0
