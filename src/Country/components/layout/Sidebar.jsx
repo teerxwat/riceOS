@@ -12,7 +12,6 @@ import {
   Settings,
   ChevronRight,
 } from 'lucide-react'
-import './Sidebar.css'
 
 const NAV_ITEMS = [
   { label: 'ภาพรวมประเทศ', icon: Home },
@@ -29,54 +28,64 @@ const NAV_ITEMS = [
 
 function Sidebar({ activeLabel = 'ภาพรวมประเทศ' }) {
   return (
-    <aside className="sidebar">
-      <div className="sidebar-logo">
+    <aside className="sticky top-0 box-border flex h-svh w-[232px] shrink-0 flex-col gap-5 overflow-y-auto border-r border-db-border bg-db-surface-alt p-3.5">
+      <div className="flex items-center gap-2.5 px-2 text-db-green">
         <Wheat size={22} strokeWidth={1.75} />
-        <div className="sidebar-logo-text">
-          <span className="sidebar-logo-name">DONAUS</span>
-          <span className="sidebar-logo-sub">RiceOS</span>
+        <div className="flex flex-col leading-tight">
+          <span className="text-[15px] font-bold text-db-text">DONAUS</span>
+          <span className="text-xs text-db-text-muted">RiceOS</span>
         </div>
       </div>
 
-      <nav className="sidebar-nav">
-        {NAV_ITEMS.map(({ label, icon: Icon }) => (
-          <button
-            key={label}
-            type="button"
-            className={
-              label === activeLabel
-                ? 'sidebar-nav-item active'
-                : 'sidebar-nav-item'
-            }
-          >
-            <Icon size={18} strokeWidth={1.75} />
-            <span>{label}</span>
-          </button>
-        ))}
+      <nav className="flex flex-col gap-0.5">
+        {NAV_ITEMS.map(({ label, icon: Icon }) => {
+          const isActive = label === activeLabel
+          return (
+            <button
+              key={label}
+              type="button"
+              className={`flex cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-[9px] text-left font-[inherit] text-[13.5px] ${
+                isActive
+                  ? 'bg-db-green-bg font-semibold text-db-green'
+                  : 'text-db-text-muted hover:bg-db-surface hover:text-db-text'
+              }`}
+            >
+              <Icon size={18} strokeWidth={1.75} />
+              <span>{label}</span>
+            </button>
+          )
+        })}
       </nav>
 
-      <div className="sidebar-footer">
-        <button type="button" className="sidebar-ai-card">
-          <span className="sidebar-ai-title">AI Assistant</span>
-          <span className="sidebar-ai-desc">
+      <div className="mt-auto flex flex-col gap-2.5">
+        <button
+          type="button"
+          className="relative flex cursor-pointer flex-col items-start gap-0.5 rounded-db border border-db-border bg-db-surface p-3 text-left font-[inherit] text-db-text"
+        >
+          <span className="text-[13px] font-semibold">AI Assistant</span>
+          <span className="text-[11.5px] text-db-text-muted">
             ผู้ช่วยผู้บริหาร ถามได้ทุกเรื่อง
           </span>
           <ChevronRight
-            className="sidebar-ai-arrow"
+            className="absolute top-3 right-3 text-db-text-dim"
             size={16}
             strokeWidth={1.75}
           />
         </button>
 
-        <div className="sidebar-user">
+        <div className="flex items-center gap-2.5 rounded-db p-2">
           <img
-            className="sidebar-user-avatar"
+            className="h-8 w-8 rounded-full object-cover"
             src="https://i.pravatar.cc/64?img=12"
             alt=""
           />
-          <div className="sidebar-user-info">
-            <span className="sidebar-user-name">สมชาย ใจดี</span>
-            <span className="sidebar-user-role">อธิบดีกรมการข้าว</span>
+          <div className="flex min-w-0 flex-col leading-[1.3]">
+            <span className="text-[13px] font-medium text-db-text">
+              สมชาย ใจดี
+            </span>
+            <span className="text-[11.5px] text-db-text-muted">
+              อธิบดีกรมการข้าว
+            </span>
           </div>
         </div>
       </div>
