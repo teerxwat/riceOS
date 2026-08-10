@@ -58,8 +58,14 @@ function Sidebar({ activeLabel = 'ภาพรวมประเทศ' }) {
       <div className="sidebar-footer">
         <button type="button" className="sidebar-ai-card">
           <span className="sidebar-ai-title">AI Assistant</span>
-          <span className="sidebar-ai-desc">ผู้ช่วยผู้บริหาร ถามได้ทุกเรื่อง</span>
-          <ChevronRight className="sidebar-ai-arrow" size={16} strokeWidth={1.75} />
+          <span className="sidebar-ai-desc">
+            ผู้ช่วยผู้บริหาร ถามได้ทุกเรื่อง
+          </span>
+          <ChevronRight
+            className="sidebar-ai-arrow"
+            size={16}
+            strokeWidth={1.75}
+          />
         </button>
 
         <div className="sidebar-user">
