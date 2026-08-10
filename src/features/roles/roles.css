@@ -1,0 +1,294 @@
+/* ───────── LOGIN ───────── */
+.login-page {
+  min-height: calc(100vh - 66px);
+  display: grid;
+  place-items: center;
+  padding: 3rem 1.2rem;
+}
+.login-card {
+  width: 100%;
+  max-width: 720px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  padding: clamp(1.6rem, 4vw, 2.8rem);
+  box-shadow: var(--card-shadow);
+  text-align: center;
+}
+.login-card h1 {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+.login-sub {
+  color: var(--muted);
+  margin: 0 0 1.8rem;
+}
+.role-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1.4rem;
+}
+.role-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1.1rem 0.6rem;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+.role-option:hover {
+  transform: translateY(-3px);
+}
+.role-option.active {
+  border-color: var(--role-accent);
+  background: color-mix(in srgb, var(--role-accent) 14%, var(--surface));
+}
+.role-option-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--role-accent);
+}
+.role-option-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.role-option-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.2;
+}
+.login-input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.login-input:focus {
+  outline: none;
+  border-color: var(--green-strong);
+}
+.login-submit {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 0.9rem 1.6rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--green), var(--green-strong));
+  box-shadow: 0 10px 24px -10px rgba(31, 122, 61, 0.6);
+  transition: transform 0.15s ease;
+}
+.login-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+.login-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.login-note {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 1.2rem 0 0;
+}
+
+/* login แบบฟอร์ม user/password */
+.login-card--form {
+  max-width: 440px;
+}
+.login-field {
+  display: block;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+.login-field span {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.login-field .login-input {
+  margin-bottom: 0;
+}
+.login-error {
+  text-align: left;
+  color: #e5484d;
+  font-size: 0.9rem;
+  margin: 0 0 1rem;
+}
+.login-hint {
+  margin-top: 1.6rem;
+  text-align: left;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.login-hint b {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  font-size: 0.8rem;
+}
+.login-hint ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  columns: 2;
+}
+.login-hint li {
+  margin-bottom: 0.2rem;
+}
+
+/* ───────── ROLE PAGE ───────── */
+.role-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 3rem clamp(1.2rem, 5vw, 3rem) 5rem;
+}
+.role-hero {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.4rem;
+}
+.role-badge {
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  flex: none;
+  background: linear-gradient(
+    135deg,
+    var(--role-accent),
+    color-mix(in srgb, var(--role-accent) 55%, #000)
+  );
+  box-shadow: 0 16px 30px -14px var(--role-accent);
+}
+.role-eyebrow {
+  color: var(--role-accent);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.role-hero h1 {
+  margin: 0.2rem 0 0.1rem;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+.role-sub {
+  color: var(--muted);
+  margin: 0;
+}
+.role-summary {
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: var(--text);
+  margin: 0 0 2.4rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--role-accent);
+}
+.role-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+.role-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.6rem 1.8rem;
+}
+.role-card h2 {
+  font-size: 1.15rem;
+  margin: 0 0 1rem;
+}
+.dot-list,
+.check-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+.dot-list li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.dot-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--role-accent);
+}
+.check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: var(--text);
+  line-height: 1.55;
+}
+.check-list .li-check {
+  flex: none;
+  color: var(--role-accent);
+  margin-top: 2px;
+}
+.role-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+.meta-item {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem 1.4rem;
+  color: var(--role-accent);
+}
+.meta-item b {
+  color: var(--text);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.meta-item p {
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.55;
+}
+
+@media (max-width: 720px) {
+  .role-grid,
+  .role-meta {
+    grid-template-columns: 1fr;
+  }
+}

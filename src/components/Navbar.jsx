@@ -1,0 +1,75 @@
+import { useEffect, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { Wheat, Moon, Sun, LogIn, LogOut } from 'lucide-react'
+import { useAuth } from '../auth/authContext.js'
+import { getRole } from '../features/roles/roles.js'
+
+// dark เป็นโหมดหลัก: ใช้ dark เว้นแต่ผู้ใช้เลือก light ไว้เอง
+function getInitialTheme() {
+  return localStorage.getItem('theme') === 'light' ? 'light' : 'dark'
+}
+
+export default function Navbar() {
+  const [theme, setTheme] = useState(getInitialTheme)
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  const role = user ? getRole(user.role) : null
+
+  return (
+    <header className="nav">
+      <div className="nav-inner">
+        <NavLink to="/" className="brand">
+          <Wheat size={22} className="brand-icon" />
+          riceOS
+        </NavLink>
+
+        <div className="nav-spacer" />
+
+        {role && (
+          <span className="nav-role">
+            <role.Icon size={16} />
+            {role.name}
+            {user.name ? ` · ${user.name}` : ''}
+          </span>
+        )}
+
+        {user ? (
+          <button
+            type="button"
+            className="nav-btn"
+            onClick={() => {
+              logout()
+              navigate('/')
+            }}
+          >
+            <LogOut size={16} /> ออกจากระบบ
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="nav-btn primary"
+            onClick={() => navigate('/login')}
+          >
+            <LogIn size={16} /> เข้าสู่ระบบ
+          </button>
+        )}
+
+        <button
+          type="button"
+          className="theme-toggle"
+          onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
+          aria-label="สลับโหมดสว่าง/มืด"
+          title="สลับโหมดสว่าง/มืด"
+        >
+          {theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
+        </button>
+      </div>
+    </header>
+  )
+}
