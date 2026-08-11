@@ -1,5 +1,7 @@
-import { Bell, ChevronDown, Download } from 'lucide-react'
+import { Bell, Download } from 'lucide-react'
 
+// ไม่มีรูปโปรไฟล์/ออกจากระบบซ้ำในนี้ — Navbar กลาง (src/components/Navbar.jsx)
+// ที่ครอบทุกหน้าไว้แสดง role badge + ปุ่มออกจากระบบอยู่แล้วด้านบนสุด
 function Header({ title, subtitle }) {
   return (
     <header className="flex flex-wrap items-start justify-between gap-4 border-b border-db-border px-7 py-5">
@@ -33,25 +35,7 @@ function Header({ title, subtitle }) {
 
         <button
           type="button"
-          className="flex cursor-pointer items-center gap-2 rounded-lg border border-db-border bg-db-surface py-1.5 pr-2.5 pl-1.5 font-[inherit] text-db-text"
-        >
-          <img
-            className="h-[26px] w-[26px] rounded-full object-cover"
-            src="https://i.pravatar.cc/64?img=12"
-            alt=""
-          />
-          <span className="flex flex-col text-left leading-[1.25]">
-            <span className="text-[12.5px] font-medium">สมชาย ใจดี</span>
-            <span className="text-[11px] text-db-text-muted">
-              อธิบดีกรมการข้าว
-            </span>
-          </span>
-          <ChevronDown size={16} strokeWidth={1.75} />
-        </button>
-
-        <button
-          type="button"
-          className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg bg-db-green px-3.5 py-[9px] font-[inherit] text-[13px] font-semibold text-[#06240f]"
+          className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg bg-db-green px-3.5 py-[9px] font-[inherit] text-[13px] font-semibold text-white"
         >
           <Download size={16} strokeWidth={1.75} />
           สร้างรายงานผู้บริหาร
