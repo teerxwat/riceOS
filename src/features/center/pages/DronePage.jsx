@@ -72,7 +72,13 @@ export function DronePage() {
           <div className="c-stack">
             <div className="cdr-top-row">
               <DroneListPanel drones={data.drones} stations={data.stations} />
-              <MissionMapPanel />
+              <MissionMapPanel
+                drones={data.drones}
+                stations={data.stations}
+                hotspots={data.hotspots}
+                fieldBoundary={data.fieldBoundary}
+                mapCenter={data.mapCenter}
+              />
               <div className="cdr-side" style={{ width: '20rem' }}>
                 <MissionsPanel missions={data.missions} />
                 <AlertsPanel alerts={data.alerts} />

@@ -6,6 +6,14 @@
     "windKmh": 8,
     "visibilityKm": 10
   },
+  "mapCenter": { "lat": 18.98543, "lng": 98.93877 },
+  "fieldBoundary": [
+    [18.9895, 98.9345],
+    [18.9905, 98.9405],
+    [18.9865, 98.943],
+    [18.9825, 98.9395],
+    [18.984, 98.935]
+  ],
   "drones": [
     {
       "id": "drn-1",
@@ -14,7 +22,9 @@
       "status": "flying",
       "batteryPercent": 78,
       "altitudeM": 120,
-      "speedMs": 12.4
+      "speedMs": 12.4,
+      "lat": 18.9878,
+      "lng": 98.9375
     },
     {
       "id": "drn-2",
@@ -23,7 +33,9 @@
       "status": "flying",
       "batteryPercent": 95,
       "altitudeM": 120,
-      "speedMs": 10.1
+      "speedMs": 10.1,
+      "lat": 18.9835,
+      "lng": 98.936
     },
     {
       "id": "drn-3",
@@ -32,7 +44,9 @@
       "status": "standby",
       "batteryPercent": 100,
       "altitudeM": 0,
-      "speedMs": 0
+      "speedMs": 0,
+      "lat": 18.98,
+      "lng": 98.941
     },
     {
       "id": "drn-4",
@@ -41,7 +55,9 @@
       "status": "standby",
       "batteryPercent": 100,
       "altitudeM": 0,
-      "speedMs": 0
+      "speedMs": 0,
+      "lat": 18.9855,
+      "lng": 98.93
     }
   ],
   "stations": [
@@ -49,21 +65,43 @@
       "id": "h1",
       "code": "H1",
       "name": "ศูนย์ข้าวบ้านหนองหวัด",
-      "ready": true
+      "ready": true,
+      "lat": 18.9855,
+      "lng": 98.93
     },
     {
       "id": "h2",
       "code": "H2",
       "name": "ศูนย์ข้าวบ้านทุ่งหลวง",
-      "ready": true
+      "ready": true,
+      "lat": 18.9915,
+      "lng": 98.942
     },
     {
       "id": "h3",
       "code": "H3",
       "name": "ศูนย์ข้าวบ้านสันป่าตัน",
-      "ready": true
+      "ready": true,
+      "lat": 18.98,
+      "lng": 98.941
     },
-    { "id": "h4", "code": "H4", "name": "ศูนย์ข้าวบ้านเวียงทอง", "ready": true }
+    {
+      "id": "h4",
+      "code": "H4",
+      "name": "ศูนย์ข้าวบ้านเวียงทอง",
+      "ready": true,
+      "lat": 18.9805,
+      "lng": 98.933
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "hs1",
+      "lat": 18.992,
+      "lng": 98.944,
+      "label": "จุดความร้อน (Hotspot)"
+    },
+    { "id": "hs2", "lat": 18.987, "lng": 98.9455, "label": "เขตเฝ้าระวัง" }
   ],
   "missions": [
     {
@@ -136,12 +174,42 @@
     { "key": "orthomosaic", "label": "สร้าง Orthomosaic\n2D/3D Map" }
   ],
   "analysisLayers": [
-    { "key": "rgb", "label": "ภาพ RGB (Orthomosaic)" },
-    { "key": "ndvi", "label": "ดัชนีพืชพรรณ (NDVI)" },
-    { "key": "ndwi", "label": "ดัชนีความเครียด (NDWI/NDCI)" },
-    { "key": "water_map", "label": "แผนที่น้ำ (Water Map)" },
-    { "key": "anomaly", "label": "จุดผิดปกติ (Anomaly)" },
-    { "key": "timeseries", "label": "เปรียบเทียบตามช่วงเวลา" }
+    {
+      "key": "rgb",
+      "label": "ภาพ RGB (Orthomosaic)",
+      "kind": "rgb",
+      "stat": "ความละเอียด 2 ซม./พิกเซล"
+    },
+    {
+      "key": "ndvi",
+      "label": "ดัชนีพืชพรรณ (NDVI)",
+      "kind": "ndvi",
+      "stat": "เฉลี่ย 0.71 (สมบูรณ์ดี)"
+    },
+    {
+      "key": "ndwi",
+      "label": "ดัชนีความเครียด (NDWI/NDCI)",
+      "kind": "ndwi",
+      "stat": "พื้นที่เครียดน้ำ 6%"
+    },
+    {
+      "key": "water_map",
+      "label": "แผนที่น้ำ (Water Map)",
+      "kind": "water",
+      "stat": "คลุมน้ำ 18.4 ไร่"
+    },
+    {
+      "key": "anomaly",
+      "label": "จุดผิดปกติ (Anomaly)",
+      "kind": "anomaly",
+      "stat": "ตรวจพบ 7 จุด"
+    },
+    {
+      "key": "timeseries",
+      "label": "เปรียบเทียบตามช่วงเวลา",
+      "kind": "timeseries",
+      "stat": "NDVI +0.06 จากรอบก่อน"
+    }
   ],
   "summary": {
     "areaCoveredRai": 2106,
