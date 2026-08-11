@@ -61,6 +61,21 @@
   box-sizing: border-box;
 }
 
+/* Reset the browser's default <button> chrome (border/background/font) so
+   every custom button class starts from a clean slate — prevents the UA
+   stylesheet border from leaking through when a class only overrides one
+   side (e.g. border-bottom for a tab underline). Wrapped in :where() so this
+   reset has zero specificity and never fights a component's own class. */
+:where(.c-app button) {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
 /* ───────── Shell: sidebar + topbar + content ───────── */
 .c-shell {
   display: flex;
