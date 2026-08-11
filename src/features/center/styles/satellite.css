@@ -1,0 +1,239 @@
+.cs-top-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 1280px) {
+  .cs-top-row {
+    flex-direction: row;
+  }
+}
+
+.cs-side {
+  display: flex;
+  width: 18rem;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+/* Capture-info badge shown next to the topbar title */
+.cs-capture-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.6875rem;
+  color: var(--c-text-muted);
+}
+
+.cs-capture-badge span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Field water-status list */
+.cs-field-item {
+  border-radius: 0.375rem;
+  border: 1px solid var(--c-border-strong);
+  background: var(--c-surface-alt);
+  padding: 0.625rem;
+}
+
+.cs-field-item__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.375rem;
+}
+
+.cs-field-item__name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--c-text);
+}
+
+.cs-field-item__meta {
+  margin: 0.125rem 0 0;
+  font-size: 0.6875rem;
+  color: var(--c-text-faint);
+}
+
+.cs-field-item__bar {
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: var(--c-border-strong);
+  overflow: hidden;
+}
+
+.cs-field-item__bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+}
+
+.cs-field-item__bar-fill--flooded {
+  background: var(--c-sky);
+}
+
+.cs-field-item__bar-fill--low {
+  background: var(--c-amber);
+}
+
+.cs-field-item__bar-fill--dry {
+  background: var(--c-red);
+}
+
+.cs-field-item__pct {
+  margin: 0.25rem 0 0;
+  text-align: right;
+  font-size: 0.625rem;
+  color: var(--c-text-faint);
+}
+
+/* Map */
+.cs-map-wrap {
+  position: relative;
+  height: 26.25rem;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  border: 1px solid var(--c-border-strong);
+  background: #0d1912;
+}
+
+.cs-map-legend {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  border-radius: 0.375rem;
+  background: rgba(10, 15, 20, 0.75);
+  padding: 0.5rem 0.625rem;
+  font-size: 0.6875rem;
+  color: var(--c-text-muted);
+}
+
+.cs-map-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.cs-map-legend__swatch {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 0.1875rem;
+  flex-shrink: 0;
+}
+
+.cs-map-legend__swatch--flooded {
+  background: var(--c-sky);
+}
+
+.cs-map-legend__swatch--low {
+  background: var(--c-amber);
+}
+
+.cs-map-legend__swatch--dry {
+  background: var(--c-red);
+}
+
+.c-leaflet-icon--sensor {
+  background: #fff;
+  border-color: var(--c-sky);
+}
+
+/* Alerts (shared look with other panels) */
+.cs-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.cs-alert__msg {
+  margin: 0;
+  color: var(--c-text-muted);
+}
+
+.cs-alert__time {
+  margin: 0;
+  font-size: 0.625rem;
+  color: var(--c-text-faint);
+}
+
+/* Analysis grid (reused pattern for satellite-derived layers) */
+.cs-analysis-item {
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.cs-analysis-thumb {
+  display: flex;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  border: 1px solid var(--c-border-strong);
+  background: var(--c-surface-alt);
+  transition: border-color 0.15s ease;
+}
+
+.cs-analysis-item:hover .cs-analysis-thumb {
+  border-color: var(--c-brand-500);
+}
+
+.cs-analysis-thumb svg {
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+
+.cs-analysis-label {
+  margin-top: 0.375rem;
+  text-align: center;
+  font-size: 0.625rem;
+  color: var(--c-text-muted);
+}
+
+.cs-analysis-stat {
+  margin: 0.0625rem 0 0;
+  text-align: center;
+  font-size: 0.5625rem;
+  color: var(--c-text-faint);
+}
+
+/* Summary footer */
+.cs-summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 0.375rem;
+  background: var(--c-surface-alt);
+  padding: 0.75rem 0;
+  text-align: center;
+}
+
+.cs-summary-item__value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.cs-summary-item__label {
+  font-size: 0.625rem;
+  color: var(--c-text-faint);
+}

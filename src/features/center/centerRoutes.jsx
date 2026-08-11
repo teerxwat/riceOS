@@ -1,7 +1,7 @@
 import RequireCenterRole from './RequireCenterRole.jsx'
 import { CenterShell } from './components/layout/CenterShell.jsx'
 import { DashboardPage } from './pages/DashboardPage.jsx'
-import { DronePage } from './pages/DronePage.jsx'
+import { SatellitePage } from './pages/SatellitePage.jsx'
 import { MarketplacePage } from './pages/MarketplacePage.jsx'
 import { AddFarmerPage } from './pages/AddFarmerPage.jsx'
 
@@ -17,7 +17,7 @@ export const centerRoutes = [
     ),
     children: [
       { index: true, element: <DashboardPage /> },
-      { path: 'drone', element: <DronePage /> },
+      { path: 'satellite', element: <SatellitePage /> },
       { path: 'marketplace', element: <MarketplacePage /> },
       { path: 'add-farmer', element: <AddFarmerPage /> },
     ],

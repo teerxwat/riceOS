@@ -716,7 +716,7 @@
   color: var(--c-text-muted);
 }
 
-/* ───────── Leaflet map (shared across drone map + plot-location picker) ───────── */
+/* ───────── Leaflet map (shared across satellite map + plot-location picker) ───────── */
 .c-leaflet {
   height: 100%;
   width: 100%;

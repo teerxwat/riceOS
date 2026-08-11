@@ -1,28 +1,17 @@
-import { Route, Camera, HardDrive, Timer, Plane } from 'lucide-react'
+import {
+  Layers,
+  Ruler,
+  CloudFog,
+  HardDrive,
+  MapPinned,
+  CalendarClock,
+} from 'lucide-react'
 import { Card } from '../common/Card.jsx'
-
-export function ActivityTypeButtons({ types }) {
-  return (
-    <Card title="ประเภทกิจกรรม (เลือกสร้างใหม่)">
-      <div className="c-grid c-grid-2 c-grid-md-3 c-grid-lg-6">
-        {types.map((t) => {
-          const [line1, line2] = t.label.split('\n')
-          return (
-            <button key={t.key} type="button" className="cdr-activity-btn">
-              <span className="cdr-activity-btn__title">{line1}</span>
-              {line2 && <span className="cdr-activity-btn__sub">{line2}</span>}
-            </button>
-          )
-        })}
-      </div>
-    </Card>
-  )
-}
 
 const FIELD_SHAPE = 'M15,55 L45,20 L85,25 L90,60 L60,85 L20,80 Z'
 
 // Small mockup "results" per analysis kind — generated inline as SVG so the
-// grid isn't just empty icon boxes, without depending on real drone imagery.
+// grid isn't just empty icon boxes, without depending on real imagery.
 function AnalysisThumb({ kind }) {
   switch (kind) {
     case 'rgb':
@@ -77,24 +66,32 @@ function AnalysisThumb({ kind }) {
         <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
           <rect width="100" height="100" fill="#0d1912" />
           <path
-            d={FIELD_SHAPE}
-            fill="none"
-            stroke="#26333f"
+            d="M8,42 H46 V78 H8 Z"
+            fill="#38bdf8"
+            fillOpacity="0.55"
+            stroke="#0ea5e9"
             strokeWidth="1.5"
-            strokeDasharray="3 2"
           />
           <path
-            d="M10,50 C 30,35 45,60 60,45 S 90,35 100,45 L100,65 L10,65 Z"
-            fill="#1d4ed8"
-            opacity="0.85"
+            d="M8,8 H46 V38 H8 Z"
+            fill="#38bdf8"
+            fillOpacity="0.55"
+            stroke="#0ea5e9"
+            strokeWidth="1.5"
           />
-          <ellipse
-            cx="30"
-            cy="75"
-            rx="12"
-            ry="7"
-            fill="#0891b2"
-            opacity="0.8"
+          <path
+            d="M50,8 H92 V38 H50 Z"
+            fill="#f87171"
+            fillOpacity="0.4"
+            stroke="#ef4444"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M50,42 H92 V78 H50 Z"
+            fill="#fbbf24"
+            fillOpacity="0.4"
+            stroke="#f59e0b"
+            strokeWidth="1.5"
           />
         </svg>
       )
@@ -110,8 +107,12 @@ function AnalysisThumb({ kind }) {
           />
           {[
             [30, 40],
-            [50, 30],
             [65, 55],
+          ].map(([x, y], i) => (
+            <circle key={i} cx={x} cy={y} r={6} fill="#f87171" opacity="0.9" />
+          ))}
+          {[
+            [50, 30],
             [40, 65],
             [72, 40],
             [55, 70],
@@ -121,9 +122,9 @@ function AnalysisThumb({ kind }) {
               key={i}
               cx={x}
               cy={y}
-              r={i % 3 === 0 ? 4 : 2.4}
-              fill="#f87171"
-              opacity="0.9"
+              r={2.4}
+              fill="#fbbf24"
+              opacity="0.85"
             />
           ))}
         </svg>
@@ -144,7 +145,7 @@ function AnalysisThumb({ kind }) {
             <path d={FIELD_SHAPE} fill="#a3752b" opacity="0.85" />
           </g>
           <g clipPath="url(#tsRight)">
-            <path d={FIELD_SHAPE} fill="#15803d" />
+            <path d={FIELD_SHAPE} fill="#38bdf8" fillOpacity="0.7" />
           </g>
           <line
             x1="50"
@@ -166,7 +167,12 @@ function AnalysisThumb({ kind }) {
 export function AnalysisGrid({ layers, compareDates }) {
   return (
     <Card
-      title="ผลวิเคราะห์ล่าสุด"
+      title={
+        <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <Layers size={16} color="var(--c-brand-400)" />
+          ผลวิเคราะห์ภาพถ่ายดาวเทียมล่าสุด
+        </span>
+      }
       titleAction={
         <span className="c-card__header-action">
           เปรียบเทียบ {compareDates.from} - {compareDates.to}
@@ -175,12 +181,12 @@ export function AnalysisGrid({ layers, compareDates }) {
     >
       <div className="c-grid c-grid-2 c-grid-md-3 c-grid-lg-6">
         {layers.map((l) => (
-          <button key={l.key} type="button" className="cdr-analysis-item">
-            <div className="cdr-analysis-thumb">
+          <button key={l.key} type="button" className="cs-analysis-item">
+            <div className="cs-analysis-thumb">
               <AnalysisThumb kind={l.kind} />
             </div>
-            <p className="cdr-analysis-label">{l.label}</p>
-            {l.stat && <p className="cdr-analysis-stat">{l.stat}</p>}
+            <p className="cs-analysis-label">{l.label}</p>
+            {l.stat && <p className="cs-analysis-stat">{l.stat}</p>}
           </button>
         ))}
       </div>
@@ -191,33 +197,45 @@ export function AnalysisGrid({ layers, compareDates }) {
 export function SummaryFooter({ summary }) {
   const items = [
     {
-      icon: Route,
-      label: 'พื้นที่สำรวจแล้ว',
+      icon: MapPinned,
+      label: 'พื้นที่วิเคราะห์รวม',
       value: `${summary.areaCoveredRai.toLocaleString('th-TH')} ไร่`,
     },
-    { icon: Plane, label: 'เที่ยวบิน', value: `${summary.flights} เที่ยว` },
-    { icon: Route, label: 'ระยะทางรวม', value: `${summary.distanceKm} กม.` },
-    { icon: Timer, label: 'เวลาในการบินรวม', value: summary.flightDuration },
     {
-      icon: Camera,
-      label: 'ภาพถ่ายที่ได้',
-      value: summary.photosCaptured.toLocaleString('th-TH'),
+      icon: Layers,
+      label: 'แปลงที่ตรวจสอบ',
+      value: `${summary.fieldsAnalyzed} แปลง`,
+    },
+    {
+      icon: Ruler,
+      label: 'ความละเอียดภาพ',
+      value: `${summary.resolutionM} ม./พิกเซล`,
+    },
+    {
+      icon: CloudFog,
+      label: 'เมฆปกคลุม',
+      value: `${summary.cloudCoverPercent}%`,
     },
     {
       icon: HardDrive,
-      label: 'ข้อมูลที่ได้บิน',
+      label: 'ขนาดข้อมูลภาพ',
       value: `${summary.dataSizeGb} GB`,
+    },
+    {
+      icon: CalendarClock,
+      label: 'รอบถ่ายภาพถัดไป',
+      value: summary.nextPassDate,
     },
   ]
 
   return (
-    <Card title="สรุปผลกิจกรรมวันนี้">
+    <Card title="สรุปข้อมูลภาพถ่ายดาวเทียมวันนี้">
       <div className="c-grid c-grid-2 c-grid-md-3 c-grid-lg-6">
         {items.map(({ icon: Icon, label, value }) => (
-          <div key={label} className="cdr-summary-item">
+          <div key={label} className="cs-summary-item">
             <Icon size={16} color="var(--c-brand-400)" />
-            <span className="cdr-summary-item__value">{value}</span>
-            <span className="cdr-summary-item__label">{label}</span>
+            <span className="cs-summary-item__value">{value}</span>
+            <span className="cs-summary-item__label">{label}</span>
           </div>
         ))}
       </div>

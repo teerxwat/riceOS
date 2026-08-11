@@ -22,15 +22,15 @@ export function AlertsPanel({ alerts }) {
         {alerts.map((a, i) => {
           const Icon = ICON[a.level]
           return (
-            <div key={i} className="cdr-alert">
+            <div key={i} className="cs-alert">
               <Icon
                 size={14}
                 color={COLOR[a.level]}
                 style={{ marginTop: '0.125rem', flexShrink: 0 }}
               />
               <div>
-                <p className="cdr-alert__msg">{a.message}</p>
-                <p className="cdr-alert__time">{a.time}</p>
+                <p className="cs-alert__msg">{a.message}</p>
+                <p className="cs-alert__time">{a.time}</p>
               </div>
             </div>
           )

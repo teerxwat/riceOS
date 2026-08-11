@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css'
 import { Card } from '../common/Card.jsx'
 import { TextInput } from '../common/FormField.jsx'
 
-// Same fictional center used on the drone map — keeps the mockup data consistent.
+// Same fictional center used on the satellite map — keeps the mockup data consistent.
 const DEFAULT_CENTER = { lat: 18.98543, lng: 98.93877 }
 
 const PIN_ICON = L.divIcon({

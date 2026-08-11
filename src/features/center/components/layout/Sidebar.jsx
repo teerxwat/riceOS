@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard,
-  Plane,
+  Satellite,
   Store,
   UserPlus,
   Sprout,
@@ -14,7 +14,7 @@ import { useAuth } from '../../../../auth/authContext.js'
 
 const NAV_ITEMS = [
   { to: '/app/center', label: 'หน้าหลัก', icon: LayoutDashboard },
-  { to: '/app/center/drone', label: 'แผงควบคุมโดรน', icon: Plane },
+  { to: '/app/center/satellite', label: 'ภาพถ่ายดาวเทียม', icon: Satellite },
   { to: '/app/center/marketplace', label: 'ตลาดข้าว', icon: Store },
   { to: '/app/center/add-farmer', label: 'เพิ่มเกษตรกร', icon: UserPlus },
 ]
