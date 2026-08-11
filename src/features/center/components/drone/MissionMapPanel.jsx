@@ -13,7 +13,7 @@ import { Card } from '../common/Card.jsx'
 
 function divIcon(modifier, size) {
   return L.divIcon({
-    className: `cdr-leaflet-icon cdr-leaflet-icon--${modifier}`,
+    className: `c-leaflet-icon cdr-leaflet-icon--${modifier}`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
   })
@@ -53,7 +53,7 @@ export function MissionMapPanel({
           center={center}
           zoom={15}
           scrollWheelZoom
-          className="cdr-leaflet"
+          className="c-leaflet"
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

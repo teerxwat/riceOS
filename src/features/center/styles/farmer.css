@@ -220,26 +220,19 @@
   color: var(--c-text-muted);
 }
 
-.cf-map-preview {
+.cf-map-wrap {
   position: relative;
-  display: flex;
-  height: 14rem;
-  align-items: center;
-  justify-content: center;
+  height: 16rem;
+  width: 100%;
   overflow: hidden;
   border-radius: 0.375rem;
   border: 1px solid var(--c-border-strong);
   background: #0d1912;
 }
 
-.cf-map-preview svg {
-  height: 100%;
-  width: 100%;
-}
-
-.cf-map-preview__pin {
-  position: absolute;
-  color: var(--c-brand-400);
+.cf-leaflet-icon--pin {
+  background: var(--c-brand-500);
+  cursor: grab;
 }
 
 .cf-map-area-note {

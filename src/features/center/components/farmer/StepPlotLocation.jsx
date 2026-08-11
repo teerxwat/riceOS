@@ -1,12 +1,32 @@
 import { useState } from 'react'
-import { MapPin } from 'lucide-react'
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
 import { Card } from '../common/Card.jsx'
 import { TextInput } from '../common/FormField.jsx'
+
+// Same fictional center used on the drone map — keeps the mockup data consistent.
+const DEFAULT_CENTER = { lat: 18.98543, lng: 98.93877 }
+
+const PIN_ICON = L.divIcon({
+  className: 'c-leaflet-icon cf-leaflet-icon--pin',
+  iconSize: [22, 22],
+  iconAnchor: [11, 11],
+})
 
 function numOrEmpty(value) {
   if (value === '') return ''
   const n = Number(value)
   return Number.isNaN(n) ? '' : n
+}
+
+function LocationPicker({ onPick }) {
+  useMapEvents({
+    click(e) {
+      onPick(e.latlng.lat, e.latlng.lng)
+    },
+  })
+  return null
 }
 
 export function StepPlotLocation({ plots, plotLocations, onChange }) {
@@ -27,7 +47,16 @@ export function StepPlotLocation({ plots, plotLocations, onChange }) {
     )
   }
 
+  function setPoint(lat, lng) {
+    update({ latitude: lat.toFixed(6), longitude: lng.toFixed(6) })
+  }
+
   if (!active) return null
+
+  const hasPoint = active.latitude !== '' && active.longitude !== ''
+  const position = hasPoint
+    ? [Number(active.latitude), Number(active.longitude)]
+    : [DEFAULT_CENTER.lat, DEFAULT_CENTER.lng]
 
   return (
     <Card title="3. กำหนดตำแหน่งแปลงนา">
@@ -101,37 +130,33 @@ export function StepPlotLocation({ plots, plotLocations, onChange }) {
 
         <div>
           <p className="cf-map-caption">
-            ภาพประกอบตำแหน่งแปลง (ตัวอย่าง — ไม่ใช่แผนที่ใช้งานจริง)
+            คลิกบนแผนที่ หรือลากหมุด เพื่อกำหนดตำแหน่งแปลง
           </p>
-          <div className="cf-map-preview">
-            <svg viewBox="0 0 300 200">
-              <defs>
-                <pattern
-                  id="plotGrid"
-                  width="20"
-                  height="20"
-                  patternUnits="userSpaceOnUse"
-                >
-                  <rect width="20" height="20" fill="#12241a" />
-                  <path
-                    d="M20 0 L0 0 0 20"
-                    fill="none"
-                    stroke="#1c3327"
-                    strokeWidth="1"
-                  />
-                </pattern>
-              </defs>
-              <rect width="300" height="200" fill="url(#plotGrid)" />
-              <polygon
-                points="90,50 210,40 230,120 130,150 80,110"
-                fill="#1f9450"
-                fillOpacity="0.2"
-                stroke="#34b866"
-                strokeWidth="2"
-                strokeDasharray="5 3"
+          <div className="cf-map-wrap">
+            <MapContainer
+              key={active.plotLocalId}
+              center={position}
+              zoom={16}
+              scrollWheelZoom
+              className="c-leaflet"
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-            </svg>
-            <MapPin size={22} className="cf-map-preview__pin" />
+              <Marker
+                position={position}
+                icon={PIN_ICON}
+                draggable
+                eventHandlers={{
+                  dragend: (e) => {
+                    const { lat, lng } = e.target.getLatLng()
+                    setPoint(lat, lng)
+                  },
+                }}
+              />
+              <LocationPicker onPick={setPoint} />
+            </MapContainer>
           </div>
           <p className="cf-map-area-note">
             แปลงที่ {activePlotIndex + 1} · พื้นที่โดยประมาณ{' '}
