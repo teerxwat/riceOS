@@ -1,4 +1,5 @@
-import { CheckCircle2, ShieldCheck, Milestone } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { CheckCircle2, ShieldCheck, Milestone, ArrowRight } from 'lucide-react'
 import { useAuth } from '../../auth/authContext.js'
 import { getRole } from './roles.js'
 import './roles.css'
@@ -33,6 +34,12 @@ export default function RolePage() {
       </header>
 
       <p className="role-summary">{role.summary}</p>
+
+      {role.id === 'center' && (
+        <Link to="/app/center" className="nav-btn primary role-dashboard-link">
+          เข้าสู่แดชบอร์ดศูนย์ข้าว <ArrowRight size={16} />
+        </Link>
+      )}
 
       <div className="role-grid">
         <section className="role-card">

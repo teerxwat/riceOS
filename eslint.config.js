@@ -5,7 +5,9 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // backend/ is a standalone Node (CommonJS) service with its own tooling,
+  // not part of this Vite/React app — excluded from the browser-focused lint config.
+  globalIgnores(['dist', 'backend']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [

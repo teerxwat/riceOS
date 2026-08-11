@@ -1,0 +1,155 @@
+{
+  "weather": {
+    "condition": "ท้องฟ้าโปร่ง",
+    "tempC": 28,
+    "humidityPercent": 62,
+    "windKmh": 8,
+    "visibilityKm": 10
+  },
+  "drones": [
+    {
+      "id": "drn-1",
+      "code": "DRN-001",
+      "model": "DJI Matrice 350 RTK",
+      "status": "flying",
+      "batteryPercent": 78,
+      "altitudeM": 120,
+      "speedMs": 12.4
+    },
+    {
+      "id": "drn-2",
+      "code": "DRN-002",
+      "model": "DJI Mavic 3 Multispectral",
+      "status": "flying",
+      "batteryPercent": 95,
+      "altitudeM": 120,
+      "speedMs": 10.1
+    },
+    {
+      "id": "drn-3",
+      "code": "DRN-003",
+      "model": "DJI Matrice 30T",
+      "status": "standby",
+      "batteryPercent": 100,
+      "altitudeM": 0,
+      "speedMs": 0
+    },
+    {
+      "id": "drn-4",
+      "code": "DRN-004",
+      "model": "DJI Phantom 4 RTK",
+      "status": "standby",
+      "batteryPercent": 100,
+      "altitudeM": 0,
+      "speedMs": 0
+    }
+  ],
+  "stations": [
+    {
+      "id": "h1",
+      "code": "H1",
+      "name": "ศูนย์ข้าวบ้านหนองหวัด",
+      "ready": true
+    },
+    {
+      "id": "h2",
+      "code": "H2",
+      "name": "ศูนย์ข้าวบ้านทุ่งหลวง",
+      "ready": true
+    },
+    {
+      "id": "h3",
+      "code": "H3",
+      "name": "ศูนย์ข้าวบ้านสันป่าตัน",
+      "ready": true
+    },
+    { "id": "h4", "code": "H4", "name": "ศูนย์ข้าวบ้านเวียงทอง", "ready": true }
+  ],
+  "missions": [
+    {
+      "id": "m1",
+      "title": "ตรวจสุขภาพข้าว (NDVI)",
+      "status": "in_progress",
+      "targetArea": "แปลงนา หมู่ 4,5 ต.สันป่าตัด",
+      "totalAreaRai": 1256,
+      "progressPercent": 78,
+      "startedAt": "23 พ.ค. 2567 10:30",
+      "finishedAt": null,
+      "drone": "DRN-001 (Matrice 350 RTK)"
+    },
+    {
+      "id": "m2",
+      "title": "ตรวจระดับน้ำ",
+      "status": "completed",
+      "targetArea": "คลองชลประทานสายหลัก",
+      "totalAreaRai": 850,
+      "progressPercent": 100,
+      "startedAt": "23 พ.ค. 2567 08:15",
+      "finishedAt": "23 พ.ค. 2567 08:15",
+      "drone": "DRN-002 (Mavic 3M)"
+    },
+    {
+      "id": "m3",
+      "title": "ตรวจการเผา (Hotspot)",
+      "status": "pending",
+      "targetArea": "ต.หนองควาย, ต.ป่าตาล",
+      "totalAreaRai": 2100,
+      "progressPercent": null,
+      "startedAt": "23 พ.ค. 2567 14:00",
+      "finishedAt": null,
+      "drone": "DRN-003 (Matrice 30T)"
+    }
+  ],
+  "alerts": [
+    {
+      "level": "critical",
+      "message": "ตรวจพบจุดความร้อน (Hotspot) ต.หนองควาย อ.หางดง จ.เชียงใหม่",
+      "time": "09:32"
+    },
+    {
+      "level": "warning",
+      "message": "ระดับแบตเตอรี่ต่ำใน DRN-002",
+      "time": "09:20"
+    },
+    {
+      "level": "info",
+      "message": "การภารกิจตรวจสุขภาพข้าวเสร็จ 50%",
+      "time": "08:45"
+    },
+    {
+      "level": "info",
+      "message": "อัปโหลดข้อมูลภารกิจสำเร็จ 2.3 GB",
+      "time": "08:30"
+    },
+    {
+      "level": "success",
+      "message": "สภาพอากาศเหมาะสมสำหรับบิน",
+      "time": "07:10"
+    }
+  ],
+  "activityTypes": [
+    { "key": "ndvi", "label": "ตรวจสุขภาพข้าว\nNDVI, ความเครียด" },
+    { "key": "water", "label": "ตรวจระดับน้ำ\nWater Level" },
+    { "key": "disease", "label": "ตรวจโรคและแมลง\nDisease & Pest" },
+    { "key": "fire", "label": "ตรวจการเผา\nFire / Hotspot" },
+    { "key": "damage", "label": "ความเสียหายหลังภัยพิบัติ\nDamage Assessment" },
+    { "key": "orthomosaic", "label": "สร้าง Orthomosaic\n2D/3D Map" }
+  ],
+  "analysisLayers": [
+    { "key": "rgb", "label": "ภาพ RGB (Orthomosaic)" },
+    { "key": "ndvi", "label": "ดัชนีพืชพรรณ (NDVI)" },
+    { "key": "ndwi", "label": "ดัชนีความเครียด (NDWI/NDCI)" },
+    { "key": "water_map", "label": "แผนที่น้ำ (Water Map)" },
+    { "key": "anomaly", "label": "จุดผิดปกติ (Anomaly)" },
+    { "key": "timeseries", "label": "เปรียบเทียบตามช่วงเวลา" }
+  ],
+  "summary": {
+    "areaCoveredRai": 2106,
+    "flights": 3,
+    "distanceKm": 68.5,
+    "flightDuration": "2 ชม. 18 นาที",
+    "photosCaptured": 8452,
+    "dataSizeGb": 11.6
+  },
+  "compareDates": { "from": "16 พ.ค. 67", "to": "23 พ.ค. 67" }
+}

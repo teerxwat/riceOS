@@ -1,0 +1,216 @@
+{
+  "centerInfo": {
+    "name": "ศูนย์ข้าวชุมชนบ้านหนองหวัด",
+    "code": "RC6601001",
+    "subDistrict": "ต.หนองหวัด",
+    "district": "อ.สันป่าตอง",
+    "province": "จ.เชียงใหม่",
+    "online": true,
+    "weather": { "tempC": 24.6, "humidityPercent": 68, "rainChancePercent": 60 }
+  },
+  "urgentAnnouncement": {
+    "source": "กรมชลประทาน",
+    "title": "ประกาศด่วนจากกรมชลประทาน",
+    "message": "เตรียมปล่อยน้ำรอบเวร วันที่ 24 พ.ค. 2567 เวลา 09:00 น. สำหรับพื้นที่ฝั่งซ้ายคลองแม่ข่า ขอให้เกษตรกรเตรียมแปลงนา และปิดเครื่องสูบน้ำก่อนเวลาปล่อยน้ำ 30 นาที"
+  },
+  "kpis": {
+    "assetHealthScore": 82,
+    "remainingUsefulLifeDays": 132,
+    "remainingUsefulLifeHours": 1820,
+    "highRiskMachines": 3,
+    "urgentRepairJobs": 2,
+    "urgentRepairWithinHours": 24
+  },
+  "dryers": [
+    {
+      "id": "dryer-1",
+      "name": "เครื่องอบ 1",
+      "status": "running",
+      "percent": 72,
+      "round": 23,
+      "totalRounds": 30,
+      "tempC": 52,
+      "humidityIn": 25.4,
+      "humidityOut": 14.2,
+      "timeRemaining": "01:25",
+      "volumeTon": 15.2,
+      "note": null
+    },
+    {
+      "id": "dryer-2",
+      "name": "เครื่องอบ 2",
+      "status": "running",
+      "percent": 48,
+      "round": 14,
+      "totalRounds": 30,
+      "tempC": 49,
+      "humidityIn": 24.1,
+      "humidityOut": 14.2,
+      "timeRemaining": "02:10",
+      "volumeTon": 9.6,
+      "note": null
+    },
+    {
+      "id": "dryer-3",
+      "name": "เครื่องอบ 3",
+      "status": "idle",
+      "percent": 0,
+      "round": 0,
+      "totalRounds": 0,
+      "tempC": null,
+      "humidityIn": null,
+      "humidityOut": null,
+      "timeRemaining": null,
+      "volumeTon": null,
+      "note": "รอรับข้าว"
+    },
+    {
+      "id": "dryer-4",
+      "name": "เครื่องอบ 4",
+      "status": "maintenance",
+      "percent": 0,
+      "round": 0,
+      "totalRounds": 0,
+      "tempC": null,
+      "humidityIn": null,
+      "humidityOut": null,
+      "timeRemaining": null,
+      "volumeTon": null,
+      "note": "มอเตอร์พัดลมขัดข้อง รอช่างเข้าตรวจสอบ"
+    }
+  ],
+  "serviceQueue": {
+    "receiving": 28,
+    "drying": 16,
+    "weighing": 9,
+    "quality": 6,
+    "updatedAt": "23 พ.ค. 2567 09:45 น."
+  },
+  "currentlyServing": [
+    {
+      "type": "รับซื้อข้าว",
+      "name": "นายสมชาย ใจดี",
+      "queueNo": 12,
+      "extra": null
+    },
+    {
+      "type": "อบข้าว",
+      "name": "นางวิไล ใจงาม",
+      "queueNo": 7,
+      "extra": "เครื่องอบ 1"
+    },
+    {
+      "type": "ชั่งน้ำหนัก",
+      "name": "นายทองดี คำฟู",
+      "queueNo": 4,
+      "extra": null
+    },
+    {
+      "type": "ตรวจคุณภาพ",
+      "name": "นางบัวผัน อินต๊ะ",
+      "queueNo": 2,
+      "extra": null
+    },
+    {
+      "type": "รับซื้อข้าว",
+      "name": "นายคำตัน สุขใจ",
+      "queueNo": 13,
+      "extra": null
+    }
+  ],
+  "water": {
+    "canalLevelM": 0.85,
+    "canalStatus": "ปกติ",
+    "awdCurrentRound": 2,
+    "awdTotalRounds": 5,
+    "sensorsTotal": 36,
+    "sensorsNormal": 32,
+    "sensorsError": 4,
+    "updatedAt": "23 พ.ค. 2567 09:45 น."
+  },
+  "watchedMachine": {
+    "id": "dryer-3-unit",
+    "name": "เครื่องอบข้าว #3",
+    "model": "DR-120",
+    "serial": "DR120-003-2022",
+    "riskLabel": "เสี่ยงสูง",
+    "healthScore": 61,
+    "rulDays": 96,
+    "rulHours": 1240,
+    "readings": {
+      "tempC": 78.6,
+      "tempChangePercent": 18,
+      "vibrationMm": 7.2,
+      "vibrationChangePercent": 42,
+      "currentA": 18.7,
+      "currentChangePercent": 12,
+      "powerKw": 7.6,
+      "powerChangePercent": -5
+    },
+    "aiPrediction": {
+      "confidencePercent": 91,
+      "withinHours": 96,
+      "rootCauses": [
+        { "cause": "ลูกปืนลูกสูงกว่าปกติ", "probabilityPercent": 68 },
+        {
+          "cause": "การสั่นสะเทือนของพัดลมเพิ่มขึ้น",
+          "probabilityPercent": 52
+        },
+        { "cause": "การโหลดวัสดุอากาศไม่เพียงพอ", "probabilityPercent": 27 }
+      ],
+      "recommendedWindow": "ควรซ่อมบำรุงใน 3-5 วันข้างหน้า",
+      "recommendedDateRange": "ช่วงเวลาที่เหมาะสม: 25-27 พ.ค. 2567",
+      "parts": [
+        {
+          "name": "ลูกปืน Bearing 6204",
+          "qty": 2,
+          "unitPrice": 180,
+          "total": 360
+        },
+        {
+          "name": "สายพาน V-Belt B80",
+          "qty": 1,
+          "unitPrice": 320,
+          "total": 320
+        },
+        {
+          "name": "พัดลมระบายอากาศ 18\"",
+          "qty": 1,
+          "unitPrice": 1250,
+          "total": 1250
+        },
+        { "name": "Grease NLGI-2", "qty": 1, "unitPrice": 120, "total": 120 }
+      ],
+      "totalPartsCost": 2050,
+      "impactIfNotRepaired": {
+        "downtimeDays": "3-7 วัน",
+        "efficiencyLossPercent": 22,
+        "estimatedCostBaht": 18400
+      }
+    }
+  },
+  "performance": {
+    "oeePercent": 78.6,
+    "oeeDeltaPercent": 4.2,
+    "availabilityPercent": 89.3,
+    "availabilityDeltaPercent": 3.1,
+    "performancePercent": 82.1,
+    "performanceDeltaPercent": 5.3,
+    "qualityPercent": 96.5,
+    "qualityDeltaPercent": 1.2
+  },
+  "ricePrices": [
+    { "product": "ข้าวเปลือกเจ้า", "pricePerTon": 10100 },
+    { "product": "ข้าวเปลือกหอมมะลิ", "pricePerTon": 14800 },
+    { "product": "ข้าวเปลือกเหนียว", "pricePerTon": 10300 },
+    { "product": "ข้าวหอมปทุม", "pricePerTon": 9700 }
+  ],
+  "centralAnnouncement": {
+    "title": "โครงการสนับสนุนการลดการเผาฟาง ปี 2567",
+    "body": "สนับสนุนค่าจัดการฟางและวัสดุเหลือใช้ไร่ละ 500 บาท ลงทะเบียนได้ที่ศูนย์ข้าวชุมชนใกล้บ้าน"
+  },
+  "contact": {
+    "phone": "053-123-456",
+    "hours": "เวลาทำการ 08:30 - 17:00 น."
+  }
+}

@@ -292,3 +292,9 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ───────── ROLE DASHBOARD ENTRY (center role) ───────── */
+.role-dashboard-link {
+  margin: 0 0 1.6rem;
+  width: fit-content;
+}
