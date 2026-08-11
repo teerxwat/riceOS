@@ -1,34 +1,14 @@
-// This is the one write path in the center dashboard that is NOT mocked — it
-// submits real multipart form data to the standalone Node/Express backend in
-// /backend at the repo root (separate service, its own MySQL database), not
-// through the shared services/apiClient.js (which targets a different,
-// not-yet-built shared backend for the other features).
-const API_BASE_URL =
-  import.meta.env.VITE_CENTER_API_URL ?? 'http://localhost:4000'
+import { delay } from './delay'
 
-export async function createFarmer(form) {
-  const body = new FormData()
-  body.append('member', JSON.stringify(form.member))
-  body.append('plots', JSON.stringify(form.plots))
-  body.append('plotLocations', JSON.stringify(form.plotLocations))
-  body.append('cultivation', JSON.stringify(form.cultivation))
+let mockFarmerIdCounter = 1001
 
-  form.files.forEach((entry) => {
-    body.append('documents', entry.file, entry.file.name)
-    body.append('documentCategories', entry.category)
-  })
-
-  const res = await fetch(`${API_BASE_URL}/api/farmers`, {
-    method: 'POST',
-    body,
-  })
-
-  if (!res.ok) {
-    const errorBody = await res.json().catch(() => null)
-    throw new Error(
-      errorBody?.message ?? `บันทึกข้อมูลไม่สำเร็จ (HTTP ${res.status})`
-    )
-  }
-
-  return res.json()
+// Mockup only — does not call a real backend or store anything. Simulates
+// network latency and returns a fake member id, same shape a real
+// POST /api/farmers response would have, so swapping in the real call later
+// (see backend/routes/farmers/add.js) won't require changing the caller.
+export async function createFarmer() {
+  await delay(600)
+  const farmerId = mockFarmerIdCounter
+  mockFarmerIdCounter += 1
+  return { success: true, farmerId }
 }

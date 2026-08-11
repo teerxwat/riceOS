@@ -106,6 +106,9 @@ export function AddFarmerPage() {
               ถูกเพิ่มเข้าศูนย์เรียบร้อยแล้ว
               {savedFarmerId > 0 && ` (รหัสสมาชิก #${savedFarmerId})`}
             </p>
+            <p className="cf-success-mock-note">
+              * ข้อมูลจำลอง (mockup) เท่านั้น ยังไม่บันทึกลงฐานข้อมูลจริง
+            </p>
             <button
               type="button"
               onClick={handleStartNew}
@@ -123,7 +126,7 @@ export function AddFarmerPage() {
     <>
       <Topbar
         title="เพิ่มเกษตรกร (ชาวนา) เข้าศูนย์"
-        subtitle="กรอกข้อมูลให้น้อยที่สุด เร็วที่สุด — ข้อมูลนี้จะถูกบันทึกลงฐานข้อมูลจริง"
+        subtitle="กรอกข้อมูลให้น้อยที่สุด เร็วที่สุด — หน้านี้เป็น mockup ข้อมูลจำลอง ยังไม่บันทึกลงฐานข้อมูลจริง"
       />
       <div className="c-content">
         <div className="cf-wizard">

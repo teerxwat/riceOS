@@ -436,3 +436,9 @@
   font-size: 0.875rem;
   color: var(--c-text-muted);
 }
+
+.cf-success-mock-note {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--c-text-faint);
+}
