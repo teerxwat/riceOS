@@ -58,7 +58,7 @@ function TrendChart({ months, actual, forecast, target }) {
         x={WIDTH - PAD_RIGHT}
         y={targetY - 6}
         textAnchor="end"
-        className="fill-db-amber text-[11px] font-medium"
+        className="fill-db-amber text-caption font-medium"
       >
         เป้าหมาย {formatNumber(target, { decimals: 2 })} ล้านตัน
       </text>
@@ -103,7 +103,7 @@ function TrendChart({ months, actual, forecast, target }) {
             x={x}
             y={HEIGHT - 8}
             textAnchor="middle"
-            className="fill-db-text-dim text-[10px]"
+            className="fill-db-text-dim text-caption"
           >
             {m}
           </text>

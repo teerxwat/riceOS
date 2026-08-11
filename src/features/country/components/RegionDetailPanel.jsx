@@ -20,12 +20,12 @@ function RegionDetailPanel({ region, isWholeCountry }) {
   return (
     <section className="rounded-db border border-db-border bg-db-surface p-5">
       <div className="flex items-center justify-between gap-2">
-        <h2 className="font-display text-[16px] font-bold text-db-text">
+        <h2 className="font-display text-heading font-bold text-db-text">
           {isWholeCountry ? 'ภาพรวมทั้งประเทศ' : `ภาค${region.name}`}
         </h2>
         {!isWholeCountry && (
           <span
-            className={`rounded-full px-2.5 py-1 text-[11.5px] font-semibold ${STATUS_COLOR[region.status]}`}
+            className={`rounded-full px-2.5 py-1 text-label font-semibold ${STATUS_COLOR[region.status]}`}
           >
             {STATUS_TEXT[region.status]}
           </span>
@@ -35,15 +35,15 @@ function RegionDetailPanel({ region, isWholeCountry }) {
       <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-4">
         {STAT_ROWS.map((row) => (
           <div key={row.key}>
-            <dt className="text-[11.5px] text-db-text-muted">{row.label}</dt>
-            <dd className="font-display mt-0.5 text-[19px] font-semibold tabular-nums text-db-text">
+            <dt className="text-label text-db-text-muted">{row.label}</dt>
+            <dd className="font-display mt-0.5 text-stat font-semibold tabular-nums text-db-text">
               {formatNumber(
                 row.key === 'production'
                   ? region[row.key] * 1
                   : region[row.key],
                 { decimals: row.decimals ?? 0 }
               )}
-              <span className="ml-1 text-[11px] font-normal text-db-text-muted">
+              <span className="ml-1 text-caption font-normal text-db-text-muted">
                 {row.unit}
               </span>
             </dd>
@@ -52,8 +52,9 @@ function RegionDetailPanel({ region, isWholeCountry }) {
       </dl>
 
       {!isWholeCountry && (
-        <p className="mt-4 text-[11.5px] text-db-text-dim">
-          กดที่ "ทั้งประเทศ" กลางแผนภาพเพื่อกลับไปดูภาพรวม
+        <p className="mt-4 text-label text-db-text-dim">
+          กดปุ่ม "ทั้งประเทศ" เหนือแผนที่ หรือ "← ดูทั้งประเทศ" บนแผนที่
+          เพื่อกลับไปดูภาพรวม
         </p>
       )}
     </section>

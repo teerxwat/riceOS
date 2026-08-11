@@ -44,12 +44,14 @@ export const KPI_STRIP = [
   },
 ]
 
-// เรียงตามลำดับที่จะวางรอบวง radial map (ไม่ใช่พิกัดภูมิศาสตร์จริง
-// เป็นแผนภาพเชิงสัญลักษณ์ — ระยะห่างเท่ากันทุกแฉกตามลำดับนี้)
+// พิกัด lat/lng เป็นจุดศูนย์กลางโดยประมาณของแต่ละภาค (ใกล้จังหวัดหลัก)
+// ใช้ปักหมุดบนแผนที่ Leaflet จริง ไม่ใช่พิกัดขอบเขตภาคที่แม่นยำระดับสำรวจ
 export const REGIONS = [
   {
     id: 'north',
     name: 'เหนือ',
+    lat: 18.79,
+    lng: 98.98,
     centers: 190,
     production: 1742.3,
     area: 95430,
@@ -59,6 +61,8 @@ export const REGIONS = [
   {
     id: 'northeast',
     name: 'ตะวันออกเฉียงเหนือ',
+    lat: 15.85,
+    lng: 102.94,
     centers: 340,
     production: 2864.7,
     area: 162850,
@@ -68,6 +72,8 @@ export const REGIONS = [
   {
     id: 'east',
     name: 'ตะวันออก',
+    lat: 12.68,
+    lng: 101.28,
     centers: 95,
     production: 812.4,
     area: 48250,
@@ -77,6 +83,8 @@ export const REGIONS = [
   {
     id: 'south',
     name: 'ใต้',
+    lat: 8.44,
+    lng: 99.96,
     centers: 110,
     production: 601.2,
     area: 33450,
@@ -86,6 +94,8 @@ export const REGIONS = [
   {
     id: 'west',
     name: 'ตะวันตก',
+    lat: 14.02,
+    lng: 99.53,
     centers: 55,
     production: 507.2,
     area: 29560,
@@ -95,6 +105,8 @@ export const REGIONS = [
   {
     id: 'central',
     name: 'กลาง',
+    lat: 14.35,
+    lng: 100.58,
     centers: 210,
     production: 2015.6,
     area: 128340,

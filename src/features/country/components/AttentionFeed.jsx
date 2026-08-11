@@ -32,7 +32,7 @@ const SEVERITY_STYLE = {
 function AttentionFeed({ items }) {
   return (
     <section className="rounded-db border border-db-border bg-db-surface p-5">
-      <h2 className="font-display text-[16px] font-bold text-db-text">
+      <h2 className="font-display text-heading font-bold text-db-text">
         สิ่งที่ต้องรู้วันนี้
       </h2>
 
@@ -53,19 +53,21 @@ function AttentionFeed({ items }) {
 
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-[13.5px] font-semibold text-db-text">
+                  <p className="text-body font-semibold text-db-text">
                     {item.title}
                   </p>
                   <span
-                    className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${s.badge}`}
+                    className={`rounded-full px-2 py-0.5 text-caption font-bold ${s.badge}`}
                   >
                     {s.label}
                   </span>
                 </div>
-                <p className="mt-0.5 text-[12.5px] text-db-text-muted">
+                <p className="mt-0.5 text-label text-db-text-muted">
                   {item.detail}
                 </p>
-                <p className="mt-1 text-[11px] text-db-text-dim">{item.time}</p>
+                <p className="mt-1 text-caption text-db-text-dim">
+                  {item.time}
+                </p>
               </div>
             </li>
           )

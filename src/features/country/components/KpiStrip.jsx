@@ -11,18 +11,18 @@ function KpiStrip({ items }) {
           key={item.key}
           className="rounded-db border border-db-border bg-db-surface p-3.5"
         >
-          <p className="text-[12px] text-db-text-muted">{item.label}</p>
-          <p className="font-display mt-1 text-[20px] font-semibold tabular-nums text-db-text">
+          <p className="text-label text-db-text-muted">{item.label}</p>
+          <p className="font-display mt-1 text-stat font-semibold tabular-nums text-db-text">
             {formatNumber(item.value, {
               decimals: item.value % 1 !== 0 ? 1 : 0,
             })}
-            <span className="ml-1 text-[12px] font-normal text-db-text-muted">
+            <span className="ml-1 text-label font-normal text-db-text-muted">
               {item.unit}
             </span>
           </p>
           {item.sub && (
             <p
-              className={`mt-1 flex items-center gap-1 text-[11px] ${
+              className={`mt-1 flex items-center gap-1 text-caption ${
                 item.trend === 'up' ? 'text-db-green' : 'text-db-text-dim'
               }`}
             >
