@@ -43,10 +43,22 @@ import { IMG } from './images.js'
 import './HomePage.css'
 
 // เผยเนื้อหาแบบ fade-up เมื่อเลื่อนถึง
+// element ที่อยู่ในจอตั้งแต่แรกโชว์ทันที (ไม่รอ IntersectionObserver —
+// บางสภาวะ IO ไม่ยิง event ทำให้เนื้อหาล่องหนถาวร)
 function useReveal() {
   const ref = useRef(null)
   useEffect(() => {
-    const els = ref.current?.querySelectorAll('[data-reveal]') ?? []
+    const els = [...(ref.current?.querySelectorAll('[data-reveal]') ?? [])]
+    const vh = window.innerHeight || document.documentElement.clientHeight
+    const rest = els.filter((el) => {
+      const r = el.getBoundingClientRect()
+      if (r.top < vh && r.bottom > 0) {
+        el.classList.add('is-visible')
+        return false
+      }
+      return true
+    })
+    if (!rest.length) return undefined
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -58,7 +70,7 @@ function useReveal() {
       },
       { threshold: 0.12 }
     )
-    els.forEach((el) => io.observe(el))
+    rest.forEach((el) => io.observe(el))
     return () => io.disconnect()
   }, [])
   return ref
