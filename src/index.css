@@ -2,29 +2,81 @@
 
 /* โทเคนของหน้า Country dashboard (ใช้ Tailwind v4) */
 @theme {
-  --color-db-bg: #0a0e1a;
-  --color-db-surface: #131a2b;
-  --color-db-surface-alt: #0f1524;
-  --color-db-border: rgba(255, 255, 255, 0.08);
-  --color-db-text: #e5e7eb;
-  --color-db-text-muted: #8b93a7;
-  --color-db-text-dim: #5b6478;
+  /* สีของ dashboard เดินตามธีมรวมของแอป (var(--bg)/--surface/--text ฯลฯ
+     ที่ประกาศไว้ด้านล่าง) แทนค่าตายตัว เพื่อให้หน้าตาตรงกับหน้าอื่นทั้งแอป
+     และสลับ light/dark ตาม toggle บน Navbar ได้เหมือนกัน */
+  --color-db-bg: var(--bg);
+  --color-db-surface: var(--surface);
+  --color-db-surface-alt: var(--surface-2);
+  --color-db-border: var(--border);
+  --color-db-text: var(--text);
+  --color-db-text-muted: var(--muted);
+  --color-db-text-dim: var(--muted);
 
-  --color-db-green: #22c55e;
-  --color-db-green-bg: rgba(34, 197, 94, 0.12);
-  --color-db-amber: #f59e0b;
-  --color-db-amber-bg: rgba(245, 158, 11, 0.12);
+  --color-db-green: var(--green-strong);
+  --color-db-green-bg: var(--badge-bg);
+  --color-db-amber: var(--gold);
+  --color-db-amber-bg: color-mix(in srgb, var(--gold) 15%, transparent);
   --color-db-red: #ef4444;
   --color-db-red-bg: rgba(239, 68, 68, 0.12);
   --color-db-blue: #38bdf8;
   --color-db-blue-bg: rgba(56, 189, 248, 0.12);
+  --color-db-purple: #8b5cf6;
+  --color-db-purple-bg: rgba(139, 92, 246, 0.12);
 
-  --radius-db: 12px;
-  --shadow-db: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --radius-db: 16px;
+  --shadow-db: var(--card-shadow);
+
+  /* ใช้เฉพาะตัวเลข/หัวข้อภาษาอังกฤษ (ตัวเลขอารบิกอ่านได้ทุก font) เพื่อสร้าง
+     hierarchy ให้ตัวเลขสำคัญเด่นกว่าตัวอักษรไทยรอบข้างที่ใช้ font ปกติ */
+  --font-display: 'Space Grotesk', var(--sans);
+
+  /* type scale ของ dashboard — แทนที่การยิง text-[Npx] แบบลอยๆ ทั่วโค้ด
+     (audit เจอ 84 จุด) ทุกจุดควรอ้างชื่อระดับพวกนี้แทน ไม่ใช่เลขเอง */
+  --text-caption: 0.6875rem; /* 11px — timestamp, footnote */
+  --text-caption--line-height: 1.4;
+  --text-label: 0.75rem; /* 12px — muted label, sub-text */
+  --text-label--line-height: 1.4;
+  --text-body: 0.8125rem; /* 13px — เนื้อหา/เมนู/ตารางทั่วไป */
+  --text-body--line-height: 1.5;
+  --text-heading-sm: 0.9375rem; /* 15px — หัวข้อการ์ดรอง */
+  --text-heading-sm--line-height: 1.3;
+  --text-heading: 1rem; /* 16px — หัวข้อการ์ดหลัก */
+  --text-heading--line-height: 1.3;
+  --text-stat: 1.1875rem; /* 19px — ตัวเลขสถิติขนาดกลาง */
+  --text-stat--line-height: 1.2;
+  --text-stat-lg: 1.375rem; /* 22px — ชื่อหน้า (h1) */
+  --text-stat-lg--line-height: 1.25;
+  --text-hero: 3.5rem; /* 56px — ตัวเลข hero metric */
+  --text-hero--line-height: 1;
+
+  /* stagger reveal ตอนโหลดหน้า dashboard — ใช้ animation-delay ต่อ section */
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none;
+  }
 }
 
 /* ───────── THEME TOKENS ───────── */
 :root {
+  /* ความสูงจริงของ .nav (sticky top:0) — ใช้ตรงกันทุกที่ที่ต้องเว้นพื้นที่ให้
+     navbar กลาง เช่น calc(100vh - var(--nav-h)) กัน sticky ซ้อนทับกัน */
+  --nav-h: 66px;
+
   /* accents (คงที่ทั้งสองธีม) */
   --green: #3fae57;
   --gold: #e8b84b;

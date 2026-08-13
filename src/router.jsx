@@ -8,6 +8,7 @@ import { roleRoutes } from './features/roles/roleRoutes.jsx'
 import { centerRoutes } from './features/center/centerRoutes.jsx'
 import { provinceRoutes } from './features/province/provinceRoutes.jsx'
 import { technicianRoutes } from './features/technician/technicianRoutes.jsx'
+import { countryRoutes } from './features/country/countryRoutes.jsx'
 
 // ไฟล์นี้คือ "hotspot" เดียวที่ทุกคนใช้ร่วม
 export default function AppRoutes() {
@@ -20,6 +21,7 @@ export default function AppRoutes() {
         ...roleRoutes,
         ...provinceRoutes,
         ...technicianRoutes,
+        ...countryRoutes,
       ],
     },
     // เต็มจอ ไม่มี Navbar กลาง — แดชบอร์ดศูนย์ข้าวมี sidebar/topbar ของตัวเอง
