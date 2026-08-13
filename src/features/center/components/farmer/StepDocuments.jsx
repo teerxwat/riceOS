@@ -4,11 +4,15 @@ import {
   Circle,
   FileText,
   Image as ImageIcon,
+  MapPinOff,
   UploadCloud,
   X,
 } from 'lucide-react'
+import { MapContainer, TileLayer, Polygon } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css'
 import { Card } from '../common/Card.jsx'
 import { nextLocalId } from '../../utils/id'
+import { polygonAreaSqm, polygonCentroid } from '../../utils/geo'
 
 const CATEGORIES = [
   { key: 'id_card', label: 'สำเนาบัตรประชาชน', multiple: false },
@@ -81,7 +85,63 @@ function UploadSlot({ category, label, multiple, files, onAdd, onRemove }) {
   )
 }
 
+function PlotBoundaryPreview({ plot, index, plotLocation }) {
+  const boundary = plotLocation?.boundary ?? []
+  const hasBoundary = boundary.length >= 3
+  const center = hasBoundary ? polygonCentroid(boundary) : null
+  const areaRai = hasBoundary
+    ? (polygonAreaSqm(boundary) / 1600).toFixed(2)
+    : null
+
+  return (
+    <div className="cf-plot-review">
+      <p className="cf-plot-review__title">
+        แปลงที่ {index + 1} {plot.location ? `· ${plot.location}` : ''}
+      </p>
+      {hasBoundary ? (
+        <>
+          <div className="cf-plot-review__map">
+            <MapContainer
+              center={center}
+              zoom={16}
+              scrollWheelZoom={false}
+              className="c-leaflet"
+              attributionControl={false}
+            >
+              <TileLayer
+                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                maxZoom={19}
+              />
+              <Polygon
+                positions={boundary}
+                pathOptions={{
+                  color: '#34b866',
+                  weight: 2,
+                  fillColor: '#1f9450',
+                  fillOpacity: 0.3,
+                }}
+              />
+            </MapContainer>
+          </div>
+          <p className="cf-plot-review__meta">
+            พื้นที่จากแนวเขตที่วาด {areaRai} ไร่ · {boundary.length} จุด
+          </p>
+        </>
+      ) : (
+        <div className="cf-plot-review__empty">
+          <MapPinOff size={18} />
+          <span>
+            ยังไม่ได้กำหนดขอบเขตแปลงนา (ย้อนกลับไปขั้นตอนที่ 3 เพื่อวาดแนวเขต)
+          </span>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export function StepDocuments({
+  plots,
+  plotLocations,
   files,
   onFilesChange,
   checklist,
@@ -106,66 +166,83 @@ export function StepDocuments({
   const allDone = checklist.every((c) => c.done)
 
   return (
-    <div className="c-grid c-grid-1 c-grid-lg-3">
-      <div className="c-col-span-2">
-        <Card title="4. เอกสารและรูปภาพ">
-          <div className="cf-doc-grid">
-            {CATEGORIES.map((c) => (
-              <UploadSlot
-                key={c.key}
-                category={c.key}
-                label={c.label}
-                multiple={c.multiple}
-                files={files}
-                onAdd={(f) => addFiles(c.key, f)}
-                onRemove={removeFile}
-              />
-            ))}
-          </div>
-        </Card>
-      </div>
-
-      <Card title="ตรวจสอบและบันทึก">
-        <div className="cf-checklist">
-          {checklist.map((item) => (
-            <div
-              key={item.label}
-              className={`cf-checklist-item ${item.done ? 'is-done' : ''}`}
-            >
-              {item.done ? (
-                <CheckCircle2 size={15} color="var(--c-emerald)" />
-              ) : (
-                <Circle size={15} />
+    <div className="c-stack">
+      <Card title="ตำแหน่งแปลงนาที่บันทึกจากขั้นตอนที่ 3">
+        <div className="cf-plot-review-grid">
+          {plots.map((plot, i) => (
+            <PlotBoundaryPreview
+              key={plot.localId}
+              plot={plot}
+              index={i}
+              plotLocation={plotLocations.find(
+                (l) => l.plotLocalId === plot.localId
               )}
-              <span>{item.label}</span>
-            </div>
+            />
           ))}
         </div>
-
-        {submitError && <p className="cf-submit-error">{submitError}</p>}
-
-        <div className="cf-submit-actions">
-          <button
-            type="button"
-            onClick={onSaveDraft}
-            disabled={submitting}
-            className="c-btn c-btn--outline"
-          >
-            บันทึกเป็นร่าง
-          </button>
-          <button
-            type="button"
-            onClick={onSubmit}
-            disabled={submitting || !allDone}
-            className="c-btn c-btn--primary"
-          >
-            {submitting ? 'กำลังบันทึก...' : 'บันทึกข้อมูลสมาชิก'}
-          </button>
-        </div>
-        <p className="cf-submit-hint">
-          สมาชิกจะได้รับรหัสสมาชิกและสามารถใช้งานศูนย์ได้ทันทีหลังบันทึก
-        </p>
       </Card>
+
+      <div className="c-grid c-grid-1 c-grid-lg-3">
+        <div className="c-col-span-2">
+          <Card title="4. เอกสารและรูปภาพ">
+            <div className="cf-doc-grid">
+              {CATEGORIES.map((c) => (
+                <UploadSlot
+                  key={c.key}
+                  category={c.key}
+                  label={c.label}
+                  multiple={c.multiple}
+                  files={files}
+                  onAdd={(f) => addFiles(c.key, f)}
+                  onRemove={removeFile}
+                />
+              ))}
+            </div>
+          </Card>
+        </div>
+
+        <Card title="ตรวจสอบและบันทึก">
+          <div className="cf-checklist">
+            {checklist.map((item) => (
+              <div
+                key={item.label}
+                className={`cf-checklist-item ${item.done ? 'is-done' : ''}`}
+              >
+                {item.done ? (
+                  <CheckCircle2 size={15} color="var(--c-emerald)" />
+                ) : (
+                  <Circle size={15} />
+                )}
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {submitError && <p className="cf-submit-error">{submitError}</p>}
+
+          <div className="cf-submit-actions">
+            <button
+              type="button"
+              onClick={onSaveDraft}
+              disabled={submitting}
+              className="c-btn c-btn--outline"
+            >
+              บันทึกเป็นร่าง
+            </button>
+            <button
+              type="button"
+              onClick={onSubmit}
+              disabled={submitting || !allDone}
+              className="c-btn c-btn--primary"
+            >
+              {submitting ? 'กำลังบันทึก...' : 'บันทึกข้อมูลสมาชิก'}
+            </button>
+          </div>
+          <p className="cf-submit-hint">
+            สมาชิกจะได้รับรหัสสมาชิกและสามารถใช้งานศูนย์ได้ทันทีหลังบันทึก
+          </p>
+        </Card>
+      </div>
     </div>
   )
 }

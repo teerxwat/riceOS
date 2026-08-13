@@ -28,6 +28,22 @@ export function emptyPlot() {
   }
 }
 
+export function emptyPlotLocation(plotLocalId) {
+  return {
+    plotLocalId,
+    deedNo: '',
+    surveyNo: '',
+    landNo: '',
+    subDistrict: '',
+    district: '',
+    province: '',
+    latitude: '',
+    longitude: '',
+    areaRai: '',
+    boundary: [],
+  }
+}
+
 // Same fictional address used across the app's mock data (ศูนย์ข้าวชุมชนบ้านหนองหวัด, สันป่าตอง, เชียงใหม่).
 function sampleMember() {
   return {
@@ -88,6 +104,15 @@ export function initialFarmerForm() {
         latitude: '18.986500',
         longitude: '98.937500',
         areaRai: 8.5,
+        // A small hand-drawn-looking rectangle around the sample plot (~8.5 ไร่,
+        // matching areaRai above) so the demo already has a boundary to show
+        // in step 3/4 without drawing.
+        boundary: [
+          [18.98702, 98.93805],
+          [18.98702, 98.93695],
+          [18.98598, 98.93695],
+          [18.98598, 98.93805],
+        ],
       },
     ],
     cultivation: {

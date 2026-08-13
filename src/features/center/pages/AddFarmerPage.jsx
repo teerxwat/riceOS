@@ -6,7 +6,7 @@ import { StepMember } from '../components/farmer/StepMember.jsx'
 import { StepPlots } from '../components/farmer/StepPlots.jsx'
 import { StepPlotLocation } from '../components/farmer/StepPlotLocation.jsx'
 import { StepDocuments } from '../components/farmer/StepDocuments.jsx'
-import { initialFarmerForm } from '../utils/farmerForm'
+import { initialFarmerForm, emptyPlotLocation } from '../utils/farmerForm'
 import { createFarmer } from '../api/farmers'
 import '../styles/farmer.css'
 
@@ -82,6 +82,22 @@ export function AddFarmerPage() {
     }
   }
 
+  function handleChangePlots(plots) {
+    const plotIds = new Set(plots.map((p) => p.localId))
+    const existingIds = new Set(form.plotLocations.map((l) => l.plotLocalId))
+    const keptLocations = form.plotLocations.filter((l) =>
+      plotIds.has(l.plotLocalId)
+    )
+    const newLocations = plots
+      .filter((p) => !existingIds.has(p.localId))
+      .map((p) => emptyPlotLocation(p.localId))
+    setForm({
+      ...form,
+      plots,
+      plotLocations: [...keptLocations, ...newLocations],
+    })
+  }
+
   function handleStartNew() {
     setForm(initialFarmerForm())
     setStep(1)
@@ -142,7 +158,7 @@ export function AddFarmerPage() {
           {step === 2 && (
             <StepPlots
               plots={form.plots}
-              onChangePlots={(plots) => setForm({ ...form, plots })}
+              onChangePlots={handleChangePlots}
               cultivation={form.cultivation}
               onChangeCultivation={(cultivation) =>
                 setForm({ ...form, cultivation })
@@ -160,6 +176,8 @@ export function AddFarmerPage() {
 
           {step === 4 && (
             <StepDocuments
+              plots={form.plots}
+              plotLocations={form.plotLocations}
               files={form.files}
               onFilesChange={(files) => setForm({ ...form, files })}
               checklist={checklist}
