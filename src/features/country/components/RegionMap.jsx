@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import thProvinces from '../data/thProvinces.geojson.json'
 import { formatNumber } from '../utils/format'
+import { useColorScheme } from '../hooks/useColorScheme'
 
 // แผนที่ประเทศไทยจริงผ่าน Leaflet — วาดเป็นรูปหลายเหลี่ยมขอบเขตจังหวัดจริง
 // (ลดความละเอียดเส้นขอบเขตจาก ~28,000 จุดเหลือ ~6,000 จุด ให้ไฟล์เบาพอโหลดได้)
@@ -31,6 +32,7 @@ const PAN_LIMIT_BOUNDS = [
 
 function RegionMap({ regions, selectedId, onSelect }) {
   const geoLayerRef = useRef(null)
+  const colorScheme = useColorScheme()
   const statusByRegion = useMemo(
     () => Object.fromEntries(regions.map((r) => [r.id, r.status])),
     [regions]
@@ -120,9 +122,12 @@ function RegionMap({ regions, selectedId, onSelect }) {
           scrollWheelZoom={false}
           className="h-[420px] w-full"
         >
+          {/* ใช้ tile แบบเรียบ (Positron) แทน OSM มาตรฐาน — OSM ปกติมีสีพื้นที่ป่า/
+              ชื่อเมือง/ถนนของประเทศเพื่อนบ้านแน่นเกินไป จนแย่งความสนใจจากจังหวัด
+              ที่เราระบายสีไว้ Positron เรียบกว่ามาก ให้สีของเราเด่นขึ้นแทน */}
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            url={`https://{s}.basemaps.cartocdn.com/${colorScheme === 'dark' ? 'dark_all' : 'light_all'}/{z}/{x}/{y}{r}.png`}
           />
 
           <GeoJSON
