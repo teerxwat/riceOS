@@ -34,8 +34,12 @@ export default function Navbar() {
         {role && (
           <span className="nav-role">
             <role.Icon size={16} />
-            {role.name}
-            {user.name ? ` · ${user.name}` : ''}
+            {/* ชื่อ role (สั้น เช่น "ชาวบ้าน") โชว์เสมอ ส่วนชื่อผู้ใช้ที่ความ
+                ยาวไม่แน่นอนซ่อนเฉพาะจอแคบ กัน badge ยาวจนตกบรรทัด */}
+            <span>{role.name}</span>
+            {user.name && (
+              <span className="nav-role-username"> · {user.name}</span>
+            )}
           </span>
         )}
 
@@ -48,7 +52,9 @@ export default function Navbar() {
               navigate('/')
             }}
           >
-            <LogOut size={16} /> ออกจากระบบ
+            <LogOut size={16} />
+            <span className="nav-btn-label-full">ออกจากระบบ</span>
+            <span className="nav-btn-label-short">ออก</span>
           </button>
         ) : (
           <button
@@ -56,7 +62,9 @@ export default function Navbar() {
             className="nav-btn primary"
             onClick={() => navigate('/login')}
           >
-            <LogIn size={16} /> เข้าสู่ระบบ
+            <LogIn size={16} />
+            <span className="nav-btn-label-full">เข้าสู่ระบบ</span>
+            <span className="nav-btn-label-short">เข้า</span>
           </button>
         )}
 

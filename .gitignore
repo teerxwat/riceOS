@@ -27,3 +27,6 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# บันทึกส่วนตัว ไม่ push ให้คนอื่น
+git-guide-personal.md

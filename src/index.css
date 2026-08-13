@@ -1,5 +1,12 @@
+@import 'tailwindcss';
+
 /* ───────── THEME TOKENS ───────── */
 :root {
+  /* ความสูงอ้างอิงสำหรับแถบนำทางแบบคงที่ (66px) — ใช้ทั้งกับ .nav (sticky
+     top:0, เว็บทั่วไป) และ BottomNav ของ village (fixed bottom:0) เพื่อเว้น
+     พื้นที่เนื้อหาไม่ให้โดนแถบนำทางบัง ค่าต้องตรงกับความสูงจริงของแถบนั้นๆ */
+  --nav-h: 66px;
+
   /* accents (คงที่ทั้งสองธีม) */
   --green: #3fae57;
   --gold: #e8b84b;
@@ -108,6 +115,9 @@ body,
   margin: 0;
   padding: 0;
   width: 100%;
+  /* กันเผื่อไม่ให้มีอะไรดันความกว้างหน้าเว็บเกินจอแล้วเลื่อนซ้าย-ขวาได้
+     (เช่น องค์ประกอบ fixed/absolute ที่คำนวณความกว้างพลาดไปเกิน 100%) */
+  overflow-x: hidden;
 }
 body {
   font-family: system-ui, 'Segoe UI', Roboto, 'Noto Sans Thai', sans-serif;
@@ -115,12 +125,32 @@ body {
   background-attachment: fixed;
   color: var(--text);
   -webkit-font-smoothing: antialiased;
+  /* กัน pull-to-refresh/bounce ตอนลากเกินขอบจอ (บน-ล่าง และ ซ้าย-ขวา) —
+     ถ้าไม่กันแกน x ไว้ด้วย ตอนลากนิ้ว/เมาส์เลยขอบซ้ายขวาเบราว์เซอร์จะเด้ง
+     (rubber-band) ให้ความรู้สึกเหมือน "เลื่อนได้" ทั้งที่ไม่มีเนื้อหาล้นจริง */
+  overscroll-behavior: none;
   transition:
     background 0.3s ease,
     color 0.3s ease;
 }
 #root {
   min-height: 100svh;
+}
+/* background-attachment: fixed ด้านบน บังคับให้เบราว์เซอร์วาดพื้นหลังใหม่ทุก
+   เฟรมที่เลื่อนจอ (เลื่อนแบบ composite ไม่ได้) เป็นสาเหตุคลาสสิกของอาการ
+   เลื่อนไม่ลื่น/กระตุกบนมือถือ — หน้า /village เป็นแอปเต็มจอที่มีพื้นหลังทึบ
+   ของตัวเองทับอยู่แล้ว มองไม่เห็น gradient นี้ เลยปิดเฉพาะหน้านั้น ส่วนหน้า
+   อื่นๆ ของทีม (แลนดิ้ง ฯลฯ) ยังได้ gradient ตรึงเหมือนเดิม */
+body:has(.app-layout-shell) {
+  background-attachment: scroll;
+}
+/* จอสัมผัส: ตัดไฮไลต์สีเทาตอนแตะ (ของเบราว์เซอร์มือถือ) + ตัด delay 300ms
+   ก่อน tap ทำงาน (ของเดิมไว้รอเช็คว่าเป็น double-tap-zoom ไหม) — ปุ่ม/ลิงก์เลย
+   ตอบสนองทันทีเหมือนแอป ไม่ใช่มีจังหวะหน่วงแบบเว็บ */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 h1,
 h2,
@@ -173,6 +203,8 @@ p {
   background: var(--badge-bg);
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .nav-btn {
   display: inline-flex;
@@ -186,9 +218,28 @@ p {
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text);
+  white-space: nowrap;
+  flex-shrink: 0;
   transition:
     transform 0.15s ease,
     background 0.2s ease;
+}
+.nav-btn-label-short {
+  display: none;
+}
+/* จอแคบ (มือถือ): ข้อความยาวจะพังบรรทัด (ตกบรรทัดซ้อนกันแนวตั้ง) — สลับไปใช้
+   คำย่อแทนที่จะซ่อนเป็นไอคอนล้วน (ไอคอนล้วนดูเหมือนปุ่ม 3 อันหน้าตาเหมือนกัน
+   หมด แยกไม่ออกว่าอันไหนคือ badge บอก role อันไหนคือปุ่มกดได้จริง) */
+@media (max-width: 480px) {
+  .nav-btn-label-full {
+    display: none;
+  }
+  .nav-btn-label-short {
+    display: inline;
+  }
+  .nav-role-username {
+    display: none;
+  }
 }
 .nav-btn:hover {
   transform: translateY(-1px);
