@@ -125,13 +125,11 @@ router.post('/', upload.array('documents'), async (req, res) => {
     if (connection) await connection.rollback()
     uploadedFiles.forEach((f) => fs.unlink(f.path, () => {}))
     console.error('POST /api/farmers failed:', err)
-    res
-      .status(500)
-      .json({
-        success: false,
-        message:
-          'บันทึกข้อมูลลงฐานข้อมูลไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่อฐานข้อมูล',
-      })
+    res.status(500).json({
+      success: false,
+      message:
+        'บันทึกข้อมูลลงฐานข้อมูลไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่อฐานข้อมูล',
+    })
   } finally {
     if (connection) connection.release()
   }
