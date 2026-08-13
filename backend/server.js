@@ -19,12 +19,10 @@ app.use('/api/farmers', listFarmerRoute)
 
 app.use((err, _req, res, _next) => {
   console.error(err)
-  res
-    .status(500)
-    .json({
-      success: false,
-      message: err.message || 'เกิดข้อผิดพลาดที่เซิร์ฟเวอร์',
-    })
+  res.status(500).json({
+    success: false,
+    message: err.message || 'เกิดข้อผิดพลาดที่เซิร์ฟเวอร์',
+  })
 })
 
 const PORT = process.env.PORT || 4000
