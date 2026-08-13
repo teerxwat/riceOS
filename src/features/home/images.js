@@ -10,4 +10,8 @@ export const IMG = {
   dewy: `https://images.unsplash.com/photo-1750301694390-37692aa76fd1?${q}&w=1400`,
   // green rice field — Geon George
   field: `https://images.unsplash.com/photo-1612758373188-2d59b2717542?${q}&w=1400`,
+  // solar panels in open field — Andreas Gucklhorn
+  solar: `https://images.unsplash.com/photo-1509391366360-2e959784a276?${q}&w=1400`,
+  // golden field at sunset — Federico Respini
+  golden: `https://images.unsplash.com/photo-1500382017468-9049fed747ef?${q}&w=1400`,
 }
