@@ -71,7 +71,7 @@ export default function Navbar() {
           </span>
         </NavLink>
 
-        {role?.dashboard && (
+        {(role?.id === 'province' || role?.id === 'technician') && (
           <div className="nav-page">
             <h1>
               {role.id === 'technician'

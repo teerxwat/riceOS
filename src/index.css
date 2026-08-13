@@ -586,3 +586,45 @@ p {
   display: inline-flex;
   align-items: center;
 }
+
+/* ───────── NAVBAR RESPONSIVE ───────── */
+/* แท็บเล็ต: พิลวันที่/เวลากินที่ -> ซ่อน (ข้อมูลรองดูได้ในแดชบอร์ด) */
+@media (max-width: 1150px) {
+  .nav-pill {
+    display: none;
+  }
+}
+@media (max-width: 900px) {
+  .nav-province {
+    max-width: 38vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+/* มือถือ: เหลือ โลโก้ · เลือกจังหวัด · กระดิ่ง · avatar */
+@media (max-width: 640px) {
+  .nav-inner {
+    gap: 0.45rem;
+    padding: 0.55rem 0.8rem;
+  }
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+  }
+  .brand-2line b {
+    font-size: 0.98rem;
+  }
+  .nav-page {
+    margin-left: 0.2rem;
+  }
+  .nav-user-text,
+  .nav-user-chev {
+    display: none;
+  }
+  .nav-user {
+    padding: 0.24rem;
+  }
+  .nav-menu {
+    right: -0.3rem;
+  }
+}

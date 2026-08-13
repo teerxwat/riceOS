@@ -1064,3 +1064,22 @@ html[data-theme='dark'] .pv-leaflet .leaflet-control-zoom a {
     display: none; /* จอเล็ก sidebar เป็นแถวเมนู ไม่โชว์การ์ดสรุป */
   }
 }
+
+/* ───────── RESPONSIVE (มือถือ) ───────── */
+@media (max-width: 640px) {
+  .pv-topbar {
+    padding-top: 0.9rem;
+  }
+  .pv-topbar h1 {
+    font-size: 1.12rem;
+  }
+  .pv-content {
+    padding: 0.9rem 0.8rem 2rem;
+  }
+  .pv-card {
+    padding: 0.95rem 0.9rem;
+  }
+  .pv-kpi-value {
+    font-size: 1.2rem;
+  }
+}
