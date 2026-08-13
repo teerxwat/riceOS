@@ -1,14 +1,8 @@
-import { Link, Navigate } from 'react-router-dom'
-import { CheckCircle2, ShieldCheck, Milestone, ArrowRight } from 'lucide-react'
+import { Navigate } from 'react-router-dom'
+import { CheckCircle2, ShieldCheck, Milestone } from 'lucide-react'
 import { useAuth } from '../../auth/authContext.js'
 import { getRole } from './roles.js'
 import './roles.css'
-
-// role ที่มี dashboard จริงแล้ว -> เพิ่ม 1 บรรทัดตรงนี้เมื่อ feature ของ role นั้นพร้อม
-const DASHBOARD_PATHS = {
-  country: '/country',
-  villager: '/village',
-}
 
 export default function RolePage() {
   const { user } = useAuth()
@@ -43,19 +37,6 @@ export default function RolePage() {
       </header>
 
       <p className="role-summary">{role.summary}</p>
-
-      {role.id === 'center' && (
-        <Link to="/app/center" className="nav-btn primary role-dashboard-link">
-          เข้าสู่แดชบอร์ดศูนย์ข้าว <ArrowRight size={16} />
-        </Link>
-      )}
-
-      {DASHBOARD_PATHS[role.id] && (
-        <Link to={DASHBOARD_PATHS[role.id]} className="role-cta">
-          เข้าใช้งานแดชบอร์ด
-          <ArrowRight size={18} />
-        </Link>
-      )}
 
       <div className="role-grid">
         <section className="role-card">

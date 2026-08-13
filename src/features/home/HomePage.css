@@ -33,17 +33,13 @@
   transition: width 0.1s linear;
 }
 
-/* ───────── HERO (pinned scroll) ───────── */
-/* wrapper สูงกว่าจอ เพื่อให้มีระยะ scroll สำหรับหมุนโมเดล
-   ระหว่างนี้ .hero ถูก pin ไว้ (sticky) โมเดลหมุนจนครบ 1 รอบ
-   แล้วหน้าเว็บถึงเลื่อนต่อ */
+/* ───────── HERO ───────── */
+/* hero สูงหนึ่งจอ เลื่อนผ่านได้ทันที (โมเดลหมุนตามระยะ scroll ที่ผ่าน hero) */
 .hero-scroll {
   position: relative;
-  height: 200vh;
 }
 .hero {
-  position: sticky;
-  top: 0;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -295,11 +291,12 @@
   width: 100%;
 }
 .stat-value {
-  font-size: clamp(2.1rem, 4.2vw, 3.3rem);
+  font-size: clamp(1.65rem, 2.3vw, 2.6rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--text);
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 .stat-label {
   font-size: 0.78rem;
