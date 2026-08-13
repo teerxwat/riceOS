@@ -292,3 +292,22 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ปุ่มเข้าแดชบอร์ดของ role ที่มีแดชบอร์ดแล้ว */
+.role-dashboard-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1.4rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--green), var(--green-strong));
+  box-shadow: 0 10px 24px -10px rgba(31, 122, 61, 0.6);
+  transition: transform 0.15s ease;
+}
+.role-dashboard-cta:hover {
+  transform: translateY(-2px);
+}

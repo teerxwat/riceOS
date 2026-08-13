@@ -1,3 +1,4 @@
+import { Navigate } from 'react-router-dom'
 import { CheckCircle2, ShieldCheck, Milestone } from 'lucide-react'
 import { useAuth } from '../../auth/authContext.js'
 import { getRole } from './roles.js'
@@ -6,6 +7,9 @@ import './roles.css'
 export default function RolePage() {
   const { user } = useAuth()
   const role = getRole(user?.role)
+
+  // role ที่มีแดชบอร์ดแล้ว ข้ามหน้าอธิบายบทบาท เข้าแดชบอร์ดทันที
+  if (role?.dashboard) return <Navigate to={role.dashboard} replace />
 
   if (!role) {
     return (
