@@ -187,8 +187,16 @@ body,
   padding: 0;
   width: 100%;
   /* กันเผื่อไม่ให้มีอะไรดันความกว้างหน้าเว็บเกินจอแล้วเลื่อนซ้าย-ขวาได้
-     (เช่น องค์ประกอบ fixed/absolute ที่คำนวณความกว้างพลาดไปเกิน 100%) */
-  overflow-x: hidden;
+     (เช่น องค์ประกอบ fixed/absolute ที่คำนวณความกว้างพลาดไปเกิน 100%)
+
+     ใช้ `clip` แทน `hidden`: `overflow-x: hidden` จะทำให้แกน y ถูกคำนวณเป็น
+     `auto` โดยปริยาย → html/body/#root กลายเป็น scroll container ซ้อนกัน
+     ผลคือบน Windows (เมาส์วีล) เลื่อนไม่ได้/สลับ container มั่ว และทำให้
+     `position: sticky` (sidebar country/province) พังตามไปด้วย ส่วน Mac
+     (trackpad เลื่อน container ที่ใกล้สุด) ยังเลื่อนได้เลยไม่เห็นปัญหา
+     `clip` กันล้นแนวนอนเหมือนเดิมแต่ "ไม่" สร้าง scroll container จึงเลื่อน
+     แนวตั้งได้ปกติทุก OS และ sticky ทำงานถูกต้อง */
+  overflow-x: clip;
 }
 body {
   font-family: system-ui, 'Segoe UI', Roboto, 'Noto Sans Thai', sans-serif;
