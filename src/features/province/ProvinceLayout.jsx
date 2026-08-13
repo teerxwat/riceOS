@@ -16,6 +16,8 @@ import {
 import { PROVINCES, fmt } from './provinceData.js'
 import { useAlerts, setAlerts } from './alertsStore.js'
 import { useProvinceId } from './provinceStore.js'
+import PageSkeleton from '../../components/PageSkeleton.jsx'
+import { useRouteSkeleton } from '../../components/useRouteSkeleton.js'
 import './province.css'
 
 const MENU = [
@@ -41,6 +43,7 @@ const SIDE_STATS = [
 export default function ProvinceLayout() {
   const provinceId = useProvinceId()
   const alerts = useAlerts()
+  const skeleton = useRouteSkeleton()
   const [refreshedAt, setRefreshedAt] = useState(() =>
     new Date().toLocaleTimeString('th-TH', {
       hour: '2-digit',
@@ -112,7 +115,11 @@ export default function ProvinceLayout() {
         </header>
 
         <div className="pv-content">
-          <Outlet context={{ alerts, setAlerts, province }} />
+          {skeleton ? (
+            <PageSkeleton />
+          ) : (
+            <Outlet context={{ alerts, setAlerts, province }} />
+          )}
         </div>
       </div>
     </div>

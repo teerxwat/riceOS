@@ -16,6 +16,8 @@ import { useAuth } from '../../auth/authContext.js'
 import { PROVINCES } from '../province/provinceData.js'
 import { useProvinceId } from '../province/provinceStore.js'
 import { TEAM } from './technicianData.js'
+import PageSkeleton from '../../components/PageSkeleton.jsx'
+import { useRouteSkeleton } from '../../components/useRouteSkeleton.js'
 import '../province/province.css'
 import './technician.css'
 
@@ -30,6 +32,7 @@ const MENU = [
 export default function TechnicianLayout() {
   const { user } = useAuth()
   const provinceId = useProvinceId()
+  const skeleton = useRouteSkeleton()
   const [refreshedAt, setRefreshedAt] = useState(() =>
     new Date().toLocaleTimeString('th-TH', {
       hour: '2-digit',
@@ -122,7 +125,11 @@ export default function TechnicianLayout() {
         </header>
 
         <div className="pv-content">
-          <Outlet context={{ isChief, province }} />
+          {skeleton ? (
+            <PageSkeleton />
+          ) : (
+            <Outlet context={{ isChief, province }} />
+          )}
         </div>
       </div>
     </div>
