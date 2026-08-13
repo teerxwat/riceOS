@@ -7,6 +7,7 @@ import './roles.css'
 // role ที่มี dashboard จริงแล้ว -> เพิ่ม 1 บรรทัดตรงนี้เมื่อ feature ของ role นั้นพร้อม
 const DASHBOARD_PATHS = {
   country: '/country',
+  villager: '/village',
 }
 
 export default function RolePage() {
