@@ -1,0 +1,30 @@
+import { useState } from 'react'
+import Sidebar from './Sidebar'
+import Header from './Header'
+import AIAssistantPanel from './AIAssistantPanel'
+
+function DashboardLayout({ title, subtitle, children }) {
+  const [aiOpen, setAiOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  return (
+    <div className="flex min-h-[calc(100svh-var(--nav-h))] bg-db-bg text-body text-db-text">
+      <Sidebar
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        onOpenAssistant={() => setAiOpen(true)}
+      />
+      <div className="flex min-w-0 flex-1 flex-col">
+        <Header
+          title={title}
+          subtitle={subtitle}
+          onOpenSidebar={() => setSidebarOpen(true)}
+        />
+        <main className="flex-1 px-4 pt-6 pb-8 sm:px-7">{children}</main>
+      </div>
+      <AIAssistantPanel open={aiOpen} onClose={() => setAiOpen(false)} />
+    </div>
+  )
+}
+
+export default DashboardLayout

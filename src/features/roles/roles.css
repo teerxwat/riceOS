@@ -1,6 +1,6 @@
 /* ───────── LOGIN ───────── */
 .login-page {
-  min-height: calc(100vh - 66px);
+  min-height: calc(100vh - var(--nav-h));
   display: grid;
   place-items: center;
   padding: 3rem 1.2rem;
@@ -86,6 +86,12 @@
 }
 .login-submit {
   width: 100%;
+  /* จัดไอคอน + ข้อความให้อยู่กึ่งกลางแนวตั้งตรงกัน (เดิมไม่ได้ตั้ง flex ไอคอน
+     SVG เลยยึด baseline ของบรรทัด ดูลอยไม่ตรงกับตัวหนังสือ) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   border: none;
   border-radius: 14px;
   padding: 0.9rem 1.6rem;
@@ -96,6 +102,10 @@
   background: linear-gradient(135deg, var(--green), var(--green-strong));
   box-shadow: 0 10px 24px -10px rgba(31, 122, 61, 0.6);
   transition: transform 0.15s ease;
+}
+/* กันไอคอนถูกบีบ/ยืดผิดสัดส่วนในปุ่ม flex */
+.login-submit svg {
+  flex-shrink: 0;
 }
 .login-submit:hover:not(:disabled) {
   transform: translateY(-2px);
@@ -208,6 +218,28 @@
   padding-left: 1rem;
   border-left: 3px solid var(--role-accent);
 }
+.role-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.6rem;
+  padding: 0.75rem 1.3rem;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  background: linear-gradient(
+    135deg,
+    var(--role-accent),
+    color-mix(in srgb, var(--role-accent) 55%, #000)
+  );
+  box-shadow: 0 12px 24px -12px var(--role-accent);
+  transition: transform 0.15s ease;
+}
+.role-cta:hover {
+  transform: translateY(-2px);
+}
+
 .role-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
