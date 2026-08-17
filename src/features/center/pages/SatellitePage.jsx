@@ -84,6 +84,7 @@ export function SatellitePage() {
 
             <div className="cs-top-row">
               <SatelliteMapPanel
+                fields={data.fields}
                 waterSensors={data.waterSensors}
                 mapCenter={data.mapCenter}
               />
