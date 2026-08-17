@@ -21,7 +21,7 @@ import {
 } from '../../utils/geo'
 
 // Same real San Pa Tong paddy-field area used on the satellite map — keeps the mockup data consistent.
-const DEFAULT_CENTER = { lat: 18.61792, lng: 98.92102 }
+const DEFAULT_CENTER = { lat: 18.61794, lng: 98.92109 }
 
 const TILE_LAYERS = {
   satellite: {
