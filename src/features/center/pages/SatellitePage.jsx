@@ -1,13 +1,12 @@
 import {
   CloudFog,
   Droplets,
-  DropletOff,
+  Ruler,
   Satellite as SatelliteIcon,
 } from 'lucide-react'
 import { Topbar } from '../components/layout/Topbar.jsx'
 import { StatCard } from '../components/common/StatCard.jsx'
 import { LoadingState, ErrorState } from '../components/common/LoadingState.jsx'
-import { FieldStatusList } from '../components/satellite/FieldStatusList.jsx'
 import { SatelliteMapPanel } from '../components/satellite/SatelliteMapPanel.jsx'
 import { AlertsPanel } from '../components/satellite/AlertsPanel.jsx'
 import {
@@ -21,23 +20,18 @@ import '../styles/satellite.css'
 export function SatellitePage() {
   const { data, loading, error } = useApiData(fetchSatelliteData)
 
-  const withWater =
-    data?.fields.filter((f) => f.waterStatus !== 'dry').length ?? 0
-  const dryCount =
-    data?.fields.filter((f) => f.waterStatus === 'dry').length ?? 0
-  const totalArea = data?.fields.reduce((sum, f) => sum + f.areaRai, 0) ?? 0
-  const wateredArea =
-    data?.fields
-      .filter((f) => f.waterStatus !== 'dry')
-      .reduce((sum, f) => sum + f.areaRai, 0) ?? 0
-  const waterAreaPercent =
-    totalArea > 0 ? Math.round((wateredArea / totalArea) * 100) : 0
+  const avgLevelM = data?.waterSensors.length
+    ? (
+        data.waterSensors.reduce((sum, s) => sum + s.levelM, 0) /
+        data.waterSensors.length
+      ).toFixed(2)
+    : 0
 
   return (
     <>
       <Topbar
         title="ภาพถ่ายดาวเทียม"
-        subtitle="ตรวจสอบพื้นที่มีน้ำ/ไม่มีน้ำในแปลงนาแต่ละแปลงจากภาพถ่ายดาวเทียม"
+        subtitle="ภาพถ่ายดาวเทียมของพื้นที่ศูนย์ พร้อมข้อมูลเซ็นเซอร์วัดระดับน้ำ"
         extra={
           data && (
             <div className="cs-capture-badge">
@@ -59,41 +53,37 @@ export function SatellitePage() {
           <div className="c-stack">
             <div className="c-grid c-grid-2 c-grid-md-4">
               <StatCard
-                icon={SatelliteIcon}
-                label="แปลงที่ตรวจสอบ"
-                value={data.fields.length}
-                unit="แปลง"
+                icon={Droplets}
+                label="เซ็นเซอร์วัดระดับน้ำ"
+                value={data.waterSensors.length}
+                unit="จุด"
               />
               <StatCard
                 icon={Droplets}
-                label="แปลงที่มีน้ำ"
-                value={withWater}
-                unit="แปลง"
-                deltaLabel={`${waterAreaPercent}% ของพื้นที่รวม`}
-                deltaTone="up"
+                label="ระดับน้ำเฉลี่ย"
+                value={avgLevelM}
+                unit="ม."
+                deltaLabel="จากเซ็นเซอร์ทั้งหมด"
+                deltaTone="neutral"
               />
               <StatCard
-                icon={DropletOff}
-                label="แปลงที่ไม่มีน้ำ"
-                value={dryCount}
-                unit="แปลง"
-                deltaLabel="ควรตรวจสอบชลประทาน"
-                deltaTone="down"
-              />
-              <StatCard
-                icon={CloudFog}
+                icon={Ruler}
                 label="ความละเอียดภาพ"
                 value={data.captureInfo.resolutionM}
                 unit="ม./พิกเซล"
-                deltaLabel={`เมฆปกคลุม ${data.captureInfo.cloudCoverPercent}%`}
+              />
+              <StatCard
+                icon={CloudFog}
+                label="เมฆปกคลุม"
+                value={data.captureInfo.cloudCoverPercent}
+                unit="%"
+                deltaLabel={`รอบถัดไป ${data.summary.nextPassDate}`}
                 deltaTone="neutral"
               />
             </div>
 
             <div className="cs-top-row">
-              <FieldStatusList fields={data.fields} />
               <SatelliteMapPanel
-                fields={data.fields}
                 waterSensors={data.waterSensors}
                 mapCenter={data.mapCenter}
               />

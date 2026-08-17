@@ -5,6 +5,7 @@ import {
   HardDrive,
   MapPinned,
   CalendarClock,
+  Droplets,
 } from 'lucide-react'
 import { Card } from '../common/Card.jsx'
 
@@ -202,9 +203,9 @@ export function SummaryFooter({ summary }) {
       value: `${summary.areaCoveredRai.toLocaleString('th-TH')} ไร่`,
     },
     {
-      icon: Layers,
-      label: 'แปลงที่ตรวจสอบ',
-      value: `${summary.fieldsAnalyzed} แปลง`,
+      icon: Droplets,
+      label: 'เซ็นเซอร์ทำงานอยู่',
+      value: `${summary.sensorsActive} จุด`,
     },
     {
       icon: Ruler,
