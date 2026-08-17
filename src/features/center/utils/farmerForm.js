@@ -66,7 +66,7 @@ function samplePlot() {
   return {
     localId: nextLocalId('plot'),
     location: 'ม.4 ต.หนองหวัด อ.สันป่าตอง',
-    areaRai: 2.0,
+    areaRai: 1.7,
     landDocType: 'โฉนดที่ดิน (นส.4จ.)',
     riceVariety: 'ข้าวหอมมะลิ 105',
     prevYieldKgPerRai: 620,
@@ -101,18 +101,18 @@ export function initialFarmerForm() {
         subDistrict: 'หนองหวัด',
         district: 'สันป่าตอง',
         province: 'เชียงใหม่',
-        latitude: '18.616852',
-        longitude: '98.916934',
-        areaRai: 2.0,
+        latitude: '18.616853',
+        longitude: '98.916985',
+        areaRai: 1.7,
         // A real paddy-field boundary traced from satellite imagery near the
-        // sample plot (~2.0 ไร่, matching areaRai above) so the demo already
+        // sample plot (~1.7 ไร่, matching areaRai above) so the demo already
         // has a boundary to show in step 3/4 without drawing.
         boundary: [
-          [18.617221, 98.916662],
-          [18.617357, 98.917074],
-          [18.616222, 98.917181],
-          [18.616476, 98.916966],
-          [18.616984, 98.916788],
+          [18.617192, 98.916734],
+          [18.617318, 98.917113],
+          [18.616273, 98.917212],
+          [18.616507, 98.917014],
+          [18.616974, 98.91685],
         ],
       },
     ],
