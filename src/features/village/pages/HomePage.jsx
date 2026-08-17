@@ -11,7 +11,15 @@ import {
 } from 'lucide-react'
 import VillageLayout from '../components/VillageLayout'
 import PlotCard from '../components/PlotCard'
-import { WEATHER_TODAY, TODAY_STATS, PLOTS, NEWS } from '../data/villageData'
+import { useGameState } from '../hooks/useGameState'
+import { formatNumber } from '../utils/format'
+import {
+  WEATHER_TODAY,
+  TODAY_STATS,
+  DAILY_MISSIONS,
+  PLOTS,
+  NEWS,
+} from '../data/villageData'
 
 const NEWS_TONE = {
   warning:
@@ -47,7 +55,28 @@ function SectionLink({ to, onClick, children }) {
   )
 }
 
+const STATIC_STAT_KEYS = ['income', 'status']
+
 function HomePage() {
+  const { state } = useGameState()
+  // "ภารกิจวันนี้"/"แต้มสะสม" มาจากระบบเกม (useGameState) จริง ไม่ใช่ตัวเลข
+  // คงที่อีกต่อไป — ทำภารกิจในหน้าเกมแล้วตัวเลข 2 ช่องนี้ต้องขยับตามทันที
+  const stats = [
+    {
+      key: 'tasks',
+      label: 'ภารกิจวันนี้',
+      value: `${state.completedToday.length}/${DAILY_MISSIONS.length}`,
+      to: '/village/game',
+    },
+    {
+      key: 'points',
+      label: 'แต้มสะสม',
+      value: formatNumber(state.points),
+      to: '/village/game',
+    },
+    ...TODAY_STATS.filter((s) => STATIC_STAT_KEYS.includes(s.key)),
+  ]
+
   return (
     <VillageLayout>
       <div className="flex flex-col gap-5">
@@ -56,7 +85,7 @@ function HomePage() {
             <p className="min-w-0 flex-1 truncate text-[15px] font-bold text-[var(--text)]">
               สภาพอากาศวันนี้
             </p>
-            <SectionLink>ดูพยากรณ์ 7 วัน</SectionLink>
+            <SectionLink to="/village/weather">ดูพยากรณ์ 7 วัน</SectionLink>
           </div>
           <div className="mt-2 flex items-center gap-3">
             <CloudSun size={40} className="shrink-0 text-[var(--gold)]" />
@@ -105,12 +134,14 @@ function HomePage() {
         </section>
 
         <section className="grid grid-cols-2 gap-3">
-          {TODAY_STATS.map((stat) => {
+          {stats.map((stat) => {
             const Icon = STAT_ICON[stat.key]
+            const Wrapper = stat.to ? Link : 'div'
             return (
-              <div
+              <Wrapper
                 key={stat.key}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4"
+                {...(stat.to ? { to: stat.to } : {})}
+                className={`rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 ${stat.to ? 'active:bg-[var(--surface-2)]' : ''}`}
               >
                 <Icon
                   size={20}
@@ -138,7 +169,7 @@ function HomePage() {
                 <p className="mt-0.5 text-[13px] text-[var(--muted)]">
                   {stat.label}
                 </p>
-              </div>
+              </Wrapper>
             )
           })}
         </section>
@@ -148,10 +179,10 @@ function HomePage() {
             <p className="min-w-0 flex-1 truncate text-[15px] font-bold text-[var(--text)]">
               ข่าวสารแนะนำสำหรับคุณ
             </p>
-            <SectionLink>ดูทั้งหมด</SectionLink>
+            <SectionLink to="/village/news">ดูทั้งหมด</SectionLink>
           </div>
           <ul className="flex flex-col gap-2">
-            {NEWS.map((item) => (
+            {NEWS.slice(0, 3).map((item) => (
               <li
                 key={item.id}
                 className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4"

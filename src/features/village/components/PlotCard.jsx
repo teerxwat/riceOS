@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Sprout } from 'lucide-react'
 import { formatNumber } from '../utils/format'
 
@@ -10,9 +11,14 @@ const STATUS_TONE = {
 // เดิมมีกล่องรูปภาพ placeholder ว่างๆ สูง 96px ไม่มีข้อมูลอะไรอยู่ข้างใน —
 // ตัดออก เปลี่ยนเป็นไอคอนเล็กในหัวการ์ดแทน เพื่อให้พื้นที่ทั้งหมดโชว์ข้อมูล
 // จริงที่ชาวนาต้องใช้ตัดสินใจ (พันธุ์/พื้นที่/วันเก็บเกี่ยว) แทนพื้นที่ว่างเปล่า
+//
+// กดทั้งการ์ดได้ ไปหน้ารายละเอียดแปลง (PlotDetailPage)
 function PlotCard({ plot }) {
   return (
-    <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+    <Link
+      to={`/village/plots/${plot.id}`}
+      className="block rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 active:bg-[var(--surface-2)]"
+    >
       <div className="flex items-start gap-3">
         <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--badge-bg)] text-[var(--green-strong)]">
           <Sprout size={22} strokeWidth={1.8} />
@@ -60,7 +66,7 @@ function PlotCard({ plot }) {
           {plot.progressPct}%
         </span>
       </div>
-    </div>
+    </Link>
   )
 }
 
