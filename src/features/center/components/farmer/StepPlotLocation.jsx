@@ -20,8 +20,8 @@ import {
   edgeMidpoints,
 } from '../../utils/geo'
 
-// Same fictional center used on the satellite map — keeps the mockup data consistent.
-const DEFAULT_CENTER = { lat: 18.98543, lng: 98.93877 }
+// Same real San Pa Tong paddy-field area used on the satellite map — keeps the mockup data consistent.
+const DEFAULT_CENTER = { lat: 18.61792, lng: 98.92102 }
 
 const TILE_LAYERS = {
   satellite: {
