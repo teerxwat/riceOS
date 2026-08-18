@@ -8,6 +8,7 @@ import {
   Award,
   Wallet,
   ShieldCheck,
+  Leaf,
 } from 'lucide-react'
 import VillageLayout from '../components/VillageLayout'
 import PlotCard from '../components/PlotCard'
@@ -19,6 +20,7 @@ import {
   DAILY_MISSIONS,
   PLOTS,
   NEWS,
+  CARBON_WALLET,
 } from '../data/villageData'
 
 const NEWS_TONE = {
@@ -122,6 +124,29 @@ function HomePage() {
             </div>
           </div>
         </section>
+
+        <Link
+          to="/village/carbon"
+          className="flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-[linear-gradient(135deg,var(--badge-bg),var(--surface))] p-4 active:bg-[var(--surface-2)]"
+        >
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--green-strong)] text-white">
+            <Leaf size={22} strokeWidth={1.8} />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="text-[13px] text-[var(--muted)]">กระเป๋าคาร์บอน</p>
+            <p className="text-[17px] font-bold text-[var(--green-strong)] tabular-nums">
+              {formatNumber(CARBON_WALLET.totalTco2e, { decimals: 2 })} tCO2e
+              <span className="ml-1.5 text-[13px] font-normal text-[var(--muted)]">
+                (~
+                {formatNumber(
+                  CARBON_WALLET.totalTco2e * CARBON_WALLET.pricePerTon
+                )}{' '}
+                บาท)
+              </span>
+            </p>
+          </div>
+          <ChevronRight size={18} className="shrink-0 text-[var(--muted)]" />
+        </Link>
 
         <section>
           <div className="mb-2 flex items-center justify-between gap-2">

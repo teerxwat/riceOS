@@ -5,6 +5,7 @@ import {
   BookOpen,
   Phone,
   Info,
+  Leaf,
   ChevronRight,
   Moon,
   Sun,
@@ -18,6 +19,7 @@ import { PROFILE } from '../data/villageData'
 
 const MENU_ITEMS = [
   { icon: UserCircle, label: 'โปรไฟล์ของฉัน', to: '/village/profile' },
+  { icon: Leaf, label: 'กระเป๋าคาร์บอน', to: '/village/carbon' },
   { icon: Bell, label: 'ตั้งค่าการแจ้งเตือน', to: '/village/notifications' },
   {
     icon: Warehouse,

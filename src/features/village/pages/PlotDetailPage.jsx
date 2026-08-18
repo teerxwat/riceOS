@@ -1,5 +1,13 @@
 import { useParams, Link } from 'react-router-dom'
-import { Sprout, Sparkles, CalendarDays, Ruler } from 'lucide-react'
+import {
+  Sprout,
+  Sparkles,
+  CalendarDays,
+  Ruler,
+  Droplets,
+  Leaf,
+  ShieldCheck,
+} from 'lucide-react'
 import VillageLayout from '../components/VillageLayout'
 import { PLOTS } from '../data/villageData'
 import { formatNumber } from '../utils/format'
@@ -7,6 +15,13 @@ import { formatNumber } from '../utils/format'
 const STATUS_TONE = {
   กำลังปลูก: 'text-[var(--green-strong)] bg-[var(--badge-bg)]',
   เก็บเกี่ยวแล้ว: 'text-[var(--muted)] bg-[var(--surface-2)]',
+}
+
+const AWD_TONE = {
+  เหมาะสม: 'text-[var(--green-strong)] bg-[var(--badge-bg)]',
+  เปิดน้ำ: 'text-[#3b82f6] bg-[color-mix(in_srgb,#3b82f6_14%,transparent)]',
+  'เสี่ยง/ผิดปกติ':
+    'text-[#e5484d] bg-[color-mix(in_srgb,#e5484d_14%,transparent)]',
 }
 
 function PlotDetailPage() {
@@ -104,6 +119,69 @@ function PlotDetailPage() {
             </li>
           </ul>
         </section>
+
+        {plot.carbonEnrolled ? (
+          <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+            <div className="flex items-center justify-between gap-2">
+              <p className="min-w-0 flex-1 text-[15px] font-bold text-[var(--text)]">
+                นาคาร์บอน (AWD)
+              </p>
+              <span
+                className={`shrink-0 rounded-full px-2.5 py-1 text-[12px] font-semibold ${AWD_TONE[plot.awdStatus]}`}
+              >
+                {plot.awdStatus}
+              </span>
+            </div>
+            <div className="mt-3 grid grid-cols-2 gap-3">
+              <div className="rounded-xl bg-[var(--surface-2)] p-3">
+                <Droplets size={18} className="text-[var(--muted)]" />
+                <p className="mt-1.5 text-[17px] font-bold text-[var(--text)] tabular-nums">
+                  {plot.waterLevelCm} ซม.
+                </p>
+                <p className="text-[12px] text-[var(--muted)]">
+                  ระดับน้ำล่าสุด
+                </p>
+              </div>
+              <div className="rounded-xl bg-[var(--surface-2)] p-3">
+                <Leaf size={18} className="text-[var(--green-strong)]" />
+                <p className="mt-1.5 text-[17px] font-bold text-[var(--green-strong)] tabular-nums">
+                  {formatNumber(plot.carbonTco2e, { decimals: 2 })}
+                </p>
+                <p className="text-[12px] text-[var(--muted)]">tCO2e สะสม</p>
+              </div>
+            </div>
+            <div className="mt-3 flex gap-2">
+              <Link
+                to={`/village/plots/${plot.id}/water-log`}
+                className="flex min-h-11 flex-1 cursor-pointer items-center justify-center rounded-xl bg-[var(--green-strong)] text-[13.5px] font-semibold text-white active:scale-[0.99]"
+              >
+                บันทึกน้ำวันนี้
+              </Link>
+              <Link
+                to={`/village/plots/${plot.id}/mrv`}
+                className="flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] text-[13.5px] font-semibold text-[var(--text)]"
+              >
+                <ShieldCheck size={16} strokeWidth={1.8} />
+                หลักฐาน MRV
+              </Link>
+            </div>
+          </section>
+        ) : (
+          <section className="rounded-2xl border border-dashed border-[var(--border)] p-4 text-center">
+            <p className="text-[14px] font-medium text-[var(--text)]">
+              แปลงนี้ยังไม่ได้เข้าร่วมโครงการคาร์บอน
+            </p>
+            <p className="mt-1 text-[12.5px] text-[var(--muted)]">
+              สมัครเพื่อรับรายได้เสริมจากคาร์บอนเครดิตด้วยวิธี AWD
+            </p>
+            <Link
+              to="/village/carbon/enroll"
+              className="mt-3 flex min-h-11 w-full cursor-pointer items-center justify-center rounded-xl bg-[var(--green-strong)] text-[13.5px] font-semibold text-white active:scale-[0.99]"
+            >
+              สมัครเข้าร่วมโครงการ
+            </Link>
+          </section>
+        )}
 
         <Link
           to="/village/ai"

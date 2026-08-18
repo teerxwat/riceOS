@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Sprout } from 'lucide-react'
+import { Sprout, Leaf } from 'lucide-react'
 import { formatNumber } from '../utils/format'
 
 const STATUS_TONE = {
@@ -66,6 +66,14 @@ function PlotCard({ plot }) {
           {plot.progressPct}%
         </span>
       </div>
+
+      {plot.carbonEnrolled && (
+        <div className="mt-2 flex items-center gap-1.5 text-[12px] text-[var(--green-strong)]">
+          <Leaf size={13} strokeWidth={2} />
+          นาคาร์บอน · {formatNumber(plot.carbonTco2e, { decimals: 2 })} tCO2e ·{' '}
+          {plot.awdStatus}
+        </div>
+      )}
     </Link>
   )
 }

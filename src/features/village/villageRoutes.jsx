@@ -30,15 +30,23 @@ const WeatherForecastPage = lazy(
 )
 const NewsPage = lazy(() => import('./pages/NewsPage.jsx'))
 const GamePage = lazy(() => import('./pages/GamePage.jsx'))
+const CarbonWalletPage = lazy(() => import('./pages/CarbonWalletPage.jsx'))
+const CarbonEnrollPage = lazy(() => import('./pages/CarbonEnrollPage.jsx'))
+const WaterLogPage = lazy(() => import('./pages/WaterLogPage.jsx'))
+const MrvEvidencePage = lazy(() => import('./pages/MrvEvidencePage.jsx'))
 
 const PAGES = [
   { path: 'village', Page: HomePage },
   { path: 'village/game', Page: GamePage },
+  { path: 'village/carbon', Page: CarbonWalletPage },
+  { path: 'village/carbon/enroll', Page: CarbonEnrollPage },
   { path: 'village/weather', Page: WeatherForecastPage },
   { path: 'village/news', Page: NewsPage },
   { path: 'village/plots', Page: PlotsPage },
   { path: 'village/plots/new', Page: AddPlotPage },
   { path: 'village/plots/:id', Page: PlotDetailPage },
+  { path: 'village/plots/:id/water-log', Page: WaterLogPage },
+  { path: 'village/plots/:id/mrv', Page: MrvEvidencePage },
   { path: 'village/ai', Page: AIAssistantPage },
   { path: 'village/market', Page: MarketPage },
   { path: 'village/market/sell', Page: SellRicePage },

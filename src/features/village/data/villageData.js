@@ -96,6 +96,9 @@ export const LEADERBOARD = [
   { id: 'p4', name: 'คุณอนันต์ พูนผล', points: 1200 },
 ]
 
+// carbonEnrolled/awdStatus/waterLevelCm/carbonTco2e/mrv เป็นข้อมูลของฟีเจอร์
+// "นาคาร์บอน" (AWD + คาร์บอนเครดิต) — ตั้งใจให้แปลง 3 (ยังไม่สมัครโครงการ)
+// เพื่อให้มีตัวอย่างการกด "สมัครเป็นสมาชิกโครงการคาร์บอน" ได้จริงในหน้าสาธิต
 export const PLOTS = [
   {
     id: 1,
@@ -106,6 +109,17 @@ export const PLOTS = [
     harvestDate: '10 ก.ย. 2567',
     status: 'กำลังปลูก',
     progressPct: 62,
+    carbonEnrolled: true,
+    awdStatus: 'เหมาะสม',
+    waterLevelCm: -15,
+    carbonTco2e: 1.85,
+    mrv: {
+      gps: true,
+      timestamp: true,
+      photo: true,
+      sensorData: true,
+      farmerLog: false,
+    },
   },
   {
     id: 2,
@@ -116,6 +130,17 @@ export const PLOTS = [
     harvestDate: '22 ก.ย. 2567',
     status: 'กำลังปลูก',
     progressPct: 48,
+    carbonEnrolled: true,
+    awdStatus: 'เปิดน้ำ',
+    waterLevelCm: 3,
+    carbonTco2e: 0.62,
+    mrv: {
+      gps: true,
+      timestamp: true,
+      photo: false,
+      sensorData: false,
+      farmerLog: true,
+    },
   },
   {
     id: 3,
@@ -126,8 +151,86 @@ export const PLOTS = [
     harvestDate: '5 ส.ค. 2567',
     status: 'เก็บเกี่ยวแล้ว',
     progressPct: 100,
+    carbonEnrolled: false,
+    awdStatus: null,
+    waterLevelCm: null,
+    carbonTco2e: 0,
+    mrv: {
+      gps: false,
+      timestamp: false,
+      photo: false,
+      sensorData: false,
+      farmerLog: false,
+    },
   },
 ]
+
+// ประเภทหลักฐาน MRV (Measurement, Reporting, Verification) — ใช้เป็นเช็คลิสต์
+// ต่อแปลงในหน้า MrvEvidencePage อ้างอิงตาม key ใน plot.mrv ด้านบน
+export const MRV_EVIDENCE_TYPES = [
+  { key: 'gps', label: 'พิกัด GPS' },
+  { key: 'timestamp', label: 'เวลาบันทึก (Timestamp)' },
+  { key: 'photo', label: 'รูปถ่ายแปลงนา' },
+  { key: 'sensorData', label: 'ข้อมูลเซ็นเซอร์ระดับน้ำ' },
+  { key: 'farmerLog', label: 'บันทึกกิจกรรมของเกษตรกร' },
+]
+
+// กระเป๋าคาร์บอน — totalTco2e ควรใกล้เคียงผลรวม carbonTco2e ของทุกแปลงข้างบน
+// (ไม่บังคับให้ตรงเป๊ะ เพราะของจริงจะมีส่วนต่างจากรอบตรวจสอบที่ค้างอยู่)
+export const CARBON_WALLET = {
+  totalTco2e: 2.47,
+  pricePerTon: 350,
+  breakdown: [
+    { key: 'forecast', label: 'คาดการณ์', tco2e: 0.9 },
+    { key: 'pending', label: 'รอตรวจสอบ', tco2e: 0.8 },
+    { key: 'verified', label: 'ยืนยันแล้ว', tco2e: 0.5 },
+    { key: 'sold', label: 'จำหน่ายแล้ว', tco2e: 0.27 },
+  ],
+}
+
+export const CARBON_TRANSACTIONS = [
+  {
+    id: 1,
+    date: '19 พ.ค. 2567',
+    type: 'สร้างเครดิตรายสัปดาห์',
+    amount: 0.32,
+    status: 'ยืนยันแล้ว',
+  },
+  {
+    id: 2,
+    date: '10 พ.ค. 2567',
+    type: 'ขายคาร์บอนเครดิต',
+    amount: -1.2,
+    status: 'ขายแล้ว',
+    priceBaht: 420,
+  },
+  {
+    id: 3,
+    date: '2 พ.ค. 2567',
+    type: 'สร้างเครดิตรายสัปดาห์',
+    amount: 0.28,
+    status: 'ยืนยันแล้ว',
+  },
+  {
+    id: 4,
+    date: '25 เม.ย. 2567',
+    type: 'ขายคาร์บอนเครดิต',
+    amount: -1.0,
+    status: 'ขายแล้ว',
+    priceBaht: 340,
+  },
+]
+
+export const CARBON_PROGRAM_INFO = {
+  standard: 'Verra VCS VM0042',
+  benefitPct: '15–30%',
+  terms: [
+    'ปฏิบัติตามวิธีทำนาแบบเปียกสลับแห้ง (AWD) ตามรอบที่ระบบแนะนำ',
+    'บันทึกระดับน้ำ/กิจกรรมในแปลงอย่างสม่ำเสมอเพื่อใช้เป็นหลักฐาน MRV',
+    'ยินยอมให้ศูนย์ข้าวและผู้ตรวจสอบเข้าถึงข้อมูลแปลงเพื่อรับรองคาร์บอนเครดิต',
+    'รายได้จากการขายคาร์บอนเครดิตจะโอนเข้าบัญชีตามรอบที่ตกลง',
+  ],
+}
 
 // หน้าแรกโชว์แค่ 3 อันแรก (NEWS.slice(0, 3)) ส่วนหน้า "ข่าวสารทั้งหมด" โชว์ครบ
 export const NEWS = [
