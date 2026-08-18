@@ -30,7 +30,14 @@ function buildPath(values, months, maxVal) {
   return { d, coords }
 }
 
-function TrendChart({ months, actual, forecast, target }) {
+function TrendChart({
+  months,
+  actual,
+  forecast,
+  target,
+  unit = 'ล้านตัน',
+  ariaLabel = 'แนวโน้มผลผลิตข้าว ผลจริงเทียบคาดการณ์และเป้าหมาย',
+}) {
   const maxVal = Math.max(target, ...forecast) * 1.08
   const actualPath = buildPath(actual, months, maxVal)
   const forecastPath = buildPath(forecast, months, maxVal)
@@ -42,7 +49,7 @@ function TrendChart({ months, actual, forecast, target }) {
       viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
       className="h-auto w-full"
       role="img"
-      aria-label="แนวโน้มผลผลิตข้าว ผลจริงเทียบคาดการณ์และเป้าหมาย"
+      aria-label={ariaLabel}
     >
       {/* เส้นเป้าหมาย */}
       <line
@@ -60,7 +67,7 @@ function TrendChart({ months, actual, forecast, target }) {
         textAnchor="end"
         className="fill-db-amber text-caption font-medium"
       >
-        เป้าหมาย {formatNumber(target, { decimals: 2 })} ล้านตัน
+        เป้าหมาย {formatNumber(target, { decimals: 2 })} {unit}
       </text>
 
       {/* เส้นคาดการณ์ */}

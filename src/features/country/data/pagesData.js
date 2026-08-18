@@ -243,6 +243,241 @@ export const STRAW_USAGE = [
   },
 ]
 
+// สัดส่วนคาร์บอนเครดิตตามสถานะ (pipeline) ทั่วประเทศ — รวมกันควรเท่ากับ
+// CARBON_SUMMARY.total (256,780 tCO₂e) โดยประมาณ
+export const CARBON_PIPELINE = [
+  {
+    key: 'forecast',
+    label: 'คาดการณ์',
+    value: 92440,
+    pct: 36.0,
+    color: 'var(--color-db-amber)',
+  },
+  {
+    key: 'pending',
+    label: 'รอตรวจสอบ (MRV)',
+    value: 61630,
+    pct: 24.0,
+    color: 'var(--color-db-blue)',
+  },
+  {
+    key: 'verified',
+    label: 'ยืนยันแล้ว',
+    value: 66260,
+    pct: 25.8,
+    color: 'var(--color-db-green)',
+  },
+  {
+    key: 'sold',
+    label: 'จำหน่ายแล้ว',
+    value: 36450,
+    pct: 14.2,
+    color: 'var(--color-db-text-dim)',
+  },
+]
+
+// คาร์บอนเครดิตสะสมรายเดือน (tCO₂e) — โครงสร้างเดียวกับ TREND ในหน้าภาพรวม
+// ใช้กับ TrendChart component เดิม (ผ่าน prop unit ที่เพิ่มใหม่)
+export const CARBON_TREND = {
+  months: [
+    'ม.ค.',
+    'ก.พ.',
+    'มี.ค.',
+    'เม.ย.',
+    'พ.ค.',
+    'มิ.ย.',
+    'ก.ค.',
+    'ส.ค.',
+    'ก.ย.',
+    'ต.ค.',
+    'พ.ย.',
+    'ธ.ค.',
+  ],
+  actual: [
+    38200,
+    79500,
+    124800,
+    178300,
+    256780,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ],
+  forecast: [
+    38200, 78100, 122400, 172600, 228900, 285200, 341500, 397800, 454100,
+    510400, 566700, 650000,
+  ],
+  target: 650000,
+}
+
+export const CARBON_CERTIFICATIONS = [
+  'Verra VCS Verified',
+  'VM0042 Methodology',
+  'SGS Validation',
+  'มาตรฐาน สบก. ไทย',
+]
+
+export const CARBON_TRANSACTIONS = [
+  {
+    id: 1,
+    date: '19 พ.ค. 2567',
+    region: 'ตะวันออกเฉียงเหนือ',
+    type: 'สร้างเครดิต (Generation)',
+    amount: 18420,
+    status: 'ยืนยันแล้ว',
+  },
+  {
+    id: 2,
+    date: '15 พ.ค. 2567',
+    region: 'กลาง',
+    type: 'ขายคาร์บอนเครดิต (Issuance)',
+    amount: -12500,
+    status: 'ขายแล้ว',
+    priceMillionBaht: 4.38,
+  },
+  {
+    id: 3,
+    date: '10 พ.ค. 2567',
+    region: 'เหนือ',
+    type: 'สร้างเครดิต (Generation)',
+    amount: 9840,
+    status: 'ยืนยันแล้ว',
+  },
+  {
+    id: 4,
+    date: '2 พ.ค. 2567',
+    region: 'ตะวันออกเฉียงเหนือ',
+    type: 'ขายคาร์บอนเครดิต (Issuance)',
+    amount: -23950,
+    status: 'ขายแล้ว',
+    priceMillionBaht: 8.38,
+  },
+  {
+    id: 5,
+    date: '22 เม.ย. 2567',
+    region: 'ใต้',
+    type: 'สร้างเครดิต (Generation)',
+    amount: 3120,
+    status: 'รอตรวจสอบ',
+  },
+]
+
+// ความครบถ้วนของหลักฐาน MRV รายศูนย์ (สุ่มตัวอย่างศูนย์ที่เข้าร่วมโครงการ
+// คาร์บอน) — auditReady = พร้อมให้ผู้ตรวจสอบภายนอกตรวจ (ครบถ้วน ≥ 90%)
+export const MRV_SUMMARY = [
+  {
+    key: 'enrolled',
+    label: 'ศูนย์ที่เข้าร่วมโครงการคาร์บอน',
+    value: 428,
+    unit: 'ศูนย์',
+    sub: 'จาก 1,000 ศูนย์ทั้งหมด',
+  },
+  {
+    key: 'ready',
+    label: 'พร้อมตรวจสอบ (Audit Ready)',
+    value: 312,
+    unit: 'ศูนย์',
+    sub: '72.9% ของศูนย์ที่เข้าร่วม',
+    trend: 'up',
+  },
+  {
+    key: 'avgComplete',
+    label: 'ความครบถ้วนหลักฐานเฉลี่ย',
+    value: 84.6,
+    unit: '%',
+    sub: '+3.2% จากเดือนก่อน',
+    trend: 'up',
+  },
+  {
+    key: 'flagged',
+    label: 'ศูนย์ที่ต้องติดตาม',
+    value: 23,
+    unit: 'ศูนย์',
+    sub: 'ครบถ้วน < 50%',
+  },
+]
+
+export const MRV_CENTERS = [
+  {
+    id: 1,
+    name: 'ศูนย์ข้าวบ้านหนองหวาย',
+    province: 'อุบลราชธานี',
+    plotsEnrolled: 186,
+    completePct: 96,
+    auditReady: true,
+  },
+  {
+    id: 2,
+    name: 'ศูนย์ข้าวบ้านโคกสะอาด',
+    province: 'นครราชสีมา',
+    plotsEnrolled: 152,
+    completePct: 91,
+    auditReady: true,
+  },
+  {
+    id: 3,
+    name: 'ศูนย์ข้าวบ้านดอยหมูส',
+    province: 'เชียงใหม่',
+    plotsEnrolled: 98,
+    completePct: 78,
+    auditReady: false,
+  },
+  {
+    id: 4,
+    name: 'ศูนย์ข้าวบ้านทุ่งกว้าง',
+    province: 'สุพรรณบุรี',
+    plotsEnrolled: 140,
+    completePct: 62,
+    auditReady: false,
+  },
+  {
+    id: 5,
+    name: 'ศูนย์ข้าวบ้านนาโพธิ์',
+    province: 'ขอนแก่น',
+    plotsEnrolled: 121,
+    completePct: 94,
+    auditReady: true,
+  },
+  {
+    id: 6,
+    name: 'ศูนย์ข้าวบ้านคลองเจดีย์',
+    province: 'สุพรรณบุรี',
+    plotsEnrolled: 64,
+    completePct: 38,
+    auditReady: false,
+  },
+]
+
+export const MRV_FLAGS = [
+  {
+    id: 1,
+    severity: 'critical',
+    title: 'ศูนย์ข้าวบ้านคลองเจดีย์ หลักฐานครบเพียง 38%',
+    detail:
+      'ขาดข้อมูลเซ็นเซอร์และรูปถ่ายแปลงส่วนใหญ่ เสี่ยงไม่ผ่านตรวจสอบรอบถัดไป',
+    time: '2 วันที่แล้ว',
+  },
+  {
+    id: 2,
+    severity: 'warning',
+    title: 'สุพรรณบุรีมี 2 ศูนย์ต่ำกว่าเกณฑ์ Audit Ready',
+    detail:
+      'ทุ่งกว้าง (62%) และคลองเจดีย์ (38%) ควรเร่งเก็บหลักฐานก่อนสิ้นไตรมาส',
+    time: '3 วันที่แล้ว',
+  },
+  {
+    id: 3,
+    severity: 'good',
+    title: 'อุบลราชธานีความครบถ้วนหลักฐานสูงสุด',
+    detail: 'ศูนย์บ้านหนองหวายครบถ้วน 96% พร้อมเป็นต้นแบบให้ศูนย์อื่น',
+    time: '1 วันที่แล้ว',
+  },
+]
+
 export const INCOME_SUMMARY = [
   {
     key: 'total',

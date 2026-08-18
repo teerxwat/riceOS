@@ -12,6 +12,12 @@ const STAT_ROWS = [
   { key: 'production', label: 'ผลผลิต', unit: 'พันตัน', decimals: 1 },
   { key: 'area', label: 'พื้นที่ทำคาร์บอนต่ำ', unit: 'ไร่' },
   { key: 'income', label: 'รายได้เกษตรกร', unit: 'ล้านบาท', decimals: 1 },
+  {
+    key: 'awdAdoptionPct',
+    label: 'สัดส่วนพื้นที่ทำ AWD',
+    unit: '%',
+    decimals: 1,
+  },
 ]
 
 // เปลี่ยนเนื้อหาตามภาคที่เลือกบน RegionMap — ผูกแผนที่กับตัวเลขไว้ด้วยกัน
