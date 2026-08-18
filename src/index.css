@@ -303,23 +303,20 @@ p {
   border: 2px solid color-mix(in srgb, var(--gold) 60%, transparent);
   box-shadow: 0 4px 14px -6px rgba(200, 154, 46, 0.7);
 }
-.brand-logo {
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
-  display: block;
+.brand-2line {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
 }
-.brand-word {
+.brand-2line b {
   font-weight: 800;
-  font-size: 1.22rem;
-  letter-spacing: -0.01em;
-  color: var(--text);
+  font-size: 1.08rem;
+  letter-spacing: 0.02em;
 }
-.route-loader-logo {
-  width: 96px;
-  height: 96px;
-  object-fit: contain;
-  animation: loader-pulse 1.1s ease-in-out infinite;
+.brand-2line small {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--green-strong);
 }
 
 .nav-spacer {
@@ -618,13 +615,12 @@ p {
     gap: 0.45rem;
     padding: 0.55rem 0.8rem;
   }
-  .brand-mark,
-  .brand-logo {
+  .brand-mark {
     width: 34px;
     height: 34px;
   }
-  .brand-word {
-    font-size: 1.02rem;
+  .brand-2line b {
+    font-size: 0.98rem;
   }
   .nav-page {
     margin-left: 0.2rem;
