@@ -1,0 +1,104 @@
+{
+  "summary": {
+    "machinesTotal": 6,
+    "machinesNormal": 4,
+    "machinesAbnormal": 1,
+    "machinesOff": 1,
+    "totalLoadKw": 27.8,
+    "updatedAt": "23 พ.ค. 2567 09:45 น."
+  },
+  "dryers": [
+    {
+      "id": "dryer-1",
+      "name": "เครื่องอบ 1",
+      "model": "DR-120",
+      "status": "normal",
+      "running": true,
+      "currentA": 16.2,
+      "voltageV": 398,
+      "powerKw": 6.4,
+      "note": null
+    },
+    {
+      "id": "dryer-2",
+      "name": "เครื่องอบ 2",
+      "model": "DR-120",
+      "status": "normal",
+      "running": true,
+      "currentA": 11.8,
+      "voltageV": 401,
+      "powerKw": 4.7,
+      "note": null
+    },
+    {
+      "id": "dryer-3",
+      "name": "เครื่องอบ 3",
+      "model": "DR-120",
+      "status": "abnormal",
+      "running": true,
+      "currentA": 18.7,
+      "voltageV": 372,
+      "powerKw": 7.6,
+      "note": "กระแสไฟฟ้าสูงกว่าเกณฑ์ปกติ 12% และแรงดันตกกว่าเกณฑ์ ควรตรวจสอบมอเตอร์พัดลม"
+    },
+    {
+      "id": "dryer-4",
+      "name": "เครื่องอบ 4",
+      "model": "DR-90",
+      "status": "off",
+      "running": false,
+      "currentA": 0,
+      "voltageV": 0,
+      "powerKw": 0,
+      "note": "ปิดเครื่อง — รอช่างเข้าตรวจสอบมอเตอร์พัดลม"
+    }
+  ],
+  "solar": {
+    "id": "solar-1",
+    "name": "ระบบโซล่าเซลล์หลังคาโรงสี",
+    "model": "20 kWp",
+    "status": "normal",
+    "capacityKwp": 20,
+    "currentGenKw": 8.2,
+    "todayEnergyKwh": 46.5,
+    "voltageV": 385,
+    "currentA": 21.3,
+    "panelsTotal": 48,
+    "panelsFault": 0,
+    "note": null
+  },
+  "baler": {
+    "id": "baler-1",
+    "name": "เครื่องปั่นฟางอัดก้อน",
+    "model": "SB-450",
+    "status": "normal",
+    "running": true,
+    "currentA": 22.8,
+    "voltageV": 401,
+    "powerKw": 9.1,
+    "balesToday": 84,
+    "note": null
+  },
+  "alerts": [
+    {
+      "level": "critical",
+      "message": "เครื่องอบ 3 กระแสไฟฟ้าสูงกว่าเกณฑ์ปกติ 12% ควรตรวจสอบมอเตอร์พัดลม",
+      "time": "09:32"
+    },
+    {
+      "level": "warning",
+      "message": "เครื่องอบ 4 ปิดเครื่อง รอช่างเข้าตรวจสอบ",
+      "time": "08:50"
+    },
+    {
+      "level": "info",
+      "message": "ระบบโซล่าเซลล์ผลิตไฟฟ้าได้ 46.5 หน่วยวันนี้ สูงกว่าค่าเฉลี่ย 8%",
+      "time": "08:30"
+    },
+    {
+      "level": "success",
+      "message": "เครื่องปั่นฟางอัดก้อนทำงานปกติ อัดฟางแล้ว 84 ก้อนวันนี้",
+      "time": "08:15"
+    }
+  ]
+}
