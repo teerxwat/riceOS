@@ -1,6 +1,9 @@
 import { Warehouse } from 'lucide-react'
 import { Card } from '../common/Card.jsx'
 import { Badge } from '../common/Badge.jsx'
+import { MachineCard } from '../machines/MachineCard.jsx'
+import { MachineIllustration } from '../machines/MachineIllustration.jsx'
+import '../../styles/machines.css'
 
 const STATUS_LABEL = {
   running: 'กำลังอบ',
@@ -26,6 +29,10 @@ function DryerCard({ dryer }) {
 
   return (
     <div className="cd-dryer-card">
+      <div className="cm-card__illustration">
+        <MachineIllustration kind="dryer" />
+      </div>
+
       <div className="cd-dryer-card__head">
         <span className="cd-dryer-card__name">{dryer.name}</span>
         <Badge tone={STATUS_TONE[dryer.status]}>
@@ -80,10 +87,26 @@ function DryerCard({ dryer }) {
   )
 }
 
-export function DryerStatusGrid({ dryers }) {
+export function DryerStatusGrid({ dryers, strawMachines }) {
   return (
-    <Card title="สถานะเครื่องอบข้าว">
+    <Card title="สถานะเครื่องอบข้าวและเครื่องจักรฟาง">
       <div className="c-grid c-grid-2 c-grid-md-4">
+        {strawMachines?.map((m) => (
+          <MachineCard
+            key={m.id}
+            kind={m.kind}
+            name={m.name}
+            model={m.model}
+            status={m.status}
+            readings={[
+              { label: 'กระแสไฟฟ้า', value: m.currentA, unit: 'A' },
+              { label: 'แรงดันไฟฟ้า', value: m.voltageV, unit: 'V' },
+              { label: 'กำลังไฟฟ้า', value: m.powerKw, unit: 'kW' },
+            ]}
+            extra={m.extra}
+            note={m.note}
+          />
+        ))}
         {dryers.map((d) => (
           <DryerCard key={d.id} dryer={d} />
         ))}

@@ -73,7 +73,10 @@ export function DashboardPage() {
               />
             </div>
 
-            <DryerStatusGrid dryers={data.dryers} />
+            <DryerStatusGrid
+              dryers={data.dryers}
+              strawMachines={data.strawMachines}
+            />
 
             <div className="c-grid c-grid-1 c-grid-lg-3">
               <div className="c-col-span-2">

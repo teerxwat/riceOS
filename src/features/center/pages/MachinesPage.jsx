@@ -16,7 +16,7 @@ export function MachinesPage() {
     <>
       <Topbar
         title="เครื่องจักรและพลังงาน"
-        subtitle="ตรวจสอบกระแสไฟฟ้า แรงดัน และสถานะการทำงานของเครื่องอบ โซล่าเซลล์ และเครื่องปั่นฟาง"
+        subtitle="ตรวจสอบกระแสไฟฟ้า แรงดัน และสถานะการทำงานของเครื่องปั่นฟาง เครื่องสับฟาง เครื่องอัดเม็ด เครื่องอบข้าว และโซล่าเซลล์"
       />
       <div className="c-content">
         {loading && <LoadingState />}
@@ -56,94 +56,62 @@ export function MachinesPage() {
               />
             </div>
 
-            <Card title="เครื่องอบข้าว">
+            <Card title="เครื่องจักรแปรรูปฟางและเครื่องอบข้าว">
               <div className="c-grid c-grid-2 c-grid-md-4">
-                {data.dryers.map((d) => (
+                {data.processMachines.map((m) => (
                   <MachineCard
-                    key={d.id}
-                    kind="dryer"
-                    name={d.name}
-                    model={d.model}
-                    status={d.status}
+                    key={m.id}
+                    kind={m.kind}
+                    name={m.name}
+                    model={m.model}
+                    status={m.status}
                     readings={[
-                      { label: 'กระแสไฟฟ้า', value: d.currentA, unit: 'A' },
-                      { label: 'แรงดันไฟฟ้า', value: d.voltageV, unit: 'V' },
-                      { label: 'กำลังไฟฟ้า', value: d.powerKw, unit: 'kW' },
+                      { label: 'กระแสไฟฟ้า', value: m.currentA, unit: 'A' },
+                      { label: 'แรงดันไฟฟ้า', value: m.voltageV, unit: 'V' },
+                      { label: 'กำลังไฟฟ้า', value: m.powerKw, unit: 'kW' },
                     ]}
-                    note={d.note}
+                    extra={m.extra}
+                    note={m.note}
                   />
                 ))}
               </div>
             </Card>
 
-            <div className="c-grid c-grid-1 c-grid-lg-2">
-              <MachineCard
-                kind="solar"
-                name={data.solar.name}
-                model={data.solar.model}
-                status={data.solar.status}
-                size="large"
-                readings={[
-                  {
-                    label: 'กำลังผลิตปัจจุบัน',
-                    value: data.solar.currentGenKw,
-                    unit: 'kW',
-                  },
-                  {
-                    label: 'แรงดันไฟฟ้า',
-                    value: data.solar.voltageV,
-                    unit: 'V',
-                  },
-                  {
-                    label: 'กระแสไฟฟ้า',
-                    value: data.solar.currentA,
-                    unit: 'A',
-                  },
-                ]}
-                extra={[
-                  {
-                    label: 'พลังงานสะสมวันนี้',
-                    value: `${data.solar.todayEnergyKwh} kWh`,
-                  },
-                  {
-                    label: 'แผงโซล่าปกติ',
-                    value: `${data.solar.panelsTotal - data.solar.panelsFault}/${data.solar.panelsTotal} แผง`,
-                  },
-                ]}
-                note={data.solar.note}
-              />
-              <MachineCard
-                kind="shredder"
-                name={data.strawShredder.name}
-                model={data.strawShredder.model}
-                status={data.strawShredder.status}
-                size="large"
-                readings={[
-                  {
-                    label: 'กระแสไฟฟ้า',
-                    value: data.strawShredder.currentA,
-                    unit: 'A',
-                  },
-                  {
-                    label: 'แรงดันไฟฟ้า',
-                    value: data.strawShredder.voltageV,
-                    unit: 'V',
-                  },
-                  {
-                    label: 'กำลังไฟฟ้า',
-                    value: data.strawShredder.powerKw,
-                    unit: 'kW',
-                  },
-                ]}
-                extra={[
-                  {
-                    label: 'ปั่นฟางวันนี้',
-                    value: `${data.strawShredder.strawKgToday.toLocaleString('th-TH')} กก.`,
-                  },
-                ]}
-                note={data.strawShredder.note}
-              />
-            </div>
+            <MachineCard
+              kind="solar"
+              name={data.solar.name}
+              model={data.solar.model}
+              status={data.solar.status}
+              size="large"
+              readings={[
+                {
+                  label: 'กำลังผลิตปัจจุบัน',
+                  value: data.solar.currentGenKw,
+                  unit: 'kW',
+                },
+                {
+                  label: 'แรงดันไฟฟ้า',
+                  value: data.solar.voltageV,
+                  unit: 'V',
+                },
+                {
+                  label: 'กระแสไฟฟ้า',
+                  value: data.solar.currentA,
+                  unit: 'A',
+                },
+              ]}
+              extra={[
+                {
+                  label: 'พลังงานสะสมวันนี้',
+                  value: `${data.solar.todayEnergyKwh} kWh`,
+                },
+                {
+                  label: 'แผงโซล่าปกติ',
+                  value: `${data.solar.panelsTotal - data.solar.panelsFault}/${data.solar.panelsTotal} แผง`,
+                },
+              ]}
+              note={data.solar.note}
+            />
 
             <MachineAlerts alerts={data.alerts} />
           </div>
