@@ -1,56 +1,59 @@
 {
   "summary": {
-    "machinesTotal": 6,
+    "machinesTotal": 5,
     "machinesNormal": 4,
     "machinesAbnormal": 1,
-    "machinesOff": 1,
-    "totalLoadKw": 27.8,
+    "totalLoadKw": 33.9,
     "updatedAt": "23 พ.ค. 2567 09:45 น."
   },
-  "dryers": [
+  "processMachines": [
+    {
+      "id": "spinner-1",
+      "kind": "spinner",
+      "name": "เครื่องปั่นฟาง",
+      "model": "TD-520",
+      "status": "normal",
+      "currentA": 8.5,
+      "voltageV": 400,
+      "powerKw": 3.2,
+      "extra": [{ "label": "ปั่นฟางวันนี้", "value": "12 ไร่" }],
+      "note": null
+    },
+    {
+      "id": "chopper-1",
+      "kind": "chopper",
+      "name": "เครื่องสับฟาง",
+      "model": "SC-450",
+      "status": "abnormal",
+      "currentA": 24.6,
+      "voltageV": 378,
+      "powerKw": 9.8,
+      "extra": [{ "label": "สับฟางวันนี้", "value": "1,850 กก." }],
+      "note": "กระแสไฟฟ้าสูงกว่าเกณฑ์ปกติ ควรตรวจสอบใบมีด"
+    },
+    {
+      "id": "pellet-1",
+      "kind": "pellet",
+      "name": "เครื่องอัดเม็ด",
+      "model": "PM-260",
+      "status": "normal",
+      "currentA": 32.4,
+      "voltageV": 402,
+      "powerKw": 14.5,
+      "extra": [{ "label": "ผลิตเม็ดวันนี้", "value": "620 กก." }],
+      "note": null
+    },
     {
       "id": "dryer-1",
-      "name": "เครื่องอบ 1",
+      "kind": "dryer",
+      "name": "เครื่องอบข้าว",
       "model": "DR-120",
       "status": "normal",
-      "running": true,
       "currentA": 16.2,
       "voltageV": 398,
       "powerKw": 6.4,
+      "extra": [{ "label": "อุณหภูมิเตา", "value": "52°C" }],
       "note": null
-    },
-    {
-      "id": "dryer-2",
-      "name": "เครื่องอบ 2",
-      "model": "DR-120",
-      "status": "normal",
-      "running": true,
-      "currentA": 11.8,
-      "voltageV": 401,
-      "powerKw": 4.7,
-      "note": null
-    },
-    {
-      "id": "dryer-3",
-      "name": "เครื่องอบ 3",
-      "model": "DR-120",
-      "status": "abnormal",
-      "running": true,
-      "currentA": 18.7,
-      "voltageV": 372,
-      "powerKw": 7.6,
-      "note": "กระแสไฟฟ้าสูงกว่าเกณฑ์ปกติ 12% และแรงดันตกกว่าเกณฑ์ ควรตรวจสอบมอเตอร์พัดลม"
-    },
-    {
-      "id": "dryer-4",
-      "name": "เครื่องอบ 4",
-      "model": "DR-90",
-      "status": "off",
-      "running": false,
-      "currentA": 0,
-      "voltageV": 0,
-      "powerKw": 0,
-      "note": "ปิดเครื่อง — รอช่างเข้าตรวจสอบมอเตอร์พัดลม"
     }
   ],
   "solar": {
@@ -67,27 +70,15 @@
     "panelsFault": 0,
     "note": null
   },
-  "strawShredder": {
-    "id": "shredder-1",
-    "name": "เครื่องปั่นฟาง",
-    "model": "SC-450",
-    "status": "normal",
-    "running": true,
-    "currentA": 22.8,
-    "voltageV": 401,
-    "powerKw": 9.1,
-    "strawKgToday": 1850,
-    "note": null
-  },
   "alerts": [
     {
       "level": "critical",
-      "message": "เครื่องอบ 3 กระแสไฟฟ้าสูงกว่าเกณฑ์ปกติ 12% ควรตรวจสอบมอเตอร์พัดลม",
+      "message": "เครื่องสับฟางกระแสไฟฟ้าสูงกว่าเกณฑ์ปกติ ควรตรวจสอบใบมีด",
       "time": "09:32"
     },
     {
-      "level": "warning",
-      "message": "เครื่องอบ 4 ปิดเครื่อง รอช่างเข้าตรวจสอบ",
+      "level": "info",
+      "message": "เครื่องปั่นฟางทำงานปกติ ปั่นฟางแล้ว 12 ไร่วันนี้",
       "time": "08:50"
     },
     {
@@ -97,7 +88,7 @@
     },
     {
       "level": "success",
-      "message": "เครื่องปั่นฟางทำงานปกติ ปั่นฟางแล้ว 1,850 กก. วันนี้",
+      "message": "เครื่องอัดเม็ดทำงานปกติ ผลิตเม็ดแล้ว 620 กก. วันนี้",
       "time": "08:15"
     }
   ]
