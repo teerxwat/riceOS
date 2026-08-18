@@ -34,6 +34,11 @@ const CarbonWalletPage = lazy(() => import('./pages/CarbonWalletPage.jsx'))
 const CarbonEnrollPage = lazy(() => import('./pages/CarbonEnrollPage.jsx'))
 const WaterLogPage = lazy(() => import('./pages/WaterLogPage.jsx'))
 const MrvEvidencePage = lazy(() => import('./pages/MrvEvidencePage.jsx'))
+const FarmMapPage = lazy(() => import('./pages/FarmMapPage.jsx'))
+const CropCalendarPage = lazy(() => import('./pages/CropCalendarPage.jsx'))
+const FertilizerLogPage = lazy(() => import('./pages/FertilizerLogPage.jsx'))
+const DocumentsPage = lazy(() => import('./pages/DocumentsPage.jsx'))
+const MillQueuePage = lazy(() => import('./pages/MillQueuePage.jsx'))
 
 const PAGES = [
   { path: 'village', Page: HomePage },
@@ -42,11 +47,16 @@ const PAGES = [
   { path: 'village/carbon/enroll', Page: CarbonEnrollPage },
   { path: 'village/weather', Page: WeatherForecastPage },
   { path: 'village/news', Page: NewsPage },
+  { path: 'village/documents', Page: DocumentsPage },
+  { path: 'village/mill', Page: MillQueuePage },
   { path: 'village/plots', Page: PlotsPage },
   { path: 'village/plots/new', Page: AddPlotPage },
+  { path: 'village/plots/map', Page: FarmMapPage },
   { path: 'village/plots/:id', Page: PlotDetailPage },
   { path: 'village/plots/:id/water-log', Page: WaterLogPage },
   { path: 'village/plots/:id/mrv', Page: MrvEvidencePage },
+  { path: 'village/plots/:id/calendar', Page: CropCalendarPage },
+  { path: 'village/plots/:id/fertilizer', Page: FertilizerLogPage },
   { path: 'village/ai', Page: AIAssistantPage },
   { path: 'village/market', Page: MarketPage },
   { path: 'village/market/sell', Page: SellRicePage },

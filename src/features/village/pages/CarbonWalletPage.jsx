@@ -1,7 +1,14 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Leaf, ArrowUpRight, ArrowDownRight } from 'lucide-react'
+import { Leaf, ArrowUpRight, ArrowDownRight, BadgeCheck } from 'lucide-react'
 import VillageLayout from '../components/VillageLayout'
-import { CARBON_WALLET, CARBON_TRANSACTIONS, PLOTS } from '../data/villageData'
+import {
+  CARBON_WALLET,
+  CARBON_TRANSACTIONS,
+  CARBON_TREND,
+  CARBON_CERTIFICATIONS,
+  PLOTS,
+} from '../data/villageData'
 import { formatNumber } from '../utils/format'
 
 const BREAKDOWN_COLOR = {
@@ -11,11 +18,52 @@ const BREAKDOWN_COLOR = {
   sold: 'bg-[var(--muted)]',
 }
 
+function nextTxId() {
+  return CARBON_TRANSACTIONS.reduce((max, t) => Math.max(max, t.id), 0) + 1
+}
+
+// mutate CARBON_WALLET/CARBON_TRANSACTIONS ในฟังก์ชันนอกคอมโพเนนต์ — ขาย
+// เครดิตที่ "ยืนยันแล้ว" ทั้งหมดในครั้งเดียว (ไม่มีฟอร์มเลือกจำนวนบางส่วน
+// เพื่อลดความซับซ้อน) ไม่มี marketplace จริง แค่จำลองผลลัพธ์
+function sellVerifiedCredits() {
+  const verified = CARBON_WALLET.breakdown.find((b) => b.key === 'verified')
+  const sold = CARBON_WALLET.breakdown.find((b) => b.key === 'sold')
+  if (!verified || verified.tco2e <= 0) return null
+
+  const amount = verified.tco2e
+  const priceBaht = Math.round(amount * CARBON_WALLET.pricePerTon)
+  sold.tco2e = Math.round((sold.tco2e + amount) * 100) / 100
+  verified.tco2e = 0
+  CARBON_TRANSACTIONS.unshift({
+    id: nextTxId(),
+    date: 'วันนี้',
+    type: 'ขายคาร์บอนเครดิต',
+    amount: -amount,
+    status: 'ขายแล้ว',
+    priceBaht,
+  })
+  return amount
+}
+
 function CarbonWalletPage() {
+  const [soldMessage, setSoldMessage] = useState('')
   const valueBaht = Math.round(
     CARBON_WALLET.totalTco2e * CARBON_WALLET.pricePerTon
   )
   const unenrolledCount = PLOTS.filter((p) => !p.carbonEnrolled).length
+  const verifiedBucket = CARBON_WALLET.breakdown.find(
+    (b) => b.key === 'verified'
+  )
+  const maxTrend = Math.max(...CARBON_TREND.map((t) => t.tco2e))
+
+  function handleSell() {
+    const amount = sellVerifiedCredits()
+    if (amount) {
+      setSoldMessage(
+        `ขายคาร์บอนเครดิต ${formatNumber(amount, { decimals: 2 })} tCO2e สำเร็จ`
+      )
+    }
+  }
 
   return (
     <VillageLayout title="กระเป๋าคาร์บอน" backTo="/village">
@@ -50,6 +98,50 @@ function CarbonWalletPage() {
 
         <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
           <p className="text-[15px] font-bold text-[var(--text)]">
+            แนวโน้มคาร์บอนสะสม
+          </p>
+          <div className="mt-3 flex h-20 items-end gap-2">
+            {CARBON_TREND.map((t) => (
+              <div
+                key={t.label}
+                className="flex flex-1 flex-col items-center justify-end gap-1"
+              >
+                <div
+                  className="w-full rounded-t bg-[var(--green-strong)]"
+                  style={{
+                    height: `${(t.tco2e / maxTrend) * 100}%`,
+                    minHeight: '4px',
+                  }}
+                />
+                <span className="text-[10.5px] text-[var(--muted)]">
+                  {t.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+          <div className="flex items-center gap-1.5">
+            <BadgeCheck size={16} className="text-[var(--green-strong)]" />
+            <p className="text-[13.5px] font-semibold text-[var(--text)]">
+              มาตรฐานและการรับรอง
+            </p>
+          </div>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {CARBON_CERTIFICATIONS.map((c) => (
+              <span
+                key={c}
+                className="rounded-full bg-[var(--badge-bg)] px-2.5 py-1 text-[11.5px] font-medium text-[var(--green-strong)]"
+              >
+                {c}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+          <p className="text-[15px] font-bold text-[var(--text)]">
             สถานะคาร์บอนเครดิต
           </p>
           <div className="mt-3 flex h-3 overflow-hidden rounded-full bg-[var(--surface-2)]">
@@ -78,6 +170,22 @@ function CarbonWalletPage() {
               </li>
             ))}
           </ul>
+
+          {verifiedBucket && verifiedBucket.tco2e > 0 && (
+            <button
+              type="button"
+              onClick={handleSell}
+              className="mt-3 flex min-h-11 w-full cursor-pointer items-center justify-center rounded-xl bg-[var(--green-strong)] text-[13.5px] font-semibold text-white active:scale-[0.99]"
+            >
+              ขายคาร์บอนเครดิตที่ยืนยันแล้ว (
+              {formatNumber(verifiedBucket.tco2e, { decimals: 2 })} tCO2e)
+            </button>
+          )}
+          {soldMessage && (
+            <p className="mt-2 text-center text-[12.5px] text-[var(--green-strong)]">
+              {soldMessage}
+            </p>
+          )}
         </section>
 
         {unenrolledCount > 0 && (

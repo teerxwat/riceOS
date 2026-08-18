@@ -7,6 +7,7 @@ import {
   Droplets,
   Leaf,
   ShieldCheck,
+  FlaskConical,
 } from 'lucide-react'
 import VillageLayout from '../components/VillageLayout'
 import { PLOTS } from '../data/villageData'
@@ -150,19 +151,34 @@ function PlotDetailPage() {
                 <p className="text-[12px] text-[var(--muted)]">tCO2e สะสม</p>
               </div>
             </div>
-            <div className="mt-3 flex gap-2">
+            <div className="mt-3 grid grid-cols-2 gap-2">
               <Link
                 to={`/village/plots/${plot.id}/water-log`}
-                className="flex min-h-11 flex-1 cursor-pointer items-center justify-center rounded-xl bg-[var(--green-strong)] text-[13.5px] font-semibold text-white active:scale-[0.99]"
+                className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-xl bg-[var(--green-strong)] text-[12.5px] font-semibold text-white active:scale-[0.99]"
               >
+                <Droplets size={17} strokeWidth={1.8} />
                 บันทึกน้ำวันนี้
               </Link>
               <Link
                 to={`/village/plots/${plot.id}/mrv`}
-                className="flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] text-[13.5px] font-semibold text-[var(--text)]"
+                className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] text-[12.5px] font-semibold text-[var(--text)]"
               >
-                <ShieldCheck size={16} strokeWidth={1.8} />
+                <ShieldCheck size={17} strokeWidth={1.8} />
                 หลักฐาน MRV
+              </Link>
+              <Link
+                to={`/village/plots/${plot.id}/calendar`}
+                className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] text-[12.5px] font-semibold text-[var(--text)]"
+              >
+                <CalendarDays size={17} strokeWidth={1.8} />
+                ปฏิทินการเพาะปลูก
+              </Link>
+              <Link
+                to={`/village/plots/${plot.id}/fertilizer`}
+                className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] text-[12.5px] font-semibold text-[var(--text)]"
+              >
+                <FlaskConical size={17} strokeWidth={1.8} />
+                บันทึกปุ๋ย
               </Link>
             </div>
           </section>

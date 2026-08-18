@@ -113,6 +113,9 @@ export const PLOTS = [
     awdStatus: 'เหมาะสม',
     waterLevelCm: -15,
     carbonTco2e: 1.85,
+    daysGrown: 35,
+    mapPos: { x: 30, y: 35 },
+    tasksDoneIds: ['fertilize'],
     mrv: {
       gps: true,
       timestamp: true,
@@ -134,6 +137,9 @@ export const PLOTS = [
     awdStatus: 'เปิดน้ำ',
     waterLevelCm: 3,
     carbonTco2e: 0.62,
+    daysGrown: 22,
+    mapPos: { x: 65, y: 25 },
+    tasksDoneIds: [],
     mrv: {
       gps: true,
       timestamp: true,
@@ -155,6 +161,9 @@ export const PLOTS = [
     awdStatus: null,
     waterLevelCm: null,
     carbonTco2e: 0,
+    daysGrown: 120,
+    mapPos: { x: 50, y: 68 },
+    tasksDoneIds: [],
     mrv: {
       gps: false,
       timestamp: false,
@@ -163,6 +172,165 @@ export const PLOTS = [
       farmerLog: false,
     },
   },
+]
+
+// ประวัติบันทึกน้ำ (ล่าสุดอยู่ก่อน) ต่อแปลง — ใช้วาดกราฟแท่งอย่างง่ายและสรุป
+// รอบ AWD ใน WaterLogPage คีย์ตาม plot id
+export const WATER_LOG_HISTORY = {
+  1: [
+    { date: '19 พ.ค.', levelCm: -15, type: 'ปิดน้ำ' },
+    { date: '17 พ.ค.', levelCm: -8, type: 'ปิดน้ำ' },
+    { date: '15 พ.ค.', levelCm: 2, type: 'เปิดน้ำ' },
+    { date: '13 พ.ค.', levelCm: -12, type: 'ปิดน้ำ' },
+    { date: '11 พ.ค.', levelCm: -18, type: 'ปิดน้ำ' },
+  ],
+  2: [
+    { date: '19 พ.ค.', levelCm: 3, type: 'เปิดน้ำ' },
+    { date: '16 พ.ค.', levelCm: -10, type: 'ปิดน้ำ' },
+    { date: '13 พ.ค.', levelCm: 5, type: 'เปิดน้ำ' },
+  ],
+  3: [],
+}
+
+// ระยะการเจริญเติบโตของข้าว (AI Crop Calendar) — เทียบ daysGrown ของแปลงกับ
+// ช่วงวันด้านล่างเพื่อหาว่าตอนนี้อยู่ระยะไหน
+export const CROP_STAGES = [
+  { key: 'seedling', label: 'ระยะกล้า', minDay: 0, maxDay: 20 },
+  { key: 'tillering', label: 'แตกกอ', minDay: 20, maxDay: 40 },
+  { key: 'booting', label: 'ตั้งท้อง', minDay: 40, maxDay: 70 },
+  { key: 'heading', label: 'ออกรวง', minDay: 70, maxDay: 100 },
+  { key: 'harvest', label: 'เก็บเกี่ยว', minDay: 100, maxDay: 120 },
+]
+
+// งานแนะนำล่วงหน้า (เทมเพลตเดียวใช้ร่วมกันทุกแปลงที่เข้าร่วมโครงการ) —
+// dueInDays คือ "อีกกี่วัน" นับจากวันนี้ ให้ negative/0 = ถึงกำหนดแล้ว
+export const TASK_SCHEDULE = [
+  { id: 'fertilize', label: 'ใส่ปุ๋ย', dueInDays: 0 },
+  { id: 'awd-drain', label: 'AWD Drain (ระบายน้ำตามรอบ)', dueInDays: 3 },
+  { id: 'disease-check', label: 'ตรวจโรค', dueInDays: 10 },
+  { id: 'soil-sample', label: 'เก็บตัวอย่างดิน', dueInDays: 15 },
+]
+
+export const FERTILIZER_TYPES = [
+  { formula: '16-20-0', name: 'สูตรเร่งราก' },
+  { formula: '46-0-0', name: 'ยูเรีย' },
+  { formula: '16-8-8', name: 'สูตรเร่งกอ/ใบ' },
+  { formula: '13-13-21', name: 'สูตรเร่งรวง/เมล็ด' },
+]
+
+// N2O ต่อ กก. ปุ๋ยไนโตรเจน — ตัวเลขสาธิต (ไม่ใช่ค่ามาตรฐาน IPCC จริง) ใช้แค่
+// โชว์ว่าระบบคำนวณให้อัตโนมัติจากปริมาณที่กรอก
+export const N2O_FACTOR_PER_KG = 0.0098
+
+export const FERTILIZER_LOG_HISTORY = {
+  1: [
+    {
+      id: 1,
+      date: '19 พ.ค. 2567',
+      formula: '16-20-0',
+      amountKg: 25,
+      areaRai: 21.5,
+    },
+    {
+      id: 2,
+      date: '5 พ.ค. 2567',
+      formula: '46-0-0',
+      amountKg: 20,
+      areaRai: 21.5,
+    },
+  ],
+  2: [
+    {
+      id: 3,
+      date: '10 พ.ค. 2567',
+      formula: '46-0-0',
+      amountKg: 8,
+      areaRai: 8.2,
+    },
+  ],
+  3: [],
+}
+
+export const DOCUMENT_CATEGORIES = [
+  { key: 'receipt', label: 'ใบเสร็จ', count: 4 },
+  { key: 'delivery', label: 'ใบส่งของ', count: 3 },
+  { key: 'analysis', label: 'ผลวิเคราะห์ดิน/น้ำ', count: 2 },
+  { key: 'photo', label: 'รูปภาพแปลงนา', count: 6 },
+]
+
+export const DOCUMENTS = [
+  {
+    id: 1,
+    category: 'receipt',
+    name: 'ใบเสร็จค่าปุ๋ย 16-20-0',
+    date: '19 พ.ค. 2567',
+  },
+  {
+    id: 2,
+    category: 'receipt',
+    name: 'ใบเสร็จค่าปุ๋ย 46-0-0',
+    date: '5 พ.ค. 2567',
+  },
+  {
+    id: 3,
+    category: 'delivery',
+    name: 'ใบส่งข้าวหอมมะลิ 105',
+    date: '15 พ.ค. 2567',
+  },
+  {
+    id: 4,
+    category: 'analysis',
+    name: 'ผลตรวจน้ำแปลง 1',
+    date: '19 พ.ค. 2567',
+  },
+  {
+    id: 5,
+    category: 'photo',
+    name: 'ภาพแปลง 1 (ระยะแตกกอ)',
+    date: '19 พ.ค. 2567',
+  },
+]
+
+export const MILLS = [
+  {
+    id: 1,
+    name: 'โรงอบชุมชนบ้านนา',
+    type: 'โรงอบ',
+    status: 'ว่าง',
+    queueCount: 2,
+  },
+  {
+    id: 2,
+    name: 'โรงสีข้าวทรีไรซ์',
+    type: 'โรงสี',
+    status: 'ใกล้เต็ม',
+    queueCount: 6,
+  },
+  {
+    id: 3,
+    name: 'โรงสีข้าวกลางอำเภอ',
+    type: 'โรงสี',
+    status: 'เต็ม',
+    queueCount: 9,
+  },
+]
+
+export const LOGISTICS_STEPS = ['แปลงนา', 'จุดรับสินค้า', 'โรงอบ', 'โรงสี']
+
+// แนวโน้มคาร์บอนสะสมรายเดือน (สำหรับกราฟแท่งเล็กๆ ในกระเป๋าคาร์บอน)
+export const CARBON_TREND = [
+  { label: 'ม.ค.', tco2e: 0.4 },
+  { label: 'ก.พ.', tco2e: 0.7 },
+  { label: 'มี.ค.', tco2e: 1.1 },
+  { label: 'เม.ย.', tco2e: 1.7 },
+  { label: 'พ.ค.', tco2e: 2.47 },
+]
+
+export const CARBON_CERTIFICATIONS = [
+  'Verra VCS Verified',
+  'VM0042 Methodology',
+  'SGS Validation',
+  'มาตรฐาน สบก. ไทย',
 ]
 
 // ประเภทหลักฐาน MRV (Measurement, Reporting, Verification) — ใช้เป็นเช็คลิสต์
