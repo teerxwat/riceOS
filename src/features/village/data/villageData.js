@@ -658,9 +658,99 @@ export const AI_SAMPLE_DIAGNOSIS = {
 }
 
 export const MARKET_PRICES = [
-  { key: 'hommali', name: 'ข้าวหอมมะลิ 105', price: 15200, change: 150 },
-  { key: 'kk15', name: 'ข้าว กข.15', price: 13800, change: 100 },
-  { key: 'niaw6', name: 'ข้าวเหนียว กข.6', price: 12500, change: -50 },
+  {
+    key: 'hommali',
+    name: 'ข้าวหอมมะลิ 105',
+    price: 15200,
+    change: 150,
+    unit: 'บาท/ตัน',
+  },
+  {
+    key: 'kk15',
+    name: 'ข้าว กข.15',
+    price: 13800,
+    change: 100,
+    unit: 'บาท/ตัน',
+  },
+  {
+    key: 'niaw6',
+    name: 'ข้าวเหนียว กข.6',
+    price: 12500,
+    change: -50,
+    unit: 'บาท/ตัน',
+  },
+]
+
+export const STRAW_PRICES = [
+  {
+    key: 'bale_small',
+    name: 'ฟางก้อนอัดแน่น (ก้อนเล็ก)',
+    price: 40,
+    change: 2,
+    unit: 'บาท/ก้อน',
+  },
+  {
+    key: 'bale_large',
+    name: 'ฟางก้อนใหญ่ (บิ๊กแบ็ก)',
+    price: 1500,
+    change: 50,
+    unit: 'บาท/ตัน',
+  },
+  {
+    key: 'fresh_straw',
+    name: 'ฟางสดหน้าแปลง',
+    price: 850,
+    change: -20,
+    unit: 'บาท/ตัน',
+  },
+]
+
+export const CARBON_MARKET_PRICES = [
+  {
+    key: 'tver_awd',
+    name: 'คาร์บอนเครดิต AWD (T-VER)',
+    price: 350,
+    change: 15,
+    unit: 'บาท/tCO2e',
+  },
+  {
+    key: 'verra_vcs',
+    name: 'คาร์บอนเครดิต Verra VCS',
+    price: 420,
+    change: 20,
+    unit: 'บาท/tCO2e',
+  },
+  {
+    key: 'agroforestry',
+    name: 'คาร์บอนเครดิตวนเกษตร',
+    price: 310,
+    change: -5,
+    unit: 'บาท/tCO2e',
+  },
+]
+
+export const BIOMASS_PELLETS_PRICES = [
+  {
+    key: 'straw_pellet',
+    name: 'ชีวมวลอัดเม็ดจากฟางข้าว',
+    price: 2800,
+    change: 50,
+    unit: 'บาท/ตัน',
+  },
+  {
+    key: 'husk_pellet',
+    name: 'ชีวมวลอัดเม็ดจากแกลบ',
+    price: 3200,
+    change: 80,
+    unit: 'บาท/ตัน',
+  },
+  {
+    key: 'wood_pellet',
+    name: 'ขี้เลื่อย/ชีวมวลไม้สับอัดเม็ด',
+    price: 3500,
+    change: -30,
+    unit: 'บาท/ตัน',
+  },
 ]
 
 export const CURRENT_SALE_LISTING = {

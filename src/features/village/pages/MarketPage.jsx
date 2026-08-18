@@ -3,6 +3,9 @@ import { ArrowUp, ArrowDown } from 'lucide-react'
 import VillageLayout from '../components/VillageLayout'
 import {
   MARKET_PRICES,
+  STRAW_PRICES,
+  CARBON_MARKET_PRICES,
+  BIOMASS_PELLETS_PRICES,
   CURRENT_SALE_LISTING,
   INCOME_SUMMARY,
 } from '../data/villageData'
@@ -12,40 +15,6 @@ function MarketPage() {
   return (
     <VillageLayout title="ตลาดข้าว" subtitle="ราคาข้าววันนี้และรายได้ของคุณ">
       <div className="flex flex-col gap-5">
-        <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
-          <p className="text-[15px] font-bold text-[var(--text)]">
-            ราคาข้าววันนี้
-          </p>
-          <ul className="mt-1 flex flex-col divide-y divide-[var(--border)]">
-            {MARKET_PRICES.map((item) => {
-              const isUp = item.change >= 0
-              return (
-                <li
-                  key={item.key}
-                  className="flex items-center justify-between gap-2 py-3"
-                >
-                  <span className="min-w-0 flex-1 truncate text-[14.5px] text-[var(--text)]">
-                    {item.name}
-                  </span>
-                  <span className="flex shrink-0 flex-col items-end">
-                    <span className="text-[15px] font-semibold text-[var(--text)]">
-                      {formatNumber(item.price)}
-                    </span>
-                    <span
-                      className={`flex items-center gap-0.5 text-[12px] font-medium ${
-                        isUp ? 'text-[var(--green-strong)]' : 'text-[#e5484d]'
-                      }`}
-                    >
-                      {isUp ? <ArrowUp size={12} /> : <ArrowDown size={12} />}
-                      {formatNumber(Math.abs(item.change))} บาท/ตัน
-                    </span>
-                  </span>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-
         <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
           <div className="flex items-center justify-between gap-2">
             <p className="min-w-0 flex-1 truncate text-[15px] font-bold text-[var(--text)]">
@@ -109,6 +78,147 @@ function MarketPage() {
           >
             ดูประวัติการรับเงิน
           </Link>
+        </section>
+
+        {/* ตลาดข้าว */}
+        <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+          <p className="text-[15px] font-bold text-[var(--text)]">
+            ราคาข้าววันนี้
+          </p>
+          <ul className="mt-1 flex flex-col divide-y divide-[var(--border)]">
+            {MARKET_PRICES.map((item) => {
+              const isUp = item.change >= 0
+              return (
+                <li
+                  key={item.key}
+                  className="flex items-center justify-between gap-2 py-3"
+                >
+                  <span className="min-w-0 flex-1 truncate text-[14.5px] text-[var(--text)]">
+                    {item.name}
+                  </span>
+                  <span className="flex shrink-0 flex-col items-end">
+                    <span className="text-[15px] font-semibold text-[var(--text)]">
+                      {formatNumber(item.price)}
+                    </span>
+                    <span
+                      className={`flex items-center gap-0.5 text-[12px] font-medium ${
+                        isUp ? 'text-[var(--green-strong)]' : 'text-[#e5484d]'
+                      }`}
+                    >
+                      {isUp ? <ArrowUp size={12} /> : <ArrowDown size={12} />}
+                      {formatNumber(Math.abs(item.change))}{' '}
+                      {item.unit || 'บาท/ตัน'}
+                    </span>
+                  </span>
+                </li>
+              )
+            })}
+          </ul>
+        </section>
+
+        {/* ตลาดฟาง */}
+        <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+          <p className="text-[15px] font-bold text-[var(--text)]">
+            ตลาดฟางวันนี้
+          </p>
+          <ul className="mt-1 flex flex-col divide-y divide-[var(--border)]">
+            {STRAW_PRICES.map((item) => {
+              const isUp = item.change >= 0
+              return (
+                <li
+                  key={item.key}
+                  className="flex items-center justify-between gap-2 py-3"
+                >
+                  <span className="min-w-0 flex-1 truncate text-[14.5px] text-[var(--text)]">
+                    {item.name}
+                  </span>
+                  <span className="flex shrink-0 flex-col items-end">
+                    <span className="text-[15px] font-semibold text-[var(--text)]">
+                      {formatNumber(item.price)}
+                    </span>
+                    <span
+                      className={`flex items-center gap-0.5 text-[12px] font-medium ${
+                        isUp ? 'text-[var(--green-strong)]' : 'text-[#e5484d]'
+                      }`}
+                    >
+                      {isUp ? <ArrowUp size={12} /> : <ArrowDown size={12} />}
+                      {formatNumber(Math.abs(item.change))} {item.unit}
+                    </span>
+                  </span>
+                </li>
+              )
+            })}
+          </ul>
+        </section>
+
+        {/* ตลาดคาร์บอน */}
+        <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+          <p className="text-[15px] font-bold text-[var(--text)]">
+            ตลาดคาร์บอนวันนี้
+          </p>
+          <ul className="mt-1 flex flex-col divide-y divide-[var(--border)]">
+            {CARBON_MARKET_PRICES.map((item) => {
+              const isUp = item.change >= 0
+              return (
+                <li
+                  key={item.key}
+                  className="flex items-center justify-between gap-2 py-3"
+                >
+                  <span className="min-w-0 flex-1 truncate text-[14.5px] text-[var(--text)]">
+                    {item.name}
+                  </span>
+                  <span className="flex shrink-0 flex-col items-end">
+                    <span className="text-[15px] font-semibold text-[var(--text)]">
+                      {formatNumber(item.price)}
+                    </span>
+                    <span
+                      className={`flex items-center gap-0.5 text-[12px] font-medium ${
+                        isUp ? 'text-[var(--green-strong)]' : 'text-[#e5484d]'
+                      }`}
+                    >
+                      {isUp ? <ArrowUp size={12} /> : <ArrowDown size={12} />}
+                      {formatNumber(Math.abs(item.change))} {item.unit}
+                    </span>
+                  </span>
+                </li>
+              )
+            })}
+          </ul>
+        </section>
+
+        {/* ตลาดเชื้อเพลิงชีวมวลอัดเม็ด */}
+        <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+          <p className="text-[15px] font-bold text-[var(--text)]">
+            ตลาดเชื้อเพลิงชีวมวลอัดเม็ดวันนี้
+          </p>
+          <ul className="mt-1 flex flex-col divide-y divide-[var(--border)]">
+            {BIOMASS_PELLETS_PRICES.map((item) => {
+              const isUp = item.change >= 0
+              return (
+                <li
+                  key={item.key}
+                  className="flex items-center justify-between gap-2 py-3"
+                >
+                  <span className="min-w-0 flex-1 truncate text-[14.5px] text-[var(--text)]">
+                    {item.name}
+                  </span>
+                  <span className="flex shrink-0 flex-col items-end">
+                    <span className="text-[15px] font-semibold text-[var(--text)]">
+                      {formatNumber(item.price)}
+                    </span>
+                    <span
+                      className={`flex items-center gap-0.5 text-[12px] font-medium ${
+                        isUp ? 'text-[var(--green-strong)]' : 'text-[#e5484d]'
+                      }`}
+                    >
+                      {isUp ? <ArrowUp size={12} /> : <ArrowDown size={12} />}
+                      {formatNumber(Math.abs(item.change))} {item.unit}
+                    </span>
+                  </span>
+                </li>
+              )
+            })}
+          </ul>
         </section>
       </div>
     </VillageLayout>

@@ -109,15 +109,17 @@ html[data-theme='dark'] {
 * {
   box-sizing: border-box;
 }
-html,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
 body,
 #root {
   margin: 0;
   padding: 0;
   width: 100%;
-  /* กันเผื่อไม่ให้มีอะไรดันความกว้างหน้าเว็บเกินจอแล้วเลื่อนซ้าย-ขวาได้
-     (เช่น องค์ประกอบ fixed/absolute ที่คำนวณความกว้างพลาดไปเกิน 100%) */
-  overflow-x: hidden;
 }
 body {
   font-family: system-ui, 'Segoe UI', Roboto, 'Noto Sans Thai', sans-serif;
@@ -125,10 +127,8 @@ body {
   background-attachment: fixed;
   color: var(--text);
   -webkit-font-smoothing: antialiased;
-  /* กัน pull-to-refresh/bounce ตอนลากเกินขอบจอ (บน-ล่าง และ ซ้าย-ขวา) —
-     ถ้าไม่กันแกน x ไว้ด้วย ตอนลากนิ้ว/เมาส์เลยขอบซ้ายขวาเบราว์เซอร์จะเด้ง
-     (rubber-band) ให้ความรู้สึกเหมือน "เลื่อนได้" ทั้งที่ไม่มีเนื้อหาล้นจริง */
-  overscroll-behavior: none;
+  /* กันเฉพาะเด้งออกข้าง (แกน X) ไม่ให้ล็อกการเลื่อนขึ้น-ลง (แกน Y) */
+  overscroll-behavior-x: none;
   transition:
     background 0.3s ease,
     color 0.3s ease;
