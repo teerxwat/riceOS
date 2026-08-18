@@ -58,10 +58,11 @@ export function MachinesPage() {
 
             <Card title="เครื่องอบข้าว">
               <div className="c-grid c-grid-2 c-grid-md-4">
-                {data.dryers.map((d) => (
+                {data.dryers.map((d, i) => (
                   <MachineCard
                     key={d.id}
                     kind="dryer"
+                    variant={i}
                     name={d.name}
                     model={d.model}
                     status={d.status}

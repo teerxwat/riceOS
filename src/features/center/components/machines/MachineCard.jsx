@@ -22,6 +22,7 @@ const STATUS_ICON = {
 
 export function MachineCard({
   kind,
+  variant = 0,
   name,
   model,
   status,
@@ -35,7 +36,7 @@ export function MachineCard({
   return (
     <div className={`cm-card cm-card--${status} cm-card--${size}`}>
       <div className="cm-card__illustration">
-        <MachineIllustration kind={kind} />
+        <MachineIllustration kind={kind} variant={variant} />
       </div>
 
       <div className="cm-card__head">
