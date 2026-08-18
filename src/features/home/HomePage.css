@@ -40,12 +40,13 @@
 }
 .hero {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr; /* 3D ซ้ายกว้างกว่านิดหน่อยให้เด่น */
+  gap: clamp(1rem, 3vw, 3rem);
   align-items: center;
   height: 100vh;
-  padding: 5.2rem clamp(1.2rem, 5vw, 5rem) 0;
-  text-align: center;
+  padding: 3.5rem clamp(1.2rem, 5vw, 5rem) 1rem;
+  text-align: left;
   background: transparent;
   overflow: hidden;
 }
@@ -125,11 +126,12 @@
 .hero-copy {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  max-width: 64rem;
+  align-items: flex-start;
+  max-width: 40rem;
+  order: 2;
 }
 .hero-copy h1 {
-  font-size: clamp(2.6rem, 6vw, 4.9rem);
+  font-size: clamp(2.4rem, 4.6vw, 4rem);
   line-height: 1.05;
   margin: 0 0 1.1rem;
   letter-spacing: -0.03em;
@@ -152,14 +154,14 @@
   gap: 0.8rem;
   margin-top: 1.8rem;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .hero-chips {
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
   margin-top: 1.4rem;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .hero-chips span {
   display: inline-flex;
@@ -223,8 +225,8 @@
 /* 3D canvas */
 .hero-visual {
   width: 100%;
-  flex: 1;
-  min-height: 0;
+  height: min(82vh, 760px);
+  order: 1;
 }
 /* เอาพื้นหลัง box ออก เหลือแต่ตัวโมเดล */
 .rice-hero-canvas {
@@ -705,13 +707,22 @@
   }
   .hero {
     position: static;
+    grid-template-columns: 1fr;
     height: auto;
     min-height: auto;
-    padding-block: 3.4rem 0;
+    padding-block: 2.5rem 0;
+    text-align: center;
+  }
+  .hero-copy {
+    align-items: center;
+    max-width: 100%;
+  }
+  .hero-cta,
+  .hero-chips {
+    justify-content: center;
   }
   .hero-visual {
-    height: 360px;
-    flex: none;
+    height: 380px;
   }
   .slide {
     flex-basis: 88vw;

@@ -1,12 +1,7 @@
 import { Suspense, useEffect, useMemo, useRef, Component } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import {
-  useGLTF,
-  Html,
-  ContactShadows,
-  Center,
-  Bounds,
-} from '@react-three/drei'
+import { useGLTF, Html, ContactShadows, Center } from '@react-three/drei'
+import { Box3, Vector3 } from 'three'
 
 const MODEL_URL = '/models/rice.glb'
 const TURNS = Math.PI * 2 // หมุนครบ 1 รอบตลอดช่วง pinned
@@ -68,16 +63,22 @@ function RiceModel({ scrollRef }) {
     group.current.position.y = Math.sin(state.clock.elapsedTime * 1.2) * 0.06
   })
 
-  // Bounds = auto-fit โมเดลให้พอดีเฟรมอัตโนมัติ (ไม่ต้องเดา scale)
-  // Center = ย้ายจุดหมุนมาไว้กึ่งกลางโมเดล
+  // ปรับสเกลให้โมเดลสูง ~4 หน่วยโลก แล้ววางกล้องคงที่ (ไม่ใช้ Bounds auto-fit
+  // เพราะ fit ตามความกว้าง canvas แนวตั้งแล้วโมเดลล้นบน/ล่าง)
+  const fitScale = useMemo(() => {
+    const box = new Box3().setFromObject(scene)
+    const size = new Vector3()
+    box.getSize(size)
+    const h = Math.max(size.x, size.y, size.z) || 1
+    return 4 / h
+  }, [scene])
+
   return (
-    <Bounds fit clip margin={0.65}>
-      <group ref={group}>
-        <Center>
-          <primitive object={scene} />
-        </Center>
-      </group>
-    </Bounds>
+    <group ref={group} scale={fitScale}>
+      <Center>
+        <primitive object={scene} />
+      </Center>
+    </group>
   )
 }
 
@@ -150,7 +151,7 @@ export default function RiceHero() {
   return (
     <div className="rice-hero-canvas">
       <Canvas
-        camera={{ position: [0, 0.5, 6], fov: 40 }}
+        camera={{ position: [0, 0.2, 6.4], fov: 42 }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true }}
       >
@@ -170,7 +171,7 @@ export default function RiceHero() {
         </Suspense>
 
         <ContactShadows
-          position={[0, -1.15, 0]}
+          position={[0, -2.05, 0]}
           opacity={0.35}
           scale={8}
           blur={2.6}
