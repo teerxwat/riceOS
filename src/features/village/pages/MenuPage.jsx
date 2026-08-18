@@ -5,24 +5,35 @@ import {
   BookOpen,
   Phone,
   Info,
+  Leaf,
+  FileText,
+  Truck,
   ChevronRight,
   Moon,
   Sun,
   LogOut,
 } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import VillageLayout from '../components/VillageLayout'
 import { useTheme } from '../hooks/useTheme'
 import { useAuth } from '../../../auth/authContext.js'
 import { PROFILE } from '../data/villageData'
 
 const MENU_ITEMS = [
-  { icon: UserCircle, label: 'โปรไฟล์ของฉัน' },
-  { icon: Bell, label: 'ตั้งค่าการแจ้งเตือน' },
-  { icon: Warehouse, label: 'ศูนย์ข้าวของฉัน', desc: PROFILE.center },
-  { icon: BookOpen, label: 'คู่มือการใช้งาน' },
-  { icon: Phone, label: 'ติดต่อเจ้าหน้าที่ศูนย์' },
-  { icon: Info, label: 'เกี่ยวกับแอป' },
+  { icon: UserCircle, label: 'โปรไฟล์ของฉัน', to: '/village/profile' },
+  { icon: Leaf, label: 'กระเป๋าคาร์บอน', to: '/village/carbon' },
+  { icon: Bell, label: 'ตั้งค่าการแจ้งเตือน', to: '/village/notifications' },
+  {
+    icon: Warehouse,
+    label: 'ศูนย์ข้าวของฉัน',
+    desc: PROFILE.center,
+    to: '/village/contact',
+  },
+  { icon: FileText, label: 'คลังเอกสาร', to: '/village/documents' },
+  { icon: Truck, label: 'คิวโรงอบ/โรงสี', to: '/village/mill' },
+  { icon: BookOpen, label: 'คู่มือการใช้งาน', to: '/village/manual' },
+  { icon: Phone, label: 'ติดต่อเจ้าหน้าที่ศูนย์', to: '/village/contact' },
+  { icon: Info, label: 'เกี่ยวกับแอป', to: '/village/about' },
 ]
 
 function MenuPage() {
@@ -39,13 +50,13 @@ function MenuPage() {
     <VillageLayout title="เมนู" subtitle={PROFILE.name}>
       <section className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
         <ul>
-          {MENU_ITEMS.map(({ icon: Icon, label, desc }) => (
+          {MENU_ITEMS.map(({ icon: Icon, label, desc, to }) => (
             <li
               key={label}
               className="border-b border-[var(--border)] last:border-0"
             >
-              <button
-                type="button"
+              <Link
+                to={to}
                 className="flex min-h-16 w-full cursor-pointer items-center gap-3 px-4 text-left active:bg-[var(--surface-2)]"
               >
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--badge-bg)] text-[var(--green-strong)]">
@@ -65,7 +76,7 @@ function MenuPage() {
                   size={18}
                   className="shrink-0 text-[var(--muted)]"
                 />
-              </button>
+              </Link>
             </li>
           ))}
 

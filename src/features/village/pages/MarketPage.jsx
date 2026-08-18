@@ -1,4 +1,5 @@
-import { ArrowUp, ArrowDown, ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ArrowUp, ArrowDown } from 'lucide-react'
 import VillageLayout from '../components/VillageLayout'
 import {
   MARKET_PRICES,
@@ -12,18 +13,9 @@ function MarketPage() {
     <VillageLayout title="ตลาดข้าว" subtitle="ราคาข้าววันนี้และรายได้ของคุณ">
       <div className="flex flex-col gap-5">
         <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
-          <div className="flex items-center justify-between gap-2">
-            <p className="min-w-0 flex-1 truncate text-[15px] font-bold text-[var(--text)]">
-              ราคาข้าววันนี้
-            </p>
-            <button
-              type="button"
-              className="flex min-h-11 shrink-0 cursor-pointer items-center gap-0.5 px-1 text-[14px] font-semibold text-[var(--green-strong)]"
-            >
-              ดูราคาทั้งหมด
-              <ChevronRight size={16} />
-            </button>
-          </div>
+          <p className="text-[15px] font-bold text-[var(--text)]">
+            ราคาข้าววันนี้
+          </p>
           <ul className="mt-1 flex flex-col divide-y divide-[var(--border)]">
             {MARKET_PRICES.map((item) => {
               const isUp = item.change >= 0
@@ -59,12 +51,12 @@ function MarketPage() {
             <p className="min-w-0 flex-1 truncate text-[15px] font-bold text-[var(--text)]">
               ขายข้าวของฉัน
             </p>
-            <button
-              type="button"
+            <Link
+              to="/village/market/history"
               className="flex min-h-11 shrink-0 cursor-pointer items-center px-1 text-[14px] font-semibold text-[var(--green-strong)]"
             >
               ประวัติการขาย
-            </button>
+            </Link>
           </div>
           <div className="mt-1 flex items-center justify-between gap-2">
             <div className="min-w-0 flex-1">
@@ -79,27 +71,18 @@ function MarketPage() {
               {formatNumber(CURRENT_SALE_LISTING.total)} บาท
             </p>
           </div>
-          <button
-            type="button"
-            className="mt-3 min-h-12 w-full cursor-pointer rounded-xl bg-[var(--green-strong)] text-[15px] font-bold text-white active:scale-[0.99]"
+          <Link
+            to="/village/market/sell"
+            className="mt-3 flex min-h-12 w-full cursor-pointer items-center justify-center rounded-xl bg-[var(--green-strong)] text-[15px] font-bold text-white active:scale-[0.99]"
           >
             ขายข้าวใหม่
-          </button>
+          </Link>
         </section>
 
         <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
-          <div className="flex items-center justify-between gap-2">
-            <p className="min-w-0 flex-1 truncate text-[15px] font-bold text-[var(--text)]">
-              รายได้ของฉัน (ปี {INCOME_SUMMARY.year})
-            </p>
-            <button
-              type="button"
-              className="flex min-h-11 shrink-0 cursor-pointer items-center gap-0.5 px-1 text-[14px] font-semibold text-[var(--green-strong)]"
-            >
-              ดูทั้งหมด
-              <ChevronRight size={16} />
-            </button>
-          </div>
+          <p className="text-[15px] font-bold text-[var(--text)]">
+            รายได้ของฉัน (ปี {INCOME_SUMMARY.year})
+          </p>
           <div className="mt-1 grid grid-cols-3 gap-2 text-center">
             <div>
               <p className="text-[17px] font-bold text-[var(--text)]">
@@ -120,12 +103,12 @@ function MarketPage() {
               <p className="text-[12px] text-[var(--muted)]">คงเหลือ (กก.)</p>
             </div>
           </div>
-          <button
-            type="button"
-            className="mt-3 min-h-12 w-full cursor-pointer rounded-xl border border-[var(--border)] bg-[var(--surface-2)] text-[14.5px] font-semibold text-[var(--text)]"
+          <Link
+            to="/village/market/payments"
+            className="mt-3 flex min-h-12 w-full cursor-pointer items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--surface-2)] text-[14.5px] font-semibold text-[var(--text)]"
           >
             ดูประวัติการรับเงิน
-          </button>
+          </Link>
         </section>
       </div>
     </VillageLayout>
