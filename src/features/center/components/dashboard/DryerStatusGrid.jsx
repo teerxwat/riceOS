@@ -2,6 +2,7 @@ import { Warehouse } from 'lucide-react'
 import { Card } from '../common/Card.jsx'
 import { Badge } from '../common/Badge.jsx'
 import { MachineCard } from '../machines/MachineCard.jsx'
+import { MachineIllustration } from '../machines/MachineIllustration.jsx'
 import '../../styles/machines.css'
 
 const STATUS_LABEL = {
@@ -28,6 +29,10 @@ function DryerCard({ dryer }) {
 
   return (
     <div className="cd-dryer-card">
+      <div className="cm-card__illustration">
+        <MachineIllustration kind="dryer" />
+      </div>
+
       <div className="cd-dryer-card__head">
         <span className="cd-dryer-card__name">{dryer.name}</span>
         <Badge tone={STATUS_TONE[dryer.status]}>
