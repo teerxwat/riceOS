@@ -113,35 +113,35 @@ export function MachinesPage() {
                 note={data.solar.note}
               />
               <MachineCard
-                kind="baler"
-                name={data.baler.name}
-                model={data.baler.model}
-                status={data.baler.status}
+                kind="shredder"
+                name={data.strawShredder.name}
+                model={data.strawShredder.model}
+                status={data.strawShredder.status}
                 size="large"
                 readings={[
                   {
                     label: 'กระแสไฟฟ้า',
-                    value: data.baler.currentA,
+                    value: data.strawShredder.currentA,
                     unit: 'A',
                   },
                   {
                     label: 'แรงดันไฟฟ้า',
-                    value: data.baler.voltageV,
+                    value: data.strawShredder.voltageV,
                     unit: 'V',
                   },
                   {
                     label: 'กำลังไฟฟ้า',
-                    value: data.baler.powerKw,
+                    value: data.strawShredder.powerKw,
                     unit: 'kW',
                   },
                 ]}
                 extra={[
                   {
-                    label: 'อัดฟางวันนี้',
-                    value: `${data.baler.balesToday} ก้อน`,
+                    label: 'ปั่นฟางวันนี้',
+                    value: `${data.strawShredder.strawKgToday.toLocaleString('th-TH')} กก.`,
                   },
                 ]}
-                note={data.baler.note}
+                note={data.strawShredder.note}
               />
             </div>
 

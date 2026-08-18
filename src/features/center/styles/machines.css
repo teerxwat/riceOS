@@ -24,79 +24,22 @@
 }
 
 .cm-card__illustration {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 5.5rem;
+  overflow: hidden;
+  height: 7rem;
   border-radius: 0.375rem;
   background: var(--c-surface);
 }
 
 .cm-card--large .cm-card__illustration {
-  height: 7.5rem;
+  height: 10rem;
 }
 
 .cm-illustration {
   height: 100%;
-  width: auto;
-  max-width: 90%;
-}
-
-.cm-illustration .cm-ill-body,
-.cm-illustration .cm-ill-roof {
-  fill: var(--c-brand-800);
-  stroke: var(--c-brand-400);
-  stroke-width: 1.5;
-}
-
-.cm-illustration .cm-ill-ridge,
-.cm-illustration .cm-ill-leg,
-.cm-illustration .cm-ill-duct {
-  stroke: var(--c-brand-400);
-  stroke-width: 1.5;
-  fill: none;
-}
-
-.cm-illustration .cm-ill-duct {
-  fill: var(--c-brand-800);
-}
-
-.cm-illustration .cm-ill-base {
-  fill: var(--c-brand-600);
-}
-
-.cm-illustration .cm-ill-window {
-  fill: var(--c-surface-alt);
-  stroke: var(--c-brand-400);
-  stroke-width: 1.5;
-}
-
-.cm-illustration .cm-ill-window-inner {
-  fill: var(--c-sky);
-  opacity: 0.6;
-}
-
-.cm-illustration .cm-ill-bale {
-  fill: var(--c-brand-800);
-  stroke: var(--c-amber);
-  stroke-width: 1.5;
-}
-
-.cm-illustration .cm-ill-bale-inner {
-  fill: none;
-  stroke: var(--c-amber);
-  stroke-width: 1.2;
-  opacity: 0.7;
-}
-
-.cm-illustration .cm-ill-sun circle {
-  fill: var(--c-amber);
-}
-
-.cm-illustration .cm-ill-sun line {
-  stroke: var(--c-amber);
-  stroke-width: 1.5;
-  stroke-linecap: round;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
 .cm-card__head {

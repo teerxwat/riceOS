@@ -67,16 +67,16 @@
     "panelsFault": 0,
     "note": null
   },
-  "baler": {
-    "id": "baler-1",
-    "name": "เครื่องปั่นฟางอัดก้อน",
-    "model": "SB-450",
+  "strawShredder": {
+    "id": "shredder-1",
+    "name": "เครื่องปั่นฟาง",
+    "model": "SC-450",
     "status": "normal",
     "running": true,
     "currentA": 22.8,
     "voltageV": 401,
     "powerKw": 9.1,
-    "balesToday": 84,
+    "strawKgToday": 1850,
     "note": null
   },
   "alerts": [
@@ -97,7 +97,7 @@
     },
     {
       "level": "success",
-      "message": "เครื่องปั่นฟางอัดก้อนทำงานปกติ อัดฟางแล้ว 84 ก้อนวันนี้",
+      "message": "เครื่องปั่นฟางทำงานปกติ ปั่นฟางแล้ว 1,850 กก. วันนี้",
       "time": "08:15"
     }
   ]
