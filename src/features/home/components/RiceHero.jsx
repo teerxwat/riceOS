@@ -11,9 +11,9 @@ import {
 const MODEL_URL = '/models/rice.glb'
 const TURNS = Math.PI * 2 // หมุนครบ 1 รอบตลอดช่วง pinned
 
-// ── ความคืบหน้าการหมุน (0..1) อิงกับช่วง hero ที่ถูก pin ไว้ ──
-// ระหว่างที่ hero ถูก pin (sticky) ผู้ใช้เลื่อนแล้วโมเดลจะหมุน
-// จนครบ (progress=1) หน้าเว็บถึงจะเลื่อนต่อ
+// ── ความคืบหน้าการหมุน (0..1) ตามระยะที่ hero เลื่อนพ้นจอ ──
+// hero สูง 1 จอ (ไม่ pin) — เริ่มเลื่อนโมเดลก็เริ่มหมุน และหมุนครบ 1 รอบพอดี
+// ตอน hero พ้นขอบบนจอ (ใช้ความสูงของ hero เองเป็นตัวหาร ไม่ใช่ส่วนต่างกับจอ)
 function useScrollProgress() {
   const ref = useRef(0)
   useEffect(() => {
@@ -24,8 +24,8 @@ function useScrollProgress() {
         return
       }
       const rect = el.getBoundingClientRect()
-      const total = rect.height - window.innerHeight
-      ref.current = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0
+      const total = rect.height || 1
+      ref.current = Math.min(1, Math.max(0, -rect.top / total))
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })

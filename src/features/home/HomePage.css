@@ -52,35 +52,51 @@
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(50px);
-  opacity: 0.3;
+  /* ใช้ radial-gradient ขอบจางในตัวแทน filter: blur — blur จะถูก rasterize
+     เป็น layer สี่เหลี่ยม แล้วโผล่เป็นกรอบกล่องตอน scroll (บั๊กที่เห็นในหน้า) */
+  opacity: 0.55;
   z-index: 0;
   pointer-events: none;
   transition: transform 0.3s ease-out;
+  will-change: transform;
 }
 .blob-1 {
-  width: 420px;
-  height: 420px;
-  background: #7fe0a0;
-  top: -80px;
-  right: 10%;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(
+    circle,
+    rgba(127, 224, 160, 0.55) 0%,
+    rgba(127, 224, 160, 0.18) 45%,
+    transparent 70%
+  );
+  top: -150px;
+  right: 6%;
   transform: translate(calc(var(--mx, 0) * 40px), calc(var(--my, 0) * 40px));
 }
 .blob-2 {
-  width: 340px;
-  height: 340px;
-  background: #f2d27a;
-  bottom: -60px;
-  left: 8%;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(
+    circle,
+    rgba(242, 210, 122, 0.5) 0%,
+    rgba(242, 210, 122, 0.16) 45%,
+    transparent 70%
+  );
+  bottom: -130px;
+  left: 4%;
   transform: translate(calc(var(--mx, 0) * -30px), calc(var(--my, 0) * -30px));
 }
 .blob-3 {
-  width: 260px;
-  height: 260px;
-  background: #5bbf8f;
-  top: 40%;
-  left: 45%;
-  opacity: 0.35;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(
+    circle,
+    rgba(91, 191, 143, 0.4) 0%,
+    rgba(91, 191, 143, 0.12) 45%,
+    transparent 70%
+  );
+  top: 38%;
+  left: 42%;
   transform: translate(calc(var(--mx, 0) * 24px), calc(var(--my, 0) * -20px));
 }
 .hero-copy,

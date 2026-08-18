@@ -62,13 +62,20 @@ export default function Navbar() {
     <header className="nav">
       <div className="nav-inner">
         <NavLink to="/" className="brand">
-          <span className="brand-mark">
+          <img
+            src="/logo.png"
+            alt=""
+            className="brand-logo"
+            onError={(e) => {
+              // ยังไม่มีไฟล์โลโก้ -> ซ่อนรูป โชว์ไอคอนสำรอง
+              e.currentTarget.style.display = 'none'
+              e.currentTarget.nextSibling.style.display = 'grid'
+            }}
+          />
+          <span className="brand-mark" style={{ display: 'none' }}>
             <Wheat size={20} strokeWidth={2.1} />
           </span>
-          <span className="brand-2line">
-            <b>DONAUS</b>
-            <small>RiceOS</small>
-          </span>
+          <span className="brand-word">RiceOS</span>
         </NavLink>
 
         {(role?.id === 'province' || role?.id === 'technician') && (

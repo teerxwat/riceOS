@@ -27,7 +27,16 @@ export default function RouteLoader() {
   if (!show) return null
   return (
     <div className="route-loader" role="status" aria-label="กำลังโหลดหน้า">
-      <div className="route-loader-mark">
+      <img
+        src="/logo.png"
+        alt=""
+        className="route-loader-logo"
+        onError={(e) => {
+          e.currentTarget.style.display = 'none'
+          e.currentTarget.nextSibling.style.display = 'grid'
+        }}
+      />
+      <div className="route-loader-mark" style={{ display: 'none' }}>
         <Wheat size={28} strokeWidth={2.1} />
       </div>
       <div className="route-loader-bar">
