@@ -4,6 +4,7 @@ import {
   Map,
   BarChart3,
   Leaf,
+  ShieldCheck,
   Wallet,
   Flame,
   TrendingUp,
@@ -29,6 +30,7 @@ const NAV_SECTIONS = [
     title: 'วิเคราะห์',
     items: [
       { label: 'คาร์บอนและสิ่งแวดล้อม', icon: Leaf, to: '/country/carbon' },
+      { label: 'ความพร้อมตรวจสอบ MRV', icon: ShieldCheck, to: '/country/mrv' },
       { label: 'รายได้เกษตรกร', icon: Wallet, to: '/country/income' },
       { label: 'การลดการเผา', icon: Flame, to: '/country/no-burning' },
       { label: 'แนวโน้มและพยากรณ์', icon: TrendingUp, to: '/country/forecast' },

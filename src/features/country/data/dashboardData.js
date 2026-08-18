@@ -46,6 +46,8 @@ export const KPI_STRIP = [
 
 // พิกัด lat/lng เป็นจุดศูนย์กลางโดยประมาณของแต่ละภาค (ใกล้จังหวัดหลัก)
 // ใช้ปักหมุดบนแผนที่ Leaflet จริง ไม่ใช่พิกัดขอบเขตภาคที่แม่นยำระดับสำรวจ
+// awdAdoptionPct = สัดส่วนพื้นที่ (area) ของภาคนั้นที่ทำนาแบบ AWD จริง — ใช้
+// แสดงใน RegionDetailPanel เวลากดเลือกภาคบนแผนที่ (หน้า "แผนที่ประเทศ")
 export const REGIONS = [
   {
     id: 'north',
@@ -57,6 +59,7 @@ export const REGIONS = [
     area: 95430,
     income: 284.65,
     status: 'ok',
+    awdAdoptionPct: 58.2,
   },
   {
     id: 'northeast',
@@ -68,6 +71,7 @@ export const REGIONS = [
     area: 162850,
     income: 452.3,
     status: 'ok',
+    awdAdoptionPct: 71.4,
   },
   {
     id: 'east',
@@ -79,6 +83,7 @@ export const REGIONS = [
     area: 48250,
     income: 129.4,
     status: 'ok',
+    awdAdoptionPct: 62.8,
   },
   {
     id: 'south',
@@ -90,6 +95,7 @@ export const REGIONS = [
     area: 33450,
     income: 108.2,
     status: 'risk',
+    awdAdoptionPct: 24.1,
   },
   {
     id: 'west',
@@ -101,6 +107,7 @@ export const REGIONS = [
     area: 29560,
     income: 99.4,
     status: 'ok',
+    awdAdoptionPct: 55.6,
   },
   {
     id: 'central',
@@ -112,18 +119,30 @@ export const REGIONS = [
     area: 128340,
     income: 318.75,
     status: 'watch',
+    awdAdoptionPct: 44.9,
   },
 ]
 
-export const COUNTRY_TOTAL = REGIONS.reduce(
+const REGION_TOTALS = REGIONS.reduce(
   (acc, r) => ({
     centers: acc.centers + r.centers,
     production: acc.production + r.production,
     area: acc.area + r.area,
     income: acc.income + r.income,
+    awdArea: acc.awdArea + r.area * (r.awdAdoptionPct / 100),
   }),
-  { centers: 0, production: 0, area: 0, income: 0 }
+  { centers: 0, production: 0, area: 0, income: 0, awdArea: 0 }
 )
+
+export const COUNTRY_TOTAL = {
+  centers: REGION_TOTALS.centers,
+  production: REGION_TOTALS.production,
+  area: REGION_TOTALS.area,
+  income: REGION_TOTALS.income,
+  // ถ่วงน้ำหนักด้วยพื้นที่ของแต่ละภาค ไม่ใช่ค่าเฉลี่ยธรรมดา — ภาคที่มีพื้นที่
+  // เยอะกว่าควรมีน้ำหนักต่อภาพรวมประเทศมากกว่าภาคเล็ก
+  awdAdoptionPct: (REGION_TOTALS.awdArea / REGION_TOTALS.area) * 100,
+}
 
 // ผลผลิตรายเดือน: จริง vs คาดการณ์ vs เป้าหมาย (ล้านตันสะสม)
 export const TREND = {
