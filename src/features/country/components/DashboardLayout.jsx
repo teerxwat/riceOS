@@ -3,12 +3,15 @@ import Sidebar from './Sidebar'
 import Header from './Header'
 import AIAssistantPanel from './AIAssistantPanel'
 
+// min-h-svh เฉยๆ (ไม่หัก var(--nav-h)) — Navbar เว็บกลางถูกซ่อนไว้ที่
+// Layout.jsx เฉพาะเส้นทาง /country แล้ว (ซ้ำกับ Header ของแดชบอร์ดนี้เอง)
+// เพราะงั้นไม่มี navbar ลอยด้านบนให้ต้องหักความสูงออกอีกต่อไป
 function DashboardLayout({ title, subtitle, children }) {
   const [aiOpen, setAiOpen] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="flex min-h-[calc(100svh-var(--nav-h))] bg-db-bg text-body text-db-text">
+    <div className="flex min-h-svh bg-db-bg text-body text-db-text">
       <Sidebar
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
