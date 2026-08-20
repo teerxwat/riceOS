@@ -3,7 +3,11 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { LogIn } from 'lucide-react'
 import { useAuth } from '../../auth/authContext.js'
 import { verify, CREDENTIALS } from './credentials.js'
+import { getRole } from '../roles/roles.js'
 import '../roles/roles.css'
+
+// role ที่มีแดชบอร์ดของตัวเอง -> เข้าแดชบอร์ดทันที, role อื่นไปหน้าบทบาทตามเดิม
+const landingFor = (roleId) => getRole(roleId)?.dashboard ?? '/app'
 
 export default function LoginPage() {
   const { user, login } = useAuth()
@@ -12,8 +16,8 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  // ล็อกอินอยู่แล้ว -> ไปหน้าบทบาท
-  if (user) return <Navigate to="/app" replace />
+  // ล็อกอินอยู่แล้ว -> ไปหน้าแรกของ role นั้น
+  if (user) return <Navigate to={landingFor(user.role)} replace />
 
   const submit = (e) => {
     e.preventDefault()
@@ -22,8 +26,8 @@ export default function LoginPage() {
       setError('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง')
       return
     }
-    login(match.role, username.trim())
-    navigate('/app')
+    login(match.role, match.displayName, match.title, match.scope)
+    navigate(landingFor(match.role))
   }
 
   return (

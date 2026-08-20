@@ -1,0 +1,214 @@
+{
+  "captureInfo": {
+    "satellite": "Sentinel-2 (ESA Copernicus)",
+    "capturedAt": "23 พ.ค. 2567 10:32 น.",
+    "resolutionM": 10,
+    "cloudCoverPercent": 8,
+    "nextPassAt": "28 พ.ค. 2567 (รอบถัดไปอีก 5 วัน)"
+  },
+  "mapCenter": { "lat": 18.9873, "lng": 98.9378 },
+  "fields": [
+    {
+      "id": "f-a1",
+      "name": "แปลง A1 · นายสมชาย ใจดี",
+      "areaRai": 8.5,
+      "waterStatus": "flooded",
+      "waterCoveragePercent": 95,
+      "lastUpdated": "23 พ.ค. 2567",
+      "boundary": [
+        [18.9878, 98.933],
+        [18.9878, 98.935],
+        [18.9908, 98.935],
+        [18.9908, 98.933]
+      ]
+    },
+    {
+      "id": "f-a2",
+      "name": "แปลง A2 · นางวิไล ใจงาม",
+      "areaRai": 6.2,
+      "waterStatus": "flooded",
+      "waterCoveragePercent": 88,
+      "lastUpdated": "23 พ.ค. 2567",
+      "boundary": [
+        [18.9878, 98.9355],
+        [18.9878, 98.9375],
+        [18.9908, 98.9375],
+        [18.9908, 98.9355]
+      ]
+    },
+    {
+      "id": "f-c1",
+      "name": "แปลง C1 · นายทองดี คำฟู",
+      "areaRai": 5.0,
+      "waterStatus": "dry",
+      "waterCoveragePercent": 4,
+      "lastUpdated": "23 พ.ค. 2567",
+      "boundary": [
+        [18.9878, 98.938],
+        [18.9878, 98.94],
+        [18.9908, 98.94],
+        [18.9908, 98.938]
+      ]
+    },
+    {
+      "id": "f-c2",
+      "name": "แปลง C2 · นางบัวผัน อินต๊ะ",
+      "areaRai": 7.3,
+      "waterStatus": "low",
+      "waterCoveragePercent": 42,
+      "lastUpdated": "23 พ.ค. 2567",
+      "boundary": [
+        [18.9878, 98.9405],
+        [18.9878, 98.9425],
+        [18.9908, 98.9425],
+        [18.9908, 98.9405]
+      ]
+    },
+    {
+      "id": "f-b1",
+      "name": "แปลง B1 · นายคำตัน สุขใจ",
+      "areaRai": 9.1,
+      "waterStatus": "flooded",
+      "waterCoveragePercent": 90,
+      "lastUpdated": "23 พ.ค. 2567",
+      "boundary": [
+        [18.9838, 98.933],
+        [18.9838, 98.935],
+        [18.9868, 98.935],
+        [18.9868, 98.933]
+      ]
+    },
+    {
+      "id": "f-b2",
+      "name": "แปลง B2 · นายประเสริฐ วงศ์ษา",
+      "areaRai": 4.8,
+      "waterStatus": "dry",
+      "waterCoveragePercent": 2,
+      "lastUpdated": "23 พ.ค. 2567",
+      "boundary": [
+        [18.9838, 98.9355],
+        [18.9838, 98.9375],
+        [18.9868, 98.9375],
+        [18.9868, 98.9355]
+      ]
+    },
+    {
+      "id": "f-d1",
+      "name": "แปลง D1 · นางสาวมาลี ทองคำ",
+      "areaRai": 6.6,
+      "waterStatus": "flooded",
+      "waterCoveragePercent": 85,
+      "lastUpdated": "23 พ.ค. 2567",
+      "boundary": [
+        [18.9838, 98.938],
+        [18.9838, 98.94],
+        [18.9868, 98.94],
+        [18.9868, 98.938]
+      ]
+    },
+    {
+      "id": "f-d2",
+      "name": "แปลง D2 · นายสุรชัย ใจมั่น",
+      "areaRai": 5.5,
+      "waterStatus": "low",
+      "waterCoveragePercent": 38,
+      "lastUpdated": "23 พ.ค. 2567",
+      "boundary": [
+        [18.9838, 98.9405],
+        [18.9838, 98.9425],
+        [18.9868, 98.9425],
+        [18.9868, 98.9405]
+      ]
+    }
+  ],
+  "waterSensors": [
+    {
+      "id": "ws1",
+      "label": "เซ็นเซอร์ระดับน้ำคลองซอย 1",
+      "lat": 18.9856,
+      "lng": 98.9365,
+      "levelM": 0.42
+    },
+    {
+      "id": "ws2",
+      "label": "เซ็นเซอร์ระดับน้ำคลองซอย 2",
+      "lat": 18.9856,
+      "lng": 98.9415,
+      "levelM": 0.18
+    }
+  ],
+  "alerts": [
+    {
+      "level": "critical",
+      "message": "แปลง C1 และ B2 ไม่มีน้ำต่อเนื่องเกิน 5 วัน ควรตรวจสอบระบบชลประทาน",
+      "time": "09:32"
+    },
+    {
+      "level": "warning",
+      "message": "แปลง D2 ระดับน้ำลดลงจากรอบก่อน 12%",
+      "time": "09:15"
+    },
+    {
+      "level": "info",
+      "message": "เมฆปกคลุม 8% บริเวณมุมตะวันออกเฉียงเหนือของพื้นที่",
+      "time": "08:50"
+    },
+    {
+      "level": "info",
+      "message": "ประมวลผลภาพถ่ายดาวเทียมรอบใหม่สำเร็จ (Sentinel-2)",
+      "time": "08:40"
+    },
+    {
+      "level": "success",
+      "message": "คุณภาพภาพถ่ายดี ไม่มีสิ่งบดบังในพื้นที่ตรวจสอบหลัก",
+      "time": "08:35"
+    }
+  ],
+  "analysisLayers": [
+    {
+      "key": "rgb",
+      "label": "ภาพสี RGB (ดาวเทียม)",
+      "kind": "rgb",
+      "stat": "ความละเอียด 10 ม./พิกเซล"
+    },
+    {
+      "key": "ndvi",
+      "label": "ดัชนีพืชพรรณ (NDVI)",
+      "kind": "ndvi",
+      "stat": "เฉลี่ย 0.71 (สมบูรณ์ดี)"
+    },
+    {
+      "key": "ndwi",
+      "label": "ดัชนีน้ำ (NDWI)",
+      "kind": "ndwi",
+      "stat": "6 แปลงมีน้ำ จาก 8 แปลง"
+    },
+    {
+      "key": "water_map",
+      "label": "แผนที่แปลงมีน้ำ/ไม่มีน้ำ",
+      "kind": "water",
+      "stat": "พื้นที่มีน้ำ 34.4 ไร่ (73%)"
+    },
+    {
+      "key": "anomaly",
+      "label": "จุดผิดปกติ (Anomaly)",
+      "kind": "anomaly",
+      "stat": "ตรวจพบ 2 แปลงเสี่ยงขาดน้ำ"
+    },
+    {
+      "key": "timeseries",
+      "label": "เปรียบเทียบตามช่วงเวลา",
+      "kind": "timeseries",
+      "stat": "พื้นที่มีน้ำ +9% จากรอบก่อน"
+    }
+  ],
+  "summary": {
+    "areaCoveredRai": 2106,
+    "fieldsAnalyzed": 8,
+    "resolutionM": 10,
+    "cloudCoverPercent": 8,
+    "dataSizeGb": 3.4,
+    "nextPassDate": "28 พ.ค. 2567"
+  },
+  "compareDates": { "from": "16 พ.ค. 67", "to": "23 พ.ค. 67" }
+}

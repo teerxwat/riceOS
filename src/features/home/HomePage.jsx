@@ -10,6 +10,30 @@ import {
   Wheat,
   Map,
   Check,
+  RadioTower,
+  ShieldCheck,
+  Camera,
+  MonitorSmartphone,
+  Server,
+  TrendingUp,
+  Leaf,
+  BadgeCheck,
+  Globe2,
+  Users,
+  Phone,
+  Mail,
+  Globe,
+  MapPin,
+  ArrowLeft,
+  ArrowRight,
+  FileSearch,
+  Layers,
+  Lock,
+  Clock,
+  Target,
+  Factory,
+  Sun,
+  Wrench,
 } from 'lucide-react'
 import RiceHero from './components/RiceHero.jsx'
 import ScrollProgress from './components/ScrollProgress.jsx'
@@ -19,10 +43,22 @@ import { IMG } from './images.js'
 import './HomePage.css'
 
 // เผยเนื้อหาแบบ fade-up เมื่อเลื่อนถึง
+// element ที่อยู่ในจอตั้งแต่แรกโชว์ทันที (ไม่รอ IntersectionObserver —
+// บางสภาวะ IO ไม่ยิง event ทำให้เนื้อหาล่องหนถาวร)
 function useReveal() {
   const ref = useRef(null)
   useEffect(() => {
-    const els = ref.current?.querySelectorAll('[data-reveal]') ?? []
+    const els = [...(ref.current?.querySelectorAll('[data-reveal]') ?? [])]
+    const vh = window.innerHeight || document.documentElement.clientHeight
+    const rest = els.filter((el) => {
+      const r = el.getBoundingClientRect()
+      if (r.top < vh && r.bottom > 0) {
+        el.classList.add('is-visible')
+        return false
+      }
+      return true
+    })
+    if (!rest.length) return undefined
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -34,7 +70,7 @@ function useReveal() {
       },
       { threshold: 0.12 }
     )
-    els.forEach((el) => io.observe(el))
+    rest.forEach((el) => io.observe(el))
     return () => io.disconnect()
   }, [])
   return ref
@@ -59,11 +95,76 @@ function useMouseParallax() {
   return ref
 }
 
+// ตัวเลขจริงของโครงการระดับชาติ (แพลตฟอร์มข้าวชุมชนอัจฉริยะ 1,000 ศูนย์)
 const STATS = [
-  { to: 1000, suffix: '+', label: 'ไร่ที่ดูแล' },
-  { to: 24, suffix: ' ชม.', label: 'เฝ้าระวังต่อเนื่อง' },
-  { to: 6, suffix: ' ช่วง', label: 'ครบทั้งวงจร' },
-  { to: 100, suffix: '%', label: 'ข้อมูลแก้ย้อนหลังไม่ได้' },
+  {
+    to: 1000,
+    suffix: '',
+    label: 'ศูนย์ข้าวชุมชนทั่วประเทศ',
+    sub: 'ยกระดับครบทุกภูมิภาค',
+  },
+  {
+    to: 104000,
+    suffix: '+',
+    label: 'อุปกรณ์ IoT และ IT รวม',
+    sub: 'เซ็นเซอร์ สื่อสาร โครงสร้างพื้นฐาน',
+  },
+  {
+    to: 67000,
+    suffix: '',
+    label: 'จุดตรวจวัดภาคสนาม',
+    sub: 'น้ำ ดิน อากาศ เครื่องจักร พลังงาน',
+  },
+  {
+    to: 1200000,
+    suffix: '',
+    label: 'ไร่ พื้นที่เกษตรกรสมาชิก',
+    sub: 'จากแปลงนา สู่แพลตฟอร์มข้อมูล',
+  },
+]
+
+// อุปกรณ์หลักที่จัดหาในโครงการ
+const EQUIPMENT = [
+  { Icon: Sprout, label: 'เซ็นเซอร์ภาคสนาม น้ำ/ดิน/อากาศ' },
+  { Icon: RadioTower, label: 'เกตเวย์ LoRaWAN และเครือข่าย' },
+  { Icon: ShieldCheck, label: 'ระบบความปลอดภัยเครื่องจักร' },
+  { Icon: Camera, label: 'กล้องวงจรปิด AI' },
+  { Icon: MonitorSmartphone, label: 'จอแสดงผลและระบบยืนยันตัวตน' },
+  { Icon: Server, label: 'ระบบ IT และซอฟต์แวร์ประจำศูนย์' },
+]
+
+// ประโยชน์ที่ได้รับ (จากวิสัยทัศน์โครงการ)
+const IMPACTS = [
+  {
+    Icon: TrendingUp,
+    title: 'เพิ่มรายได้เกษตรกร',
+    desc: 'ผลผลิตคุณภาพสูงขึ้น รายได้เพิ่มขึ้น 2–3 เท่า',
+  },
+  {
+    Icon: Leaf,
+    title: 'ลดต้นทุน เพิ่มประสิทธิภาพ',
+    desc: 'พลังงานสะอาด ลดการสูญเสีย ใช้ทรัพยากรคุ้มค่า',
+  },
+  {
+    Icon: BadgeCheck,
+    title: 'ยกระดับคุณภาพและมาตรฐาน',
+    desc: 'ตรวจสอบย้อนกลับได้ สร้างความเชื่อมั่นสู่ตลาดโลก',
+  },
+  {
+    Icon: Globe2,
+    title: 'ลดโลกร้อน สู่ Net Zero',
+    desc: 'ลดการปล่อยคาร์บอน สร้างรายได้คาร์บอนเครดิตในอนาคต',
+  },
+  {
+    Icon: Users,
+    title: 'สร้างความเข้มแข็งให้ชุมชน',
+    desc: 'องค์ความรู้ เทคโนโลยี และโอกาสใหม่ สู่คนรุ่นต่อไป',
+  },
+  {
+    Icon: Wheat,
+    title: 'ความมั่นคงทางอาหาร',
+    desc: 'ข้าวไทยคุณภาพดี ผลิตได้ต่อเนื่อง เสริมความมั่นคงของประเทศ',
+  },
 ]
 
 const FEATURES = [
@@ -89,6 +190,92 @@ const FEATURES = [
     desc: 'เทียบผลแต่ละภาค/จังหวัด/ศูนย์ ดูคาร์บอนและเศรษฐกิจทั้งประเทศ',
     span: 'wide',
   },
+  {
+    Icon: ShieldCheck,
+    title: 'ตรวจสอบย้อนกลับได้',
+    desc: 'ข้อมูลบันทึกแบบแก้ย้อนหลังไม่ได้ ทุกขั้นตอนโปร่งใส',
+  },
+  {
+    Icon: Leaf,
+    title: 'พร้อมต่อยอดคาร์บอนเครดิต',
+    desc: 'ข้อมูลระดับแปลงจัดเก็บตามมาตรฐาน พร้อมรองรับการรับรองคาร์บอนเครดิต สร้างรายได้ใหม่ให้เกษตรกรในระยะยาว',
+    span: 'wide',
+  },
+]
+
+// ความพร้อมของ donaus ในการเป็นผู้จัดหาอุปกรณ์ (จากข้อเสนอโครงการ)
+const WHY_DONAUS = [
+  {
+    Icon: FileSearch,
+    title: 'วิเคราะห์ข้อกำหนดเชิงลึกระดับรายบรรทัด',
+    desc: 'ครอบคลุมวิศวกรรม จัดซื้อ และกฎระเบียบ ก่อนเริ่มงานจริงทุกครั้ง',
+  },
+  {
+    Icon: Users,
+    title: 'ทบทวนหลายมุมมอง 7 ด้าน',
+    desc: 'วิศวกรรม คลื่นความถี่ พลังงาน ระบบ IT การติดตั้ง ข้อกำหนดโครงการ และจัดซื้อ พร้อมตรวจทานตัวเลขอย่างอิสระ',
+  },
+  {
+    Icon: Layers,
+    title: 'สถาปัตยกรรมระบบครบ 4 ชั้น',
+    desc: 'ภาคสนาม → เกตเวย์ → ศูนย์ → คลาวด์ พร้อมแผนผังวิศวกรรมครบถ้วน',
+  },
+  {
+    Icon: Factory,
+    title: 'แผนจัดหาแบบผู้ผลิตคู่ (Dual-Source)',
+    desc: 'ผู้ผลิตไทยและต่างประเทศคู่กัน ลดความเสี่ยงซัพพลาย พร้อมแผนขออนุญาตคลื่นความถี่',
+  },
+]
+
+// 4 เสาหลักของการส่งมอบ
+const PILLARS = [
+  {
+    Icon: ShieldCheck,
+    title: 'คุณภาพมาตรฐาน',
+    desc: 'ทดสอบผ่านการใช้งานภาคสนามจริง',
+  },
+  {
+    Icon: Lock,
+    title: 'เสถียร ปลอดภัย',
+    desc: 'เชื่อมต่อมั่นคง ข้อมูลปลอดภัย',
+  },
+  { Icon: Clock, title: 'ส่งมอบตรงเวลา', desc: 'แผนงานชัดเจน ควบคุมได้' },
+  {
+    Icon: Sprout,
+    title: 'ต่อยอดอนาคต',
+    desc: 'รองรับคาร์บอนเครดิตและการขยายผล',
+  },
+]
+
+// กลยุทธ์จัดหาแบบผู้ผลิตคู่
+const DUAL_SOURCE = [
+  {
+    Icon: Factory,
+    title: 'ผู้ผลิตในประเทศ',
+    points: [
+      'ระยะเวลาส่งมอบสั้น',
+      'บริการหลังการขายรวดเร็ว',
+      'สนับสนุนเศรษฐกิจในประเทศ',
+    ],
+  },
+  {
+    Icon: Globe2,
+    title: 'ผู้ผลิตต่างประเทศ',
+    points: [
+      'เทคโนโลยีมาตรฐานสากล',
+      'ต้นทุนแข่งขันได้',
+      'สำรองความเสี่ยงซัพพลาย',
+    ],
+  },
+]
+
+// จุดเด่นของอุปกรณ์ทั้งโครงการ
+const STANDARDS = [
+  { Icon: BadgeCheck, label: 'ออกแบบตามมาตรฐานสากล รองรับการขยายในอนาคต' },
+  { Icon: RadioTower, label: 'ใช้งานเสถียร แม้พื้นที่ห่างไกล' },
+  { Icon: Sun, label: 'ใช้พลังงานต่ำ เหมาะกับพลังงานแสงอาทิตย์' },
+  { Icon: Wrench, label: 'ติดตั้งง่าย บำรุงรักษาสะดวก' },
+  { Icon: BarChart3, label: 'ข้อมูลแม่นยำ เชื่อถือได้ ตรวจสอบได้แบบเรียลไทม์' },
 ]
 
 const SHOWCASE = [
@@ -126,6 +313,13 @@ const SHOWCASE = [
       'แจ้งเตือนแบบเรียลไทม์',
     ],
   },
+  {
+    img: IMG.solar,
+    tag: 'พลังงานสะอาด',
+    title: 'โครงสร้างพื้นฐานประจำศูนย์',
+    desc: 'โซลาร์เซลล์ ระบบพลังงาน และเครือข่ายสื่อสารประจำศูนย์ ออกแบบให้ใช้พลังงานต่ำ ทำงานเสถียรแม้พื้นที่ห่างไกล',
+    points: ['โซลาร์เซลล์ + ระบบพลังงาน', 'เกตเวย์ LoRaWAN', 'บำรุงรักษาสะดวก'],
+  },
 ]
 
 const PHASES = [
@@ -161,18 +355,6 @@ const PHASES = [
   },
 ]
 
-const MARQUEE = [
-  'ข้าว',
-  'AWD',
-  'คาร์บอนเครดิต',
-  'ไม่เผาฟาง',
-  'IoT ในแปลง',
-  'ดาวเทียม',
-  'ชลประทาน',
-  'ผลผลิตสูงขึ้น',
-  'War Room',
-]
-
 const FLOW = [
   'แปลงนาและศูนย์',
   'ระบบประจำศูนย์',
@@ -183,7 +365,23 @@ const FLOW = [
 export default function HomePage() {
   const ref = useReveal()
   const heroRef = useMouseParallax()
+  const sliderRef = useRef(null)
   const navigate = useNavigate()
+
+  // เลื่อนสไลด์ทีละใบแบบอิง index (ปุ่มลูกศรของ slider)
+  const slideBy = (dir) => {
+    const el = sliderRef.current
+    if (!el) return
+    const slides = el.querySelectorAll('.slide')
+    if (!slides.length) return
+    const gap = 26
+    const w = slides[0].getBoundingClientRect().width + gap
+    const idx = Math.max(
+      0,
+      Math.min(slides.length - 1, Math.round(el.scrollLeft / w) + dir)
+    )
+    el.scrollTo({ left: idx * w, behavior: 'smooth' })
+  }
 
   return (
     <div className="home" ref={ref}>
@@ -249,8 +447,76 @@ export default function HomePage() {
               <CountUp to={s.to} suffix={s.suffix} />
             </div>
             <div className="stat-label">{s.label}</div>
+            <div className="stat-sub">{s.sub}</div>
           </div>
         ))}
+      </section>
+
+      {/* ── NATIONAL PROJECT (โครงการระดับชาติ) ── */}
+      <section className="section">
+        <header className="section-head" data-reveal>
+          <span className="eyebrow">โครงการระดับชาติ</span>
+          <h2>แพลตฟอร์มข้าวชุมชนอัจฉริยะ 1,000 ศูนย์ทั่วประเทศ</h2>
+          <p>
+            แพลตฟอร์มเกษตรอัจฉริยะภาครัฐระดับประเทศ ครอบคลุมการตรวจวัดภาคสนาม
+            โครงสร้างพื้นฐาน ระบบ IT และซอฟต์แวร์ครบวงจร
+          </p>
+        </header>
+
+        <div className="showcase" data-reveal>
+          <div className="showcase-media">
+            <SmartImage
+              src={IMG.solar}
+              alt="โซลาร์เซลล์และอุปกรณ์ IoT ภาคสนาม"
+            />
+            <span className="showcase-tag">1,000 ศูนย์</span>
+          </div>
+          <div className="showcase-body">
+            <h3>ยกระดับศูนย์แปรรูปข้าวชุมชนครบทุกภูมิภาค</h3>
+            <p>
+              donaus รับบทผู้จัดหาอุปกรณ์ IoT และระบบซอฟต์แวร์ภาคสนามของโครงการ
+              ตั้งแต่เซ็นเซอร์ในแปลงจนถึงระบบประจำศูนย์
+              พร้อมส่งมอบโซลูชันครบวงจร — อุปกรณ์คุณภาพ ระบบเสถียร
+              ข้อมูลแม่นยำเชื่อถือได้
+            </p>
+            <ul>
+              <li>
+                <Check size={18} className="li-check" />
+                จุดตรวจวัดภาคสนาม 67,000 จุด — น้ำ ดิน อากาศ เครื่องจักร พลังงาน
+                ความปลอดภัย
+              </li>
+              <li>
+                <Check size={18} className="li-check" />
+                อุปกรณ์รวมกว่า 104,000 รายการ ทั้ง IoT ระบบสื่อสาร
+                โครงสร้างพื้นฐาน และ IT
+              </li>
+              <li>
+                <Check size={18} className="li-check" />
+                ข้อมูลระดับแปลง รองรับการรับรองคาร์บอนเครดิต
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="equip-chips" data-reveal>
+          {EQUIPMENT.map((e) => (
+            <span key={e.label}>
+              <e.Icon size={16} /> {e.label}
+            </span>
+          ))}
+        </div>
+
+        <div className="goal-banner" data-reveal>
+          <span className="goal-icon">
+            <Target size={22} />
+          </span>
+          <p>
+            <b>เป้าหมายของโครงการ</b> —
+            สร้างแพลตฟอร์มข้อมูลเกษตรอัจฉริยะที่เชื่อมโยงทุกศูนย์ข้าวชุมชนทั่วประเทศ
+            เพื่อเพิ่มประสิทธิภาพการผลิต ลดต้นทุน
+            และสร้างมูลค่าเพิ่มจากข้อมูลสู่คาร์บอนเครดิต
+          </p>
+        </div>
       </section>
 
       {/* ── FEATURES (bento) ── */}
@@ -281,48 +547,117 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── SHOWCASE (image + text สลับ) ── */}
-      <section className="section showcase-section">
+      {/* ── SHOWCASE (สไลด์แนวนอนแบบ scroll-snap) ── */}
+      <section className="section slider-section">
         <header className="section-head" data-reveal>
-          <span className="eyebrow">3 ระดับการทำงาน</span>
+          <span className="eyebrow">ระดับการทำงาน</span>
           <h2>จากแปลงนา สู่ระดับประเทศ</h2>
+          <p>ลากหรือกดลูกศรเพื่อเลื่อนดูแต่ละระดับ</p>
         </header>
-        {SHOWCASE.map((s) => (
-          <div
-            className={`showcase${s.flip ? ' flip' : ''}`}
-            key={s.title}
-            data-reveal
-          >
-            <div className="showcase-media">
-              <SmartImage src={s.img} alt={s.title} />
-              <span className="showcase-tag">{s.tag}</span>
+        <div className="slider-wrap" data-reveal>
+          <div className="slider" ref={sliderRef}>
+            {SHOWCASE.map((s) => (
+              <article className="slide" key={s.title}>
+                <div className="slide-media">
+                  <SmartImage src={s.img} alt={s.title} />
+                  <span className="showcase-tag">{s.tag}</span>
+                </div>
+                <div className="slide-body">
+                  <h3>{s.title}</h3>
+                  <p>{s.desc}</p>
+                  <ul>
+                    {s.points.map((p) => (
+                      <li key={p}>
+                        <Check size={18} className="li-check" />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="slider-nav">
+            <button
+              type="button"
+              onClick={() => slideBy(-1)}
+              aria-label="สไลด์ก่อนหน้า"
+            >
+              <ArrowLeft size={20} />
+            </button>
+            <button
+              type="button"
+              onClick={() => slideBy(1)}
+              aria-label="สไลด์ถัดไป"
+            >
+              <ArrowRight size={20} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHY DONAUS (ความพร้อมของผู้จัดหา) ── */}
+      <section className="section why-section">
+        <header className="section-head" data-reveal>
+          <span className="eyebrow">ทำไมต้อง DONAUS</span>
+          <h2>ความพร้อมในการเป็นผู้จัดหาอุปกรณ์</h2>
+          <p>
+            พร้อมส่งมอบโซลูชันครบวงจร — อุปกรณ์คุณภาพ ระบบเสถียร
+            ข้อมูลแม่นยำเชื่อถือได้
+          </p>
+        </header>
+
+        <div className="why-grid">
+          {WHY_DONAUS.map((w, i) => (
+            <article className="why-item" key={w.title} data-reveal>
+              <span className="why-num">{String(i + 1).padStart(2, '0')}</span>
+              <div className="why-body">
+                <h3>
+                  <w.Icon size={19} /> {w.title}
+                </h3>
+                <p>{w.desc}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="pillar-row" data-reveal>
+          {PILLARS.map((p) => (
+            <div className="pillar" key={p.title}>
+              <p.Icon size={22} />
+              <b>{p.title}</b>
+              <span>{p.desc}</span>
             </div>
-            <div className="showcase-body">
-              <h3>{s.title}</h3>
-              <p>{s.desc}</p>
+          ))}
+        </div>
+
+        <div className="dual-grid" data-reveal>
+          {DUAL_SOURCE.map((d) => (
+            <article className="dual-card" key={d.title}>
+              <div className="feature-icon">
+                <d.Icon size={24} strokeWidth={1.8} />
+              </div>
+              <h3>{d.title}</h3>
               <ul>
-                {s.points.map((p) => (
+                {d.points.map((p) => (
                   <li key={p}>
-                    <Check size={18} className="li-check" />
+                    <Check size={17} className="li-check" />
                     {p}
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
-        ))}
-      </section>
+            </article>
+          ))}
+        </div>
 
-      {/* ── MARQUEE ── */}
-      <div className="marquee" data-reveal>
-        <div className="marquee-track">
-          {[...MARQUEE, ...MARQUEE].map((m, i) => (
-            <span key={i}>
-              <Wheat size={16} /> {m}
+        <div className="standards-row" data-reveal>
+          {STANDARDS.map((s) => (
+            <span key={s.label}>
+              <s.Icon size={16} /> {s.label}
             </span>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* ── 6 PHASES ── */}
       <section className="section timeline-section">
@@ -361,9 +696,44 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── IMPACTS (ประโยชน์ที่ได้รับ) ── */}
+      <section className="section impact-section">
+        <header className="section-head" data-reveal>
+          <span className="eyebrow">ประโยชน์ที่ได้รับ</span>
+          <h2>คุณค่าที่ส่งถึงเกษตรกรและประเทศ</h2>
+          <p>ใช้ข้อมูล ใช้เทคโนโลยี สร้างคุณค่ายั่งยืนให้เกษตรกรไทย</p>
+        </header>
+        <div className="impact-grid">
+          {IMPACTS.map((m) => (
+            <article className="feature-card" key={m.title} data-reveal>
+              <div className="feature-icon">
+                <m.Icon size={24} strokeWidth={1.8} />
+              </div>
+              <h3>{m.title}</h3>
+              <p>{m.desc}</p>
+            </article>
+          ))}
+        </div>
+        <div className="badges-row" data-reveal>
+          <span>
+            <Globe2 size={16} /> SDGs — เป้าหมายการพัฒนาที่ยั่งยืน
+          </span>
+          <span>
+            <Recycle size={16} /> BCG — เศรษฐกิจชีวภาพ หมุนเวียน สีเขียว
+          </span>
+          <span>
+            <Leaf size={16} /> Carbon Neutral — สู่ Net Zero
+          </span>
+        </div>
+      </section>
+
       {/* ── CTA ── */}
       <section className="cta" data-reveal>
-        <SmartImage src={IMG.misty} alt="ทุ่งนายามเช้า" className="cta-bg" />
+        <SmartImage
+          src={IMG.golden}
+          alt="ทุ่งข้าวสีทองยามเย็น"
+          className="cta-bg"
+        />
         <div className="cta-inner">
           <h2>พร้อมยกระดับการทำนาของศูนย์คุณแล้วหรือยัง?</h2>
           <p>
@@ -378,6 +748,35 @@ export default function HomePage() {
           </button>
         </div>
       </section>
+
+      {/* ── FOOTER (ติดต่อ) ── */}
+      <footer className="home-footer" data-reveal>
+        <div className="home-footer-brand">
+          <b>DONAUS</b>
+          <span>Smart IoT Solution for Sustainable Future</span>
+          <p>ข้าวอัจฉริยะ เกษตรกรมั่งคั่ง ประเทศไทยยั่งยืน</p>
+        </div>
+        <div className="home-footer-contact">
+          <span>
+            <Phone size={15} /> 053-215939
+          </span>
+          <span>
+            <Mail size={15} /> info@donaus.com
+          </span>
+          <span>
+            <Globe size={15} /> www.donaus.com
+          </span>
+          <span>
+            <MapPin size={15} /> DONAUS Co., Ltd. เชียงใหม่ ประเทศไทย
+          </span>
+        </div>
+        <div className="home-footer-cred">
+          <span>ประสบการณ์ IoT และระบบอัจฉริยะกว่า 10 ปี</span>
+          <span>โครงการมากกว่า 500+ ทั่วประเทศ</span>
+          <span>ทีมงานมืออาชีพ ดูแลครบวงจรตั้งแต่ต้นจนจบ</span>
+          <span>มาตรฐานสากล ปลอดภัย ปกป้องข้อมูล 100%</span>
+        </div>
+      </footer>
     </div>
   )
 }

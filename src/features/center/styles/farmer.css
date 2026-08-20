@@ -1,0 +1,576 @@
+.cf-read-card-btn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.375rem;
+  border: 1px dashed rgba(31, 148, 80, 0.5);
+  background: rgba(31, 148, 80, 0.1);
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--c-brand-300);
+  cursor: pointer;
+}
+
+.cf-form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .cf-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cf-span-2 {
+    grid-column: span 2 / span 2;
+  }
+}
+
+.cf-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--c-text-muted);
+}
+
+/* Plots table */
+.cf-plot-table-wrap {
+  overflow-x: auto;
+}
+
+.cf-plot-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.cf-plot-table th {
+  padding: 0.375rem 0.5rem;
+  text-align: left;
+  font-weight: 400;
+  color: var(--c-text-faint);
+}
+
+.cf-plot-table td {
+  padding: 0.5rem;
+  border-top: 1px solid var(--c-border);
+  color: var(--c-text-muted);
+}
+
+.cf-plot-input {
+  border-radius: 0.25rem;
+  border: 1px solid var(--c-border-strong);
+  background: var(--c-surface-alt);
+  color: var(--c-text);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.cf-plot-input--location {
+  width: 8rem;
+}
+
+.cf-plot-input--num {
+  width: 4rem;
+}
+
+.cf-plot-input--select {
+  width: 8rem;
+}
+
+.cf-plot-remove-btn {
+  border: none;
+  background: none;
+  color: var(--c-text-faint);
+  cursor: pointer;
+}
+
+.cf-plot-remove-btn:hover {
+  color: var(--c-red);
+}
+
+.cf-plot-remove-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cf-add-plot-btn {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 0.375rem;
+  border: 1px dashed var(--c-border-strong);
+  background: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--c-text-muted);
+  cursor: pointer;
+}
+
+.cf-add-plot-btn:hover {
+  border-color: var(--c-brand-500);
+  color: var(--c-brand-400);
+}
+
+.cf-cultivation {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--c-border);
+  padding-top: 1rem;
+}
+
+.cf-cultivation-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--c-text-muted);
+}
+
+.cf-cultivation-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cf-plant-times {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cf-plant-times-btn {
+  border-radius: 0.375rem;
+  border: 1px solid var(--c-border-strong);
+  background: none;
+  padding: 0.375rem 1rem;
+  font-size: 0.75rem;
+  color: var(--c-text-muted);
+  cursor: pointer;
+}
+
+.cf-plant-times-btn.is-active {
+  border-color: var(--c-brand-500);
+  background: var(--c-brand-700);
+  color: #fff;
+}
+
+.cf-seasons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--c-text-muted);
+}
+
+.cf-season-tag {
+  border-radius: 0.375rem;
+  background: var(--c-surface-alt);
+  padding: 0.25rem 0.625rem;
+}
+
+/* Plot location step */
+.cf-plot-tabs {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cf-plot-tab {
+  border-radius: 0.375rem;
+  border: 1px solid var(--c-border-strong);
+  background: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--c-text-muted);
+  cursor: pointer;
+}
+
+.cf-plot-tab.is-active {
+  border-color: var(--c-brand-500);
+  background: var(--c-brand-700);
+  color: #fff;
+}
+
+.cf-location-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .cf-location-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cf-location-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.cf-map-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.cf-map-toolbar__group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.cf-map-toolbar__btn {
+  border-radius: 0.375rem;
+  border: 1px solid var(--c-border-strong);
+  background: var(--c-surface-alt);
+  padding: 0.3125rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--c-text-muted);
+  cursor: pointer;
+}
+
+.cf-map-toolbar__btn.is-active {
+  border-color: var(--c-brand-500);
+  background: var(--c-brand-700);
+  color: #fff;
+}
+
+.cf-map-toolbar__action {
+  padding: 0.3125rem 0.625rem;
+  font-size: 0.75rem;
+}
+
+.cf-map-caption {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  color: var(--c-text-muted);
+}
+
+.cf-map-wrap {
+  position: relative;
+  height: 20rem;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  border: 1px solid var(--c-border-strong);
+  background: #0d1912;
+}
+
+.cf-leaflet-icon--draft {
+  background: #fff;
+  border-color: var(--c-brand-400);
+}
+
+.cf-leaflet-icon--vertex {
+  background: #fff;
+  border-color: var(--c-brand-500);
+  cursor: grab;
+}
+
+.cf-edge-label span {
+  display: inline-block;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  border-radius: 0.25rem;
+  background: rgba(10, 15, 20, 0.75);
+  padding: 0.0625rem 0.3125rem;
+  font-size: 0.625rem;
+  color: #fff;
+}
+
+.cf-map-area-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 500;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.cf-map-area-overlay__label {
+  margin: 0;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.cf-map-area-overlay__value {
+  margin: 0.125rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.cf-map-area-overlay__sub {
+  margin: 0;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.cf-map-area-note {
+  margin: 0.5rem 0 0;
+  font-size: 0.6875rem;
+  color: var(--c-text-faint);
+}
+
+/* Plot boundary review (step 4) */
+.cf-plot-review-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .cf-plot-review-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cf-plot-review__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--c-text);
+}
+
+.cf-plot-review__map {
+  height: 10rem;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  border: 1px solid var(--c-border-strong);
+}
+
+.cf-plot-review__meta {
+  margin: 0.375rem 0 0;
+  font-size: 0.6875rem;
+  color: var(--c-text-faint);
+}
+
+.cf-plot-review__empty {
+  display: flex;
+  height: 10rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px dashed var(--c-border-strong);
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.6875rem;
+  color: var(--c-text-faint);
+}
+
+/* Documents step */
+.cf-doc-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .cf-doc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cf-doc-label {
+  margin: 0 0 0.375rem;
+  font-size: 0.75rem;
+  color: var(--c-text-muted);
+}
+
+.cf-upload-drop {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 0.375rem;
+  border: 1px dashed var(--c-border-strong);
+  background: var(--c-surface-alt);
+  padding: 1rem 0;
+  color: var(--c-text-faint);
+  cursor: pointer;
+}
+
+.cf-upload-drop:hover {
+  border-color: var(--c-brand-500);
+  color: var(--c-brand-400);
+}
+
+.cf-upload-hint {
+  font-size: 0.6875rem;
+}
+
+.cf-file-list {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.cf-file-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.375rem;
+  background: var(--c-surface-alt);
+  padding: 0.375rem 0.625rem;
+  font-size: 0.75rem;
+}
+
+.cf-file-chip__name {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--c-text-muted);
+}
+
+.cf-file-chip__name span {
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cf-file-chip__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cf-file-chip__size {
+  color: var(--c-text-faint);
+}
+
+.cf-file-chip__remove {
+  border: none;
+  background: none;
+  color: var(--c-text-faint);
+  cursor: pointer;
+}
+
+.cf-file-chip__remove:hover {
+  color: var(--c-red);
+}
+
+/* Checklist */
+.cf-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cf-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.cf-checklist-item.is-done {
+  color: var(--c-text-muted);
+}
+
+.cf-checklist-item:not(.is-done) {
+  color: var(--c-text-faint);
+}
+
+.cf-submit-error {
+  margin-top: 0.75rem;
+  border-radius: 0.375rem;
+  background: var(--c-red-soft);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  color: #fca5a5;
+}
+
+.cf-submit-actions {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cf-submit-hint {
+  margin-top: 0.5rem;
+  font-size: 0.6875rem;
+  color: var(--c-text-faint);
+}
+
+/* Wizard shell */
+.cf-wizard {
+  margin: 0 auto;
+  max-width: 64rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cf-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--c-border);
+  padding-top: 1rem;
+}
+
+.cf-nav-hint {
+  font-size: 0.75rem;
+  color: var(--c-text-faint);
+}
+
+/* Success screen */
+.cf-success {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.cf-success-card {
+  display: flex;
+  max-width: 24rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--c-border-strong);
+  background: var(--c-surface);
+  padding: 2rem;
+  text-align: center;
+}
+
+.cf-success-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.cf-success-desc {
+  font-size: 0.875rem;
+  color: var(--c-text-muted);
+}
+
+.cf-success-mock-note {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--c-text-faint);
+}
