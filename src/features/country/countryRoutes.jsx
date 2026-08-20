@@ -20,6 +20,7 @@ const CentersPage = lazy(() => import('./pages/CentersPage.jsx'))
 const MapPage = lazy(() => import('./pages/MapPage.jsx'))
 const PerformancePage = lazy(() => import('./pages/PerformancePage.jsx'))
 const CarbonPage = lazy(() => import('./pages/CarbonPage.jsx'))
+const MrvAuditPage = lazy(() => import('./pages/MrvAuditPage.jsx'))
 const IncomePage = lazy(() => import('./pages/IncomePage.jsx'))
 const NoBurningPage = lazy(() => import('./pages/NoBurningPage.jsx'))
 const ForecastPage = lazy(() => import('./pages/ForecastPage.jsx'))
@@ -32,6 +33,7 @@ const PAGES = [
   { path: 'country/map', Page: MapPage },
   { path: 'country/performance', Page: PerformancePage },
   { path: 'country/carbon', Page: CarbonPage },
+  { path: 'country/mrv', Page: MrvAuditPage },
   { path: 'country/income', Page: IncomePage },
   { path: 'country/no-burning', Page: NoBurningPage },
   { path: 'country/forecast', Page: ForecastPage },
